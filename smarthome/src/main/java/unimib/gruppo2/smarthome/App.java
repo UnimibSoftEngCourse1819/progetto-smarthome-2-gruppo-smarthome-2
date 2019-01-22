@@ -1,4 +1,4 @@
-package unimib.gruppo2;
+package unimib.gruppo2.smarthome;
 
 /**
  * Hello world!
