@@ -34,6 +34,7 @@ public class SmartHome {
 	public void createDeviceDescriptors(Collection<IDescriptor> descs) {
 			for (IDescriptor element : descs)
 				devDesc.add(DeviceDescriptor.DeviceDescriptorFactory.createDeviceDescriptor(element));
+				
 	}
 	
 								
