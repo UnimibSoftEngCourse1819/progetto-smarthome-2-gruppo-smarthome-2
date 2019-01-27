@@ -4,11 +4,13 @@ import java.util.Set;
 
 public interface IDescriptor {
 	
-	public AbstractId getId();
+	public Object getId();
 	
-	public Object lookForAParameter(String param);
+	public Object getName();
 	
-	public Set<Tag> getDescriptorParameters();
+	//public Object lookForAParameter(String param);
+	
+	//public Set<Tag> getDescriptorParameters();
 	
 	//public Object getDescription();
 	

@@ -10,6 +10,7 @@ public interface IDomainFacade {
 	//TODO Il tipo di ritorno va definito capendo cosa serve alla GUI
 	public Collection<IDescriptor> scanDevices() throws FileNotFoundException, IOException, ParseException, Exception;
 	
-	public IDevice addDevice(Object id) throws FileNotFoundException, IOException, ParseException;
+
+	public Device addDevice(DeviceDescriptor dvDesc) throws FileNotFoundException, IOException, ParseException;
 
 }

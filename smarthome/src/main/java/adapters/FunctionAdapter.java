@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import domain.AbstractId;
+
 import domain.CommandFactory;
-import domain.FunctionId;
 import domain.ICommand;
 import domain.IFunction;
 import domain.Tag;
+import domain.TagFunction;
 
 public class FunctionAdapter implements IFunction {
 	
@@ -33,9 +33,9 @@ public class FunctionAdapter implements IFunction {
 	}
 
 	@Override
-	public AbstractId getId() {
+	public Object getId() {
 		Object key = this.extractAKey("UID");
-		 return  new FunctionId(this.adaptee.get(key).toString());
+		 return  (this.adaptee.get(key));
 	}
 
 	@Override
@@ -46,14 +46,14 @@ public class FunctionAdapter implements IFunction {
 		
 		if(ops != null){
 			for(Object op : ops){
-			res.add(fact.createCommand(new Tag("operation"), ops));
+			res.add(fact.createCommand(new TagFunction("operation.name"), op));
 			}
 		}
 			
 		 ops = this.findTag("property");
 		 if(ops != null){
 				for(Object op : ops)
-					res.add(fact.createCommand(new Tag("property"), ops));	
+					res.add(fact.createCommand(new TagFunction("property.name"), op));	
 		 }
 		
 		return res;

@@ -33,7 +33,6 @@ public class DomainFacade implements IDomainFacade {
 	public Collection<IDescriptor> scanDevices() throws FileNotFoundException, IOException, ParseException, Exception {	
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
 		this.home.createDeviceDescriptors(descs);
-		//gui.show(descs);
 		return descs;
 	}
 	
@@ -41,24 +40,20 @@ public class DomainFacade implements IDomainFacade {
 	public List<DeviceDescriptor> getDeviceDescriptors() { return this.home.getDeviceDescriptors(); }
 	
 	
-	public IDevice addDevice(Object devDesc) throws FileNotFoundException, IOException, ParseException{
-		Collection<IFunction> ans;
-		if(this.home.getDeviceDescriptors().contains(devDesc)){
+
+	public Device addDevice(DeviceDescriptor devDesc) throws FileNotFoundException, IOException, ParseException{
+		//if(this.home.getDeviceDescriptors().contains(devDesc)){
 			//int indx = this.getDeviceDescriptors()
-			System.out.println("COntains!");
+			System.out.println("Contains!");
 			DeviceFactory fact = new DeviceFactory();
+			fact.addDeviceDescriptor(devDesc);
 			//fact.addDeviceDescriptor(this.home.getDeviceDescriptors().);
 			//DeviceBuilder dvb = new DeviceBuilder();
 			//dvb.addChild(this.home.getDeviceDescriptors().get(3));
-			ans = this.middlewareFacade.getADeviceFunctions(this.home.getDeviceDescriptors().get(2));
-			for(IFunction f : ans){
-				System.out.println("FUNCTION ID : " + f.getId());
-				System.out.println("COMMAND: " + f.getCommands() );
-			}
-			this.home.addDevice(fact.getDevice());
-			return ans;
-		}
-		return null;
+			Collection<IFunction> adapters = 
+					 this.middlewareFacade.getADeviceFunctions(devDesc);
+			fact.addFunctions(adapters);
+			return fact.getInstance();
 	}
 
 

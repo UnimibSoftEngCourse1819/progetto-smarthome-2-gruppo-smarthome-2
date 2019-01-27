@@ -5,13 +5,14 @@ import java.util.Collection;
 
 public class Function implements IFunction {
 	
-	AbstractId id;
+	Pair id;
 	Collection<ICommand> commands;
 	
 	public Function(String fId){
-		this.id = new FunctionId(fId);
+		this.id = new Pair(new TagFunction("UID"),fId);	
 		this.commands = new ArrayList<>();
 	}
+	
 
 	@Override
 	public Collection<ICommand> getCommands() {
@@ -20,9 +21,14 @@ public class Function implements IFunction {
 	}
 
 	@Override
-	public AbstractId getId() {
+	public TagFunction getId() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public void setCommands(Collection<ICommand> commands) {
+		this.commands = commands;
 	}
 
 }

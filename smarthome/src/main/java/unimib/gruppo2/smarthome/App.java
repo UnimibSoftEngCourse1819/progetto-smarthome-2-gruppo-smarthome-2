@@ -1,5 +1,6 @@
 package unimib.gruppo2.smarthome;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.FileNotFoundException;
@@ -11,6 +12,19 @@ import org.json.simple.parser.ParseException;
 
 import domain.DomainFacade;
 import gui.HomeGUI;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.simple.parser.ParseException;
+
+import domain.Device;
+import domain.DeviceDescriptor;
+import domain.DomainFacade;
+import domain.IDescriptor;
+
 
 /**
  * Hello world!
@@ -28,6 +42,7 @@ public final class App {
      * @throws FileNotFoundException 
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException, Exception {
+
     	
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,5 +59,18 @@ public final class App {
 			}
 		});
         
+
+    	List<DeviceDescriptor> res = new ArrayList<>();
+    	DomainFacade df = new DomainFacade();
+    	 df.scanDevices();
+    	 res = df.getDeviceDescriptors();
+    	 System.out.println(res.size());
+    	 
+    	 
+    	 Device d = df.addDevice(res.get(3));
+    	 
+    	 System.out.println(d.getDescriptor());
+    	 System.out.println(d.getFunctions());
+
     }
 }
