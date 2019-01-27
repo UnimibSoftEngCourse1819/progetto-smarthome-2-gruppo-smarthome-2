@@ -5,7 +5,7 @@ import java.util.Collection;
 public interface IFunction {
 	
 	//TODO void call(ICommand com)
-	public AbstractId getId();
+	public Object getId();
 	
 	public Collection<ICommand> getCommands();
 

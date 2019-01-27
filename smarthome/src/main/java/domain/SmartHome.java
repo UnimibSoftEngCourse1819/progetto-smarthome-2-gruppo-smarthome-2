@@ -12,7 +12,7 @@ public class SmartHome {
 
 	/*Per ora ci serve solo la collezione di Device Descriptor*/
 	List<DeviceDescriptor> devDesc;
-	Map<AbstractId,Device> devices;
+	Map<String,Device> devices;
 
 	
 	/*Questo rende la classe istanziabile una volta SOLA per tutto il sistema*/
@@ -21,7 +21,7 @@ public class SmartHome {
 	//Il Costruttore è privato per il singleton
 	private SmartHome(){
 		this.devDesc = new ArrayList<DeviceDescriptor>();
-		this.devices = new HashMap<AbstractId, Device>();
+		this.devices = new HashMap<String, Device>();
 	};
 
 
@@ -33,7 +33,7 @@ public class SmartHome {
 
 	public void createDeviceDescriptors(Collection<IDescriptor> descs) {
 			for (IDescriptor element : descs)
-				devDesc.add(DeviceDescriptor.DeviceDescriptorFactory.createDeviceDescriptor(element));
+				devDesc.add(DeviceDescriptor.createDeviceDescriptor(element));
 	}
 	
 								
