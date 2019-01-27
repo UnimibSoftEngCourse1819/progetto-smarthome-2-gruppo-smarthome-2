@@ -1,0 +1,69 @@
+package gui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Component;
+import javax.swing.JProgressBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class HomeGUI extends JPanel{
+
+	public JFrame frame;
+	private GUIFacade guiFacade;
+
+	/**
+	 * Create the application.
+	 */
+	public HomeGUI() {
+		this.guiFacade = new GUIFacade();
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 562, 524);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnScan = new JButton("Scan your devices!");
+		btnScan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					guiFacade.show(guiFacade.scan());
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnScan.setBounds(193, 442, 162, 25);
+		frame.getContentPane().add(btnScan);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("smart-home.png"));
+		lblNewLabel.setBounds(24, 13, 503, 416);
+		frame.getContentPane().add(lblNewLabel);
+		
+		ImageIcon imageIcon = new ImageIcon("smart-home.png");
+	    
+	    
+	    
+				
+	}
+}
