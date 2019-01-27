@@ -1,10 +1,11 @@
 package middleware;
 
-import java.io.IOException;
+import java.io.File;
+
 
 public interface ICache {
 	
-	<T> void addToCache(T obj);
+	public void addToCache(File obj);
 	
-	<T> void isInCache(T obj) throws AlreadyInCacheException, IOException;
+	public void isInCache(File obj) throws MiddlewareException;
 }

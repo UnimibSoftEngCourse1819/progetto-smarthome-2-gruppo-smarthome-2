@@ -11,9 +11,9 @@ import domain.IFunction;
 
 public interface IMiddlewareFacade {
 	
-	Collection<IDescriptor> getDevices() throws FileNotFoundException, IOException, ParseException, Exception;
+	Collection<IDescriptor> getDevices() throws MiddlewareException;
 	
 	//TODO SOLo per testare
-	Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws FileNotFoundException, IOException, ParseException;
+	Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException;
 
 }

@@ -18,19 +18,20 @@ public class FileCache implements ICache {
 	}
 
 	@Override
-	public <File> void isInCache(File obj) throws AlreadyInCacheException, IOException {
-		//if(this.dynamicCache.contains(obj))
+	public void isInCache(File obj) throws MiddlewareException{
 		for(java.io.File f : this.dynamicCache)
-			if(FileUtils.contentEquals(f, (java.io.File) obj))
-				throw new AlreadyInCacheException();
-		System.out.println("Not In Cache!");
+			try {
+				if(FileUtils.contentEquals(f, (java.io.File) obj))
+					throw new MiddlewareException("Already in cache");
+			} catch (IOException e) {
+				throw new MiddlewareException(e);
+			}
 		this.addToCache(obj);
 	}
 
 	@Override
-	public <File> void addToCache(File obj) {
+	public void addToCache(File obj) {
 		this.dynamicCache.add((java.io.File) obj);
-		
 	}
 
 }

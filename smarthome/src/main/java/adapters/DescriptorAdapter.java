@@ -13,18 +13,13 @@ import domain.Tag;
 
 public class DescriptorAdapter implements IDescriptor {
 	
-	private JSONObject adaptee;
-	
+	private JSONObject adaptee;	
 	private static final String id = "UID";
-	
-	
-	
 	
 	public DescriptorAdapter(JSONObject adaptee){
 		this.adaptee = adaptee;
 	}
 	
-
 	@Override
 	public AbstractId getId() {
 		return new DeviceId(this.extractAProperty(id).toString());
@@ -49,24 +44,18 @@ public class DescriptorAdapter implements IDescriptor {
 		return tagsForDescriptor;
 	}
 	
-	
 	public JSONObject extractAProperty(String parameter) {
 		JSONObject res = new JSONObject();
 		//Pattern di riconoscimento di Regex
 		   Pattern pattern = Pattern.compile(parameter);
-	
 		    for(Object key : this.adaptee.keySet()){
 		    	if(pattern.matcher(new String(key.toString())).find()){
 		    		System.out.println(key.toString());
 		    		System.out.println(this.adaptee.get(key));
-		    		res = (JSONObject) this.adaptee.get(key);
-		    		
+		    		res = (JSONObject) this.adaptee.get(key);	
 		    	}
 		    }
 		    return res;
 	}
 	
-	
-	
-
 }

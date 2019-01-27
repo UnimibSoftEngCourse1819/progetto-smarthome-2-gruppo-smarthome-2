@@ -4,35 +4,40 @@ import java.io.File;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import domain.IDescriptor;
 
 public class RestClient {
 
-	Client client; 
-	WebTarget myResource;
-	UriBuilder uBuild;
+	
+	private static final RestClient INSTANCE = new RestClient();
+	
+	private Client client; 
+	private WebTarget myResource;
+	private UriBuilder uBuild;
 	
 	
-	public RestClient(){
-		//Il costruttore si comporta come un singleton
-		if(this.client == null)
+	public static RestClient getINSTANCE() {
+				return INSTANCE;		
+	}
+	
+	//Il costruttore si comporta come un singleton..
+	private RestClient(){
 			this.client = ClientBuilder.newClient();
-		if(this.uBuild == null)
 			this.uBuild = new UriBuilder();
 	}
 	
-	public File get(){
+	public File get() throws MiddlewareException{
 		this.uBuild.clear();
 		return this.makeTheCall(uBuild.add("/devices").getStringUri());
 	}
 	
-	//Inutile passare LowObject ha piu senso permettere allo stesso
-	//Metodo di capire a seconda del tipo di oggetto passato quale
-	//Chiamata Rest Deve fare
-	public File get(IDescriptor desc){
+	
+	public File get(IDescriptor desc) throws MiddlewareException{
 		this.uBuild.clear();
 		this.uBuild.add("/devices")
 			.add("/")
@@ -43,12 +48,16 @@ public class RestClient {
 		return makeTheCall(this.uBuild.getStringUri());
 	}
 
-
-
-	public File makeTheCall(String uri) {
-		this.myResource = client.target(uri); 
-		return this.myResource.request(MediaType.APPLICATION_JSON).get(File.class);
+	private File makeTheCall(String uri) throws MiddlewareException {
+			this.myResource = client.target(uri); 
+			Invocation.Builder invocationBuilder =  this.myResource.request(MediaType.APPLICATION_JSON);
+			Response response = invocationBuilder.get(); 
+			int stato = response.getStatus();
+			if (stato >= 300 )  // eventuali controlli sullo stato di ritorno...
+					{
+						throw new MiddlewareException("si è riscontrato un problema di chiamata");
+					}
+			return response.readEntity(File.class);
 	}
-	
 
 }

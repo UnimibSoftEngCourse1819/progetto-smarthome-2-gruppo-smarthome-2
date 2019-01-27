@@ -9,6 +9,7 @@ import java.util.List;
 import org.json.simple.parser.ParseException;
 
 import middleware.IMiddlewareFacade;
+import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class DomainFacade implements IDomainFacade {
@@ -26,7 +27,7 @@ public class DomainFacade implements IDomainFacade {
 	
 
 	@Override
-	public void scanDevices() throws FileNotFoundException, IOException, ParseException, Exception {	
+	public void scanDevices() throws MiddlewareException {	
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
 		this.home.createDeviceDescriptors(descs);
 	}
@@ -35,7 +36,7 @@ public class DomainFacade implements IDomainFacade {
 	public List<DeviceDescriptor> getDeviceDescriptors() { return this.home.getDeviceDescriptors(); }
 	
 	
-	public void addDevice(Object devDesc) throws FileNotFoundException, IOException, ParseException{
+	public void addDevice(Object devDesc) throws MiddlewareException{
 		if(this.home.getDeviceDescriptors().contains(devDesc)){
 			//int indx = this.getDeviceDescriptors()
 			System.out.println("COntains!");
