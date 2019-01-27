@@ -19,11 +19,18 @@ import middleware.MiddlewareException;
 public class Converter implements IConverter {
 	
 	@Override
-	public JSONArray convert(File f) throws MiddlewareException {
+	public JSONArray convertToJsonArray(File f) throws MiddlewareException {
 				JSONObject obj = (new Parser().parseJSONFile(f));
 				JSONArray ja = (JSONArray) obj.get("result");	
 			return ja;
 		 }
+	
+	public JSONObject convertToJsonObject(File f) throws MiddlewareException {
+		JSONObject obj = (new Parser().parseJSONFile(f));
+		obj = (JSONObject) obj.get("result");
+		return obj;
+ }
+	
 	
 	
 	

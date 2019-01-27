@@ -16,6 +16,7 @@ import domain.IDescriptor;
 import domain.IFunction;
 import domain.Property;
 import middleware.converters.IConverter;
+import middleware.converters.Parser;
 import middleware.converters.Converter;
 
 
@@ -31,7 +32,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		JSONArray jsoArray = new JSONArray();
 		IConverter converter = new Converter();
 		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
-		jsoArray = converter.convert(jsonFile);
+		jsoArray = converter.convertToJsonArray(jsonFile);
 		return this.getDescriptors(jsoArray);
 	}
 	
@@ -45,7 +46,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException{
 		File jsonFile = client.get(desc);
 		IConverter converter = new Converter();
-		JSONArray jsonArr = converter.convert(jsonFile);
+		JSONArray jsonArr = converter.convertToJsonArray(jsonFile);
 		this.getFunctions(jsonArr);
 		return this.getFunctions(jsonArr);
 	}
@@ -64,10 +65,12 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	public Property getProperty(Property prop) throws MiddlewareException {
 		File jsonFile = this.client.post(prop);
 		Converter conv = new Converter();
-		JSONArray obj = conv.convert(jsonFile);
-		
-		System.out.println(obj.toString());
-		return null;
+		JSONObject obj = conv.convertToJsonObject(jsonFile);
+		prop.clear();
+		for (Object key : obj.keySet()) {
+			prop.addParameter(key, obj.get(key));
+		}
+		return prop;
 	}
 	
 }

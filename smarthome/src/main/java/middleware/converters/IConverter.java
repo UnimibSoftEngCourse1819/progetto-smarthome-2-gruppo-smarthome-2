@@ -15,6 +15,6 @@ import middleware.MiddlewareException;
 
 public interface IConverter {
 	
-	JSONArray convert(File f) throws MiddlewareException;
+	JSONArray convertToJsonArray(File f) throws MiddlewareException;
 
 }

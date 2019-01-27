@@ -66,7 +66,7 @@ public class RestClient {
 
 	public File post(Property prop) {
 		this.uBuild.clear();
-		this.uBuild.add("/");
+		this.uBuild.add("/functions/");
 		this.uBuild.add(prop.getFunctionId());
 		JSONObject body = this.constructGetPropBody(prop);
 		return this.makeTheCall(this.uBuild.getStringUri(), body);
@@ -75,16 +75,26 @@ public class RestClient {
 	
 	private JSONObject constructGetPropBody(Property prop) {
 		JSONObject body = new JSONObject();
-		body.put("operation", "get" + prop.getName());
+		String app = prop.getName().toString().substring(0, 1).toUpperCase() + prop.getName().toString().substring(1);
+		body.put("operation", "get" + app);
 		return body;
 	}
 
 	public File makeTheCall(String uri, JSONObject body){
-		Response response = client.target(uri)
+		/*Response response = client.target(uri)
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(body));
+                .post(Entity.json(body));*/
 		//System.out.println(response.readEntity(File.class));
+		this.myResource = client.target(uri); 
+		Invocation.Builder invocationBuilder =  this.myResource.request(MediaType.APPLICATION_JSON);
+		
+		Response response = invocationBuilder.post(Entity.entity(body, MediaType.APPLICATION_JSON));
+		response.getStatus();
+		System.out.println(response.getStatus());
+		
 		return response.readEntity(File.class);
+		
+		
 	}
 		
 }

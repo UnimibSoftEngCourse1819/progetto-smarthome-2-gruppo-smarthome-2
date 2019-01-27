@@ -30,6 +30,7 @@ public class Property implements ICommand {
 	@Override
 	public void execute() throws MiddlewareException {
 		Property result = this.receiver.getProperty(this);
+		System.out.println(result.getParameters());
 		//Setta i risultati
 	}
 
@@ -47,5 +48,18 @@ public class Property implements ICommand {
 	public Object getFunctionId() {
 		return this.funId.getValue();
 	}
+	
+	public void clear() {
+		this.parameters.clear();
+	}
+	
+	public void addParameter(Object key, Object value) {
+		this.parameters.put(key, value);
+	}
+	
+	public Map<Object, Object> getParameters() {
+		return this.parameters;
+	}
+	
 
 }
