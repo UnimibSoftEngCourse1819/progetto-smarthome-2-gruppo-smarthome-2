@@ -1,13 +1,10 @@
 package middleware;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.Collection;
-
-import org.json.simple.parser.ParseException;
-
 import domain.IDescriptor;
 import domain.IFunction;
+import domain.Property;
 
 public interface IMiddlewareFacade {
 	
@@ -15,5 +12,7 @@ public interface IMiddlewareFacade {
 	
 	//TODO SOLo per testare
 	Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException;
+	
+	Property getProperty(Property prop) throws MiddlewareException;
 
 }

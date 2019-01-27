@@ -1,28 +1,27 @@
 package middleware;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
+
 
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
-import domain.ICommand;
+
 import domain.IDescriptor;
 import domain.IFunction;
+import domain.Property;
 import middleware.converters.IConverter;
 import middleware.converters.Converter;
 
 
 
 public class MiddlewareFacade implements IMiddlewareFacade {
-	
+	//TODO CONVERTER ATTRIBUTO
 	ICache cache = new FileCache();
 	RestClient client = RestClient.getINSTANCE();
 	
@@ -60,5 +59,15 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		}
 		return adapters;
 		}
+
+	@Override
+	public Property getProperty(Property prop) throws MiddlewareException {
+		File jsonFile = this.client.post(prop);
+		Converter conv = new Converter();
+		JSONArray obj = conv.convert(jsonFile);
+		
+		System.out.println(obj.toString());
+		return null;
+	}
 	
 }

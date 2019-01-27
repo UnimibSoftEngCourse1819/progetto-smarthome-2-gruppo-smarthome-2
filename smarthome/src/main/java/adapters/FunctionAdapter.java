@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import domain.CommandFactory;
 import domain.ICommand;
 import domain.IFunction;
+import domain.Pair;
 import domain.Tag;
 import domain.TagFunction;
 
@@ -46,14 +47,19 @@ public class FunctionAdapter implements IFunction {
 		
 		if(ops != null){
 			for(Object op : ops){
-			res.add(fact.createCommand(new TagFunction("operation.name"), op));
+			res.add(fact.createCommand(new TagFunction("operation.name"), 
+					op, 
+					new Pair(new TagFunction("UID"),this.getId())
+					));
 			}
 		}
 			
 		 ops = this.findTag("property");
 		 if(ops != null){
 				for(Object op : ops)
-					res.add(fact.createCommand(new TagFunction("property.name"), op));	
+					res.add(fact.createCommand(new TagFunction("property.name"), 
+							op,
+							new Pair(new TagFunction("UID"), this.getId())));	
 		 }
 		
 		return res;

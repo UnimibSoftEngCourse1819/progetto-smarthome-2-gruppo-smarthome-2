@@ -4,12 +4,16 @@ import java.io.File;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.simple.JSONObject;
+
 import domain.IDescriptor;
+import domain.Property;
 
 public class RestClient {
 
@@ -60,4 +64,27 @@ public class RestClient {
 			return response.readEntity(File.class);
 	}
 
+	public File post(Property prop) {
+		this.uBuild.clear();
+		this.uBuild.add("/");
+		this.uBuild.add(prop.getFunctionId());
+		JSONObject body = this.constructGetPropBody(prop);
+		return this.makeTheCall(this.uBuild.getStringUri(), body);
+	}
+	
+	
+	private JSONObject constructGetPropBody(Property prop) {
+		JSONObject body = new JSONObject();
+		body.put("operation", "get" + prop.getName());
+		return body;
+	}
+
+	public File makeTheCall(String uri, JSONObject body){
+		Response response = client.target(uri)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.json(body));
+		//System.out.println(response.readEntity(File.class));
+		return response.readEntity(File.class);
+	}
+		
 }

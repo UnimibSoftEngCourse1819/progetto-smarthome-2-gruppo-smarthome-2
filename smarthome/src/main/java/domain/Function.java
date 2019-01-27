@@ -16,14 +16,12 @@ public class Function implements IFunction {
 
 	@Override
 	public Collection<ICommand> getCommands() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.commands;
 	}
 
 	@Override
-	public TagFunction getId() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getId() {
+		return this.id.getValue();
 	}
 
 
