@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.json.simple.parser.ParseException;
 
+import gui.GUIFacade;
+import gui.IGUIFacade;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareFacade;
 
@@ -15,12 +17,14 @@ public class DomainFacade implements IDomainFacade {
 	
 	private SmartHome home;
 	
+	
 	/*Deve poter chiamare la facade di Middleware*/
 	private IMiddlewareFacade middlewareFacade;
 	
 	
 	public DomainFacade(){
 		this.middlewareFacade = new MiddlewareFacade();
+		
 		this.home = SmartHome.getInstance();
 	}
 	
@@ -36,6 +40,7 @@ public class DomainFacade implements IDomainFacade {
 	public List<DeviceDescriptor> getDeviceDescriptors() { return this.home.getDeviceDescriptors(); }
 	
 	
+
 	public Device addDevice(DeviceDescriptor devDesc) throws FileNotFoundException, IOException, ParseException{
 		//if(this.home.getDeviceDescriptors().contains(devDesc)){
 			//int indx = this.getDeviceDescriptors()
