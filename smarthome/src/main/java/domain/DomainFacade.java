@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import gui.GUIFacade;
 import gui.IGUIFacade;
 import middleware.IMiddlewareFacade;
+import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class DomainFacade implements IDomainFacade {
@@ -30,7 +31,7 @@ public class DomainFacade implements IDomainFacade {
 	
 
 	@Override
-	public Collection<IDescriptor> scanDevices() throws FileNotFoundException, IOException, ParseException, Exception {	
+	public Collection<IDescriptor> scanDevices() throws MiddlewareException {	
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
 		this.home.createDeviceDescriptors(descs);
 		return descs;
@@ -41,15 +42,10 @@ public class DomainFacade implements IDomainFacade {
 	
 	
 
-	public Device addDevice(DeviceDescriptor devDesc) throws FileNotFoundException, IOException, ParseException{
-		//if(this.home.getDeviceDescriptors().contains(devDesc)){
-			//int indx = this.getDeviceDescriptors()
+	public Device addDevice(Object devDesc) throws MiddlewareException{
 			System.out.println("Contains!");
 			DeviceFactory fact = new DeviceFactory();
 			fact.addDeviceDescriptor(devDesc);
-			//fact.addDeviceDescriptor(this.home.getDeviceDescriptors().);
-			//DeviceBuilder dvb = new DeviceBuilder();
-			//dvb.addChild(this.home.getDeviceDescriptors().get(3));
 			Collection<IFunction> adapters = 
 					 this.middlewareFacade.getADeviceFunctions(devDesc);
 			fact.addFunctions(adapters);

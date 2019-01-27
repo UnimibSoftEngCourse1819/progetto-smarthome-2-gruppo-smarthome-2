@@ -24,43 +24,32 @@ import middleware.converters.Converter;
 public class MiddlewareFacade implements IMiddlewareFacade {
 	
 	ICache cache = new FileCache();
-	
+	RestClient client = RestClient.getINSTANCE();
 	
 	@Override
-	public Collection<IDescriptor> getDevices() 
-			throws FileNotFoundException, IOException, ParseException, Exception {
-		RestClient client = new RestClient();
+	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
-		this.cache.isInCache(jsonFile);
+		JSONArray jsoArray = new JSONArray();
 		IConverter converter = new Converter();
-		JSONArray jsoArray = converter.convert(jsonFile);
-		
+		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
+		jsoArray = converter.convert(jsonFile);
 		return this.getDescriptors(jsoArray);
 	}
-	
 	
 	private Collection<IDescriptor> getDescriptors(JSONArray jarr) {
 		List<IDescriptor> adapters = new ArrayList<IDescriptor>();
 		for(Object job : jarr) // per ciascun dispositivo 
 			adapters.add(new DescriptorAdapter((JSONObject) job));
-		
 		return adapters;
 	}
-	
-	
-	
-	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) 
-			throws FileNotFoundException, IOException, ParseException{
-		RestClient client = new RestClient();
+		
+	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException{
 		File jsonFile = client.get(desc);
 		IConverter converter = new Converter();
 		JSONArray jsonArr = converter.convert(jsonFile);
 		this.getFunctions(jsonArr);
-		//System.out.println(jsonArr.size());
-		//System.out.println("RECEIVED FUNCTIONS!!!!!!!!!");
 		return this.getFunctions(jsonArr);
 	}
-	
 	
 	
 	private Collection<IFunction> getFunctions(JSONArray functs){
@@ -69,10 +58,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 			//IFunction function = new Function();
 			 adapters.add((new FunctionAdapter((JSONObject) obj)));
 		}
-		
 		return adapters;
 		}
 	
-
-
 }

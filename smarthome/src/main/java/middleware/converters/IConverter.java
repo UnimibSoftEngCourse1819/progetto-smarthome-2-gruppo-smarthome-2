@@ -9,10 +9,12 @@ import org.json.simple.JSONArray;
 
 import org.json.simple.parser.ParseException;
 
+import middleware.MiddlewareException;
+
 
 
 public interface IConverter {
 	
-	JSONArray convert(File f) throws FileNotFoundException, IOException, ParseException;
+	JSONArray convert(File f) throws MiddlewareException;
 
 }

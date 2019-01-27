@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import middleware.MiddlewareException;
+
 public class Parser {
 	
 	private JSONParser parser;
@@ -19,12 +21,24 @@ public class Parser {
 	}
 	
 	
-	public JSONObject parseJSONFile(File jsonFile) throws FileNotFoundException, IOException, ParseException {
-		// parsing file "JSONExample.json" 
-        Object obj = parser.parse(new FileReader(jsonFile)); 
-        
-        // typecasting obj to JSONObject 
-        JSONObject jo = (JSONObject) obj; 
+	public JSONObject parseJSONFile(File jsonFile) throws MiddlewareException {
+		JSONObject jo = new JSONObject();
+		try {
+			// parsing file "JSONExample.json" 
+	        Object obj = parser.parse(new FileReader(jsonFile)); 
+	        // typecasting obj to JSONObject 
+	        jo = (JSONObject) obj; 
+	        
+		}
+		catch (FileNotFoundException e){
+			throw new MiddlewareException(e); 
+		}
+		catch (IOException e){
+			throw new MiddlewareException(e);
+		}
+		catch (ParseException e){
+			throw new MiddlewareException(e);
+		}
 		return jo;
 	}
 

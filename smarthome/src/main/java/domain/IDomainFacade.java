@@ -6,11 +6,12 @@ import java.util.Collection;
 
 import org.json.simple.parser.ParseException;
 
+import middleware.MiddlewareException;
+
 public interface IDomainFacade {
 	//TODO Il tipo di ritorno va definito capendo cosa serve alla GUI
-	public Collection<IDescriptor> scanDevices() throws FileNotFoundException, IOException, ParseException, Exception;
+
+	public Collection<IDescriptor> scanDevices() throws MiddlewareException;
 	
-
-	public Device addDevice(DeviceDescriptor dvDesc) throws FileNotFoundException, IOException, ParseException;
-
+	public Device addDevice(Object id) throws MiddlewareException;
 }
