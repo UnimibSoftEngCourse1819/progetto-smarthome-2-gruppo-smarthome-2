@@ -42,7 +42,7 @@ public class DomainFacade implements IDomainFacade {
 	
 	
 
-	public Device addDevice(Object devDesc) throws MiddlewareException{
+	public Device addDevice(IDescriptor devDesc) throws MiddlewareException{
 			System.out.println("Contains!");
 			DeviceFactory fact = new DeviceFactory();
 			fact.addDeviceDescriptor(devDesc);

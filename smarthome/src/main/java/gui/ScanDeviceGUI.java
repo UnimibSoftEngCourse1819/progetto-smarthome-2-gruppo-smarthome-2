@@ -17,10 +17,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JMenuBar;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -57,7 +57,7 @@ public class ScanDeviceGUI extends JPanel {
 			
 			int pos = 0;
 			for (IDescriptor dd : descs) {
-				JLabel lbl = new JLabel(dd.lookForAParameter("dal.device.name").toString());
+				JLabel lbl = new JLabel(dd.getName().toString());
 				lbl.setBounds(10, 10+pos, 160, 16);
 				Border blackline = BorderFactory.createLineBorder(Color.black);
 				lbl.setBorder(blackline);

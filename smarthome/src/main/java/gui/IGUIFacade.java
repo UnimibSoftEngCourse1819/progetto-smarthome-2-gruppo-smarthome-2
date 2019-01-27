@@ -6,12 +6,16 @@ import java.util.Collection;
 
 import org.json.simple.parser.ParseException;
 
+import domain.Device;
+import domain.DeviceDescriptor;
 import domain.IDescriptor;
 import domain.IFunction;
+import middleware.MiddlewareException;
 
 public interface IGUIFacade {
 	public void show();
 	public void show(Collection <IDescriptor> descs);
-	public Collection<IDescriptor> scan() throws FileNotFoundException, IOException, ParseException, Exception;
-	public Collection<IFunction> add(IDescriptor descDev) throws FileNotFoundException, IOException, ParseException;
+	public void showDevice(Device d);
+	public Collection<IDescriptor> scan() throws MiddlewareException;
+	public Device add(IDescriptor descDev) throws MiddlewareException;
 }

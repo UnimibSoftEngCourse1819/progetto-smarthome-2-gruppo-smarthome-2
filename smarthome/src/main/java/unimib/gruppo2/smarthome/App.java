@@ -60,7 +60,7 @@ public final class App {
 		});
         
 
-    	List<DeviceDescriptor> res = new ArrayList<>();
+    	/*List<DeviceDescriptor> res = new ArrayList<>();
     	DomainFacade df = new DomainFacade();
     	 df.scanDevices();
     	 res = df.getDeviceDescriptors();
@@ -70,7 +70,7 @@ public final class App {
     	 Device d = df.addDevice(res.get(3));
     	 
     	 System.out.println(d.getDescriptor());
-    	 System.out.println(d.getFunctions());
+    	 System.out.println(d.getFunctions());*/
 
     }
 }

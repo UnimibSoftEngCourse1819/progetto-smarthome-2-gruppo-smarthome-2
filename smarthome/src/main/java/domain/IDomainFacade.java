@@ -13,5 +13,5 @@ public interface IDomainFacade {
 
 	public Collection<IDescriptor> scanDevices() throws MiddlewareException;
 	
-	public Device addDevice(Object id) throws MiddlewareException;
+	public Device addDevice(IDescriptor id) throws MiddlewareException;
 }

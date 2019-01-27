@@ -11,11 +11,14 @@ import javax.swing.JPanel;
 
 import org.json.simple.parser.ParseException;
 
+import domain.Device;
+import domain.DeviceDescriptor;
 import domain.DomainFacade;
 import domain.IDescriptor;
 import domain.IDevice;
 import domain.IFunction;
 import domain.SmartHome;
+import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class GUIFacade implements IGUIFacade {
@@ -78,14 +81,22 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 
-	public Collection<IDescriptor> scan() throws FileNotFoundException, IOException, ParseException, Exception {
+	public Collection<IDescriptor> scan() throws MiddlewareException {
 			return this.domainFacade.scanDevices();	
 	}
 	
 
 	@Override
-	public IDevice add(IDescriptor devDesc) throws FileNotFoundException, IOException, ParseException {
+	public Device add(IDescriptor devDesc) throws MiddlewareException {
 		return this.domainFacade.addDevice(devDesc);
 	}
+
+	@Override
+	public void showDevice(Device d) {
+		
+		
+	}
+
+	
 
 }
