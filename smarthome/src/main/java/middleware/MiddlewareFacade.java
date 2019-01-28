@@ -1,28 +1,31 @@
 package middleware;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
+
 
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
+import domain.Function;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IFunction;
+import domain.Operation;
+import domain.Property;
+import domain.TagFunction;
 import middleware.converters.IConverter;
+import middleware.converters.Parser;
 import middleware.converters.Converter;
 
 
 
 public class MiddlewareFacade implements IMiddlewareFacade {
-	
+	//TODO CONVERTER ATTRIBUTO
 	ICache cache = new FileCache();
 	RestClient client = RestClient.getINSTANCE();
 	
@@ -30,9 +33,10 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
 		JSONArray jsoArray = new JSONArray();
-		IConverter converter = new Converter();
+		Converter converter = new Converter();
 		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
-		jsoArray = converter.convert(jsonFile);
+		JSONObject resource = converter.parseJSON(jsonFile);
+		jsoArray = converter.convertToJsonArray(resource);
 		return this.getDescriptors(jsoArray);
 	}
 	
@@ -45,8 +49,9 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		
 	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException{
 		File jsonFile = client.get(desc);
-		IConverter converter = new Converter();
-		JSONArray jsonArr = converter.convert(jsonFile);
+		Converter converter = new Converter();
+		JSONObject resource = converter.parseJSON(jsonFile);
+		JSONArray jsonArr = converter.convertToJsonArray(resource);
 		this.getFunctions(jsonArr);
 		return this.getFunctions(jsonArr);
 	}
@@ -60,5 +65,46 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		}
 		return adapters;
 		}
+
+	@Override
+	public Property getProperty(Property prop) throws MiddlewareException {
+		File jsonFile = this.client.post(prop);
+		Converter conv = new Converter();
+		JSONObject resource = conv.parseJSON(jsonFile);
+		JSONObject obj;
+		JSONArray arr;
+		if(conv.isJSONObject(resource)){
+			 obj = conv.convertToJsonObject(resource);
+			 prop.clear();
+			for (Object key : obj.keySet()) 
+				prop.addParameter(key, obj.get(key));
+		}
+		else{
+			arr = conv.convertToJsonArray(resource);
+			prop.clear();
+			for (Object ogg : arr) {
+				if(ogg != null){
+					JSONObject item = ((JSONObject) ogg);
+					for(Object key : item.keySet())
+						prop.addParameter(key, item.get(key));
+				}
+			}
+		}
+		return prop;
+	}
+	
+	public void executeOperation(Operation operation) throws MiddlewareException {
+		File jsonFile = this.client.post(operation);
+	}
+
+	@Override
+	public Collection<Property> updateProperties(IFunction state) throws MiddlewareException {
+		List<Property> properties = new ArrayList<>();
+		for(ICommand command : state.getCommands()) {
+			if(command.getTag().equals(new TagFunction("property.name")))
+				properties.add(this.getProperty((Property) command));
+		}
+		return properties;
+	}
 	
 }

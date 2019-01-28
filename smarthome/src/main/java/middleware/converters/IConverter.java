@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 import org.json.simple.JSONArray;
-
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import middleware.MiddlewareException;
@@ -15,6 +15,6 @@ import middleware.MiddlewareException;
 
 public interface IConverter {
 	
-	JSONArray convert(File f) throws MiddlewareException;
+	JSONArray convertToJsonArray(JSONObject obj) throws MiddlewareException;
 
 }

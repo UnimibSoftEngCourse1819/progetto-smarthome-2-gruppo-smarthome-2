@@ -2,6 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
+import middleware.MiddlewareException;
 
 public class Function implements IFunction {
 	
@@ -16,19 +19,26 @@ public class Function implements IFunction {
 
 	@Override
 	public Collection<ICommand> getCommands() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.commands;
 	}
 
 	@Override
-	public TagFunction getId() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getId() {
+		return this.id.getValue();
 	}
-
 
 	public void setCommands(Collection<ICommand> commands) {
 		this.commands = commands;
 	}
+	
+	public void callCommand(Object name) throws MiddlewareException {
+		for (ICommand command : this.commands) {
+			if (command.getName().equals(name)){
+				System.out.println(command.getName() + " " + command.getClass());
+				command.execute(); 
+			}
+		}
+	}
+	
 
 }
