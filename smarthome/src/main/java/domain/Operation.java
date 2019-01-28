@@ -1,12 +1,13 @@
 package domain;
 
+import javafx.util.Pair;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class Operation implements ICommand {
 	
-	Pair funId;
+	Pair<Tag, Object> funId;
 	
 	Tag type;
 	Object name;
@@ -37,5 +38,13 @@ public class Operation implements ICommand {
 	public Object getFunctionId() {
 		return this.funId.getValue();
 	}
+
+
+	@Override
+	public String toString() {
+		return "Operation [name=" + name + "]";
+	}
+	
+	
 
 }

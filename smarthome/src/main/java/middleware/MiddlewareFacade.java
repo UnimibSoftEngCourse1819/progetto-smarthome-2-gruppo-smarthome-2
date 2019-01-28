@@ -25,22 +25,29 @@ import middleware.converters.Converter;
 
 
 public class MiddlewareFacade implements IMiddlewareFacade {
-	//TODO CONVERTER ATTRIBUTO
-	ICache cache = new FileCache();
-	RestClient client = RestClient.getINSTANCE();
+	private ICache cache;
+	private RestClient client; 
+	private Converter converter;
+	
+	
+	public MiddlewareFacade() {
+		this.cache = new FileCache();
+		this.converter = new Converter();
+		this.client = RestClient.getINSTANCE();
+		
+	}
 	
 	@Override
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
-		JSONArray jsoArray = new JSONArray();
-		Converter converter = new Converter();
+		//JSONArray jsoArray = new JSONArray();
 		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
 		JSONObject resource = converter.parseJSON(jsonFile);
-		jsoArray = converter.convertToJsonArray(resource);
-		return this.getDescriptors(jsoArray);
+		JSONArray jsoArray = converter.convertToJsonArray(resource);
+		return this.getDescriptorsAdapters(jsoArray);
 	}
 	
-	private Collection<IDescriptor> getDescriptors(JSONArray jarr) {
+	private Collection<IDescriptor> getDescriptorsAdapters(JSONArray jarr) {
 		List<IDescriptor> adapters = new ArrayList<IDescriptor>();
 		for(Object job : jarr) // per ciascun dispositivo 
 			adapters.add(new DescriptorAdapter((JSONObject) job));
@@ -49,48 +56,50 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		
 	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException{
 		File jsonFile = client.get(desc);
-		Converter converter = new Converter();
 		JSONObject resource = converter.parseJSON(jsonFile);
 		JSONArray jsonArr = converter.convertToJsonArray(resource);
-		this.getFunctions(jsonArr);
 		return this.getFunctions(jsonArr);
 	}
 	
 	
 	private Collection<IFunction> getFunctions(JSONArray functs){
 		List<IFunction> adapters = new ArrayList<>();
-		for(Object obj : functs){
-			//IFunction function = new Function();
+		for(Object obj : functs)
 			 adapters.add((new FunctionAdapter((JSONObject) obj)));
-		}
 		return adapters;
 		}
 
+	
 	@Override
 	public Property getProperty(Property prop) throws MiddlewareException {
 		File jsonFile = this.client.post(prop);
-		Converter conv = new Converter();
-		JSONObject resource = conv.parseJSON(jsonFile);
-		JSONObject obj;
+		JSONObject resource = converter.parseJSON(jsonFile);
+		if(converter.isJSONObject(resource))
+			 addObjectParameter(prop, resource);
+		else
+			addArrayParameter(prop, resource);
+		return prop;
+	}
+
+	private void addArrayParameter(Property prop, JSONObject resource) throws MiddlewareException {
 		JSONArray arr;
-		if(conv.isJSONObject(resource)){
-			 obj = conv.convertToJsonObject(resource);
-			 prop.clear();
-			for (Object key : obj.keySet()) 
-				prop.addParameter(key, obj.get(key));
-		}
-		else{
-			arr = conv.convertToJsonArray(resource);
-			prop.clear();
-			for (Object ogg : arr) {
-				if(ogg != null){
-					JSONObject item = ((JSONObject) ogg);
-					for(Object key : item.keySet())
-						prop.addParameter(key, item.get(key));
-				}
+		arr = converter.convertToJsonArray(resource);
+		prop.clear();
+		for (Object ogg : arr) {
+			if(ogg != null){
+				JSONObject item = ((JSONObject) ogg);
+				for(Object key : item.keySet())
+					prop.addParameter(key, item.get(key));
 			}
 		}
-		return prop;
+	}
+
+	private void addObjectParameter(Property prop, JSONObject resource) throws MiddlewareException {
+		JSONObject obj;
+		obj = converter.convertToJsonObject(resource);
+		prop.clear();
+		for (Object key : obj.keySet()) 
+			prop.addParameter(key, obj.get(key));
 	}
 	
 	public void executeOperation(Operation operation) throws MiddlewareException {

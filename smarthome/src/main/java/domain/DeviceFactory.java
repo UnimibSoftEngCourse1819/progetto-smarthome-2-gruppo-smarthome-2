@@ -4,7 +4,11 @@ import java.util.Collection;
 
 public class DeviceFactory {
 	
-	private Device dev = new Device();
+	private Device dev;
+	
+	public DeviceFactory(){
+		this.dev = new Device();
+	}
 	
 	
 	public void addDeviceDescriptor(IDescriptor desc){

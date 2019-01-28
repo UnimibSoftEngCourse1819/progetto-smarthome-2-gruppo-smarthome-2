@@ -3,6 +3,7 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.util.Pair;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
@@ -14,7 +15,7 @@ public class Property implements ICommand {
 	//TODO FORSE PROPERTY E OP POSSONO ESTENDERE UNA CLASSE ASTRATTA
 	//ABSTRACTCOMMAND
 	
-	Pair funId;
+	Pair<Tag, Object> funId;
 	Tag type;
 	Object name;
 	
@@ -60,6 +61,13 @@ public class Property implements ICommand {
 	public Map<Object, Object> getParameters() {
 		return this.parameters;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Property [parameters=" + parameters + ", name=" + name + "]";
+	}
+	
 	
 
 }

@@ -18,7 +18,6 @@ import domain.Property;
 
 public class RestClient {
 
-	
 	private static final RestClient INSTANCE = new RestClient();
 	
 	private Client client; 
@@ -49,7 +48,6 @@ public class RestClient {
 			.add(desc.getId())
 			.add("/")
 			.add("functions");
-		System.out.println(this.uBuild.getStringUri());
 		return makeTheCall(this.uBuild.getStringUri());
 	}
 
@@ -95,8 +93,7 @@ public class RestClient {
 			throw new MiddlewareException("si è riscontrato un problema di chiamata");
 		
 		return response.readEntity(File.class);
-		
-		
+
 	}
 
 	public File post(Operation operation) throws MiddlewareException {

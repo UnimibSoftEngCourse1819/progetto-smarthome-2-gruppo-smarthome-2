@@ -1,5 +1,7 @@
 package domain;
 
+import javafx.util.Pair;
+
 public class CommandFactory {
 	
 	ICommand concreteCommand;

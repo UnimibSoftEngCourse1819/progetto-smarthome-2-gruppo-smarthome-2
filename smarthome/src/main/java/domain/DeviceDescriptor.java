@@ -1,33 +1,28 @@
 package domain;
 
 
+import java.util.Objects;
 
+import javafx.util.*;
 
 public class DeviceDescriptor implements IDescriptor{
 	
 	//Map<Tag,Object> descriptorElements;
+	private javafx.util.Pair<Tag, Object> deviceId;
+	private javafx.util.Pair<Tag, Object> deviceName;
 	
-	Pair deviceId;
-	Pair deviceName;
 	
-	private DeviceDescriptor() {
-		this.deviceId = new Pair();
-		//this.deviceId.setKey(new TagDevice("UID"));
-		this.deviceName = new Pair();
-		//this.deviceName.setKey(new TagDevice("name"));
+	private DeviceDescriptor(IDescriptor descrittore) {
+		this.deviceId  = new javafx.util.Pair<>(new TagDevice("UID"),descrittore.getId());
+		this.deviceName = new javafx.util.Pair<>(new TagDevice("name"),descrittore.getName());	
 	}
-	
-	
 	
 	/** GETTERS
 	 * @return the id
 	 */
 	public Object getId() {
-		
 		return this.deviceId.getValue();
 	}
-	
-	
 	
 	/**
 	 * @return the description
@@ -38,20 +33,43 @@ public class DeviceDescriptor implements IDescriptor{
 	
 			
 public static DeviceDescriptor createDeviceDescriptor(IDescriptor abstractDesc){
-			DeviceDescriptor deviceDescriptor = new DeviceDescriptor();
-			deviceDescriptor.initializeDescriptor(abstractDesc);
+			DeviceDescriptor deviceDescriptor = new DeviceDescriptor(abstractDesc);
 			return deviceDescriptor;
 }
-			
-		
 
-private void initializeDescriptor(IDescriptor abstractDesc) {
-	this.deviceId.setKey(new TagDevice("UID"));
-	this.deviceName.setKey(new TagDevice("name"));
-	this.deviceId.setValue(abstractDesc.getId());
-	this.deviceName.setValue(abstractDesc.getName());
-	
+/* (non-Javadoc)
+ * @see java.lang.Object#toString()
+ */
+@Override
+public String toString() {
+	return "DeviceDescriptor [deviceId=" + deviceId + ", deviceName=" + deviceName + "]";
 }
 
+/* (non-Javadoc)
+ * @see java.lang.Object#hashCode()
+ */
+@Override
+public int hashCode() {
+	return Objects.hash(deviceId, deviceName);
+}
+
+/* (non-Javadoc)
+ * @see java.lang.Object#equals(java.lang.Object)
+ */
+@Override
+public boolean equals(Object obj) {
+	if (this == obj) {
+		return true;
+	}
+	if (obj == null) {
+		return false;
+	}
+	if (!(obj instanceof DeviceDescriptor)) {
+		return false;
+	}
+	DeviceDescriptor other = (DeviceDescriptor) obj;
+	return Objects.equals(deviceId, other.deviceId) && Objects.equals(deviceName, other.deviceName);
+}
+		
 
 }
