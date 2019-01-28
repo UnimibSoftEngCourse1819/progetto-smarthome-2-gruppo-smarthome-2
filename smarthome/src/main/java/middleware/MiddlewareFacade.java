@@ -25,7 +25,6 @@ import middleware.converters.Converter;
 
 
 public class MiddlewareFacade implements IMiddlewareFacade {
-	//TODO CONVERTER ATTRIBUTO
 	private ICache cache;
 	private RestClient client; 
 	private Converter converter;
@@ -41,10 +40,10 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	@Override
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
-		JSONArray jsoArray = new JSONArray();
+		//JSONArray jsoArray = new JSONArray();
 		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
 		JSONObject resource = converter.parseJSON(jsonFile);
-		jsoArray = converter.convertToJsonArray(resource);
+		JSONArray jsoArray = converter.convertToJsonArray(resource);
 		return this.getDescriptorsAdapters(jsoArray);
 	}
 	
@@ -57,20 +56,16 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		
 	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException{
 		File jsonFile = client.get(desc);
-		Converter converter = new Converter();
 		JSONObject resource = converter.parseJSON(jsonFile);
 		JSONArray jsonArr = converter.convertToJsonArray(resource);
-		this.getFunctions(jsonArr);
 		return this.getFunctions(jsonArr);
 	}
 	
 	
 	private Collection<IFunction> getFunctions(JSONArray functs){
 		List<IFunction> adapters = new ArrayList<>();
-		for(Object obj : functs){
-			//IFunction function = new Function();
+		for(Object obj : functs)
 			 adapters.add((new FunctionAdapter((JSONObject) obj)));
-		}
 		return adapters;
 		}
 

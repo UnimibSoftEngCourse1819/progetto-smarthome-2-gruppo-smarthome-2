@@ -61,6 +61,13 @@ public class Property implements ICommand {
 	public Map<Object, Object> getParameters() {
 		return this.parameters;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Property [parameters=" + parameters + ", name=" + name + "]";
+	}
+	
 	
 
 }

@@ -37,6 +37,10 @@ public class SmartHome {
 				devDesc.add(DeviceDescriptor.createDeviceDescriptor(element));
 	}
 	
+	public void deleteDeviceDescriptor(IDescriptor devDesc){
+		this.devDesc.remove(devDesc);
+	}
+	
 								
 	//void addDevice(Device d) { this.devices.put(new DeviceId(d.getDescriptor()), d);}
 	

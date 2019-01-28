@@ -40,13 +40,13 @@ public class DomainFacade implements IDomainFacade {
 	}
 	
 	public Device addDevice(IDescriptor devDesc) throws MiddlewareException{
-			System.out.println("Contains!");
-			DeviceFactory fact = new DeviceFactory();
-			fact.addDeviceDescriptor(devDesc);
-			Collection<IFunction> adapters = 
-					 this.middlewareFacade.getADeviceFunctions(devDesc);
-			fact.addFunctions(adapters);
-			return fact.getInstance();
+		DeviceFactory fact = new DeviceFactory();
+		fact.addDeviceDescriptor(devDesc);
+		Collection<IFunction> adapters = 
+				this.middlewareFacade.getADeviceFunctions(devDesc);
+		fact.addFunctions(adapters);
+		this.home.deleteDeviceDescriptor(devDesc);
+		return fact.getInstance();
 	}
 
 

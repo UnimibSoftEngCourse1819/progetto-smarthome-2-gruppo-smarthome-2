@@ -49,7 +49,6 @@ public class RestClient {
 			.add(desc.getId())
 			.add("/")
 			.add("functions");
-		System.out.println(this.uBuild.getStringUri());
 		return makeTheCall(this.uBuild.getStringUri());
 	}
 
