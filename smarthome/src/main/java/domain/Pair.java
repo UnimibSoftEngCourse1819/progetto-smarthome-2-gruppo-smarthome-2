@@ -14,11 +14,6 @@ public class Pair {
 	}
 
 
-	public Pair(Object key, Object val) {
-		this.key = key;
-		this.value = val;
-	}
-
 	public Tag getKey() {
 		return key;
 	}

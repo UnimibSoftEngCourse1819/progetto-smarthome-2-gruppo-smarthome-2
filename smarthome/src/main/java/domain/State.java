@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.util.Pair;
+import javafx.util.*;
 
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
@@ -13,7 +13,7 @@ import middleware.MiddlewareFacade;
 
 public class State {
 	//[Key = Pair(FunID,property name) , Val = Map (Parameter Name, Value)]
-	private Map<Pair, Map<Object,Object>> currentState;
+	private Map<javafx.util.Pair<Object,Object>, Map<Object,Object>> currentState;
 	private IMiddlewareFacade receiver;
 	
 	public State() {
@@ -31,17 +31,18 @@ public class State {
 				// chiami il middleware..
 				temp = (List<Property>) this.receiver.updateProperties(state);
 				for (Property property : temp) {
-					this.currentState.put(new Pair(property.funId.getValue(), property.getName()), new HashMap<>());
-					this.addParameters(property.getName(),property.getParameters());
+					javafx.util.Pair<Object,Object> chiave = new javafx.util.Pair(property.funId.getValue(), property.getName());
+					this.currentState.put(chiave, new HashMap<>());
+					this.addParameters(chiave,property.getParameters());
 				}
 			}
 			//System.out.println(this.currentState);
 		}
 	
 	
-	private void addParameters(Object propertyName, Map<Object, Object> parameters){
+	private void addParameters(javafx.util.Pair<Object,Object> chiave, Map<Object, Object> parameters){
 		for (Object key : parameters.keySet())
-			this.currentState.get(propertyName).put(key, parameters.get(key));
+			this.currentState.get(chiave).put(key, parameters.get(key));
 	}
 	
 	private Collection<Property> getProperties(IFunction function){
@@ -58,11 +59,11 @@ public class State {
 
 	
 
-	public Map<Object, Map<Object, Object>> getCurrentState() {
+	public Map<javafx.util.Pair<Object,Object>, Map<Object, Object>> getCurrentState() {
 		return currentState;
 	}
 
-	public void setCurrentState(Map<Object, Map<Object, Object>> currentState) {
+	public void setCurrentState(Map<javafx.util.Pair<Object,Object>, Map<Object, Object>> currentState) {
 		this.currentState = currentState;
 	}
 
