@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import middleware.MiddlewareException;
 
@@ -33,9 +34,9 @@ public class Function implements IFunction {
 	public void callCommand(Object name) throws MiddlewareException {
 		for (ICommand command : this.commands) {
 			if (command.getName().equals(name))
-				command.execute(); // eccezioni
-			// update state e quindi chiamare le proprietà 
+				command.execute(); 
 		}
 	}
+	
 
 }

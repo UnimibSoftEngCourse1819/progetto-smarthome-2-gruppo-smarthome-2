@@ -10,6 +10,7 @@ public class Device{
 	
 	private Collection<IFunction> functions;
 	private DeviceDescriptor desc;
+	private State state;
 	// attributo stato mappa si altera con l'esecuzione di un operazione 
 	
 	public Device(){
@@ -17,8 +18,7 @@ public class Device{
 		this.functions = new ArrayList<>();
 	}
 	
-	
-	
+
 	public void setDescriptor(IDescriptor desc) {
 		this.desc = (DeviceDescriptor) desc;
 	}
@@ -39,10 +39,14 @@ public class Device{
 	}
 	
 	public void callFunction(Object idfunct, Object idcommand) throws MiddlewareException {
-		for (IFunction function : this.functions)
+		for (IFunction function : this.functions) {
 			if (function.getId().equals(idfunct)) {
 				function.callCommand(idcommand);
+				this.state.updateState(function);
 			}
+		}
+		
+			
 	}
 
 

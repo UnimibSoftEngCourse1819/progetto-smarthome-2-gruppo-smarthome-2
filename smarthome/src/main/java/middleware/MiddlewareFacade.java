@@ -11,7 +11,8 @@ import org.json.simple.JSONObject;
 
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
-
+import domain.Function;
+import domain.ICommand;
 import domain.IDescriptor;
 import domain.IFunction;
 import domain.Operation;
@@ -76,6 +77,15 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	
 	public void executeOperation(Operation operation) throws MiddlewareException {
 		File jsonFile = this.client.post(operation);
+	}
+
+	@Override
+	public Collection<Property> updateProperties(IFunction state) throws MiddlewareException {
+		List<Property> properties = new ArrayList<>();
+		for(ICommand command : state.getCommands()) {
+			properties.add(this.getProperty((Property) command));
+		}
+		return properties;
 	}
 	
 }

@@ -18,4 +18,6 @@ public interface IMiddlewareFacade {
 
 	void executeOperation(Operation operation) throws MiddlewareException;
 
+	Collection<Property> updateProperties(IFunction state) throws MiddlewareException;
+
 }
