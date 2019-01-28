@@ -64,7 +64,7 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 	
-	public void showDevice (IDevice device) {
+	public void showDevice (Device device) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -90,13 +90,5 @@ public class GUIFacade implements IGUIFacade {
 	public Device add(IDescriptor devDesc) throws MiddlewareException {
 		return this.domainFacade.addDevice(devDesc);
 	}
-
-	@Override
-	public void showDevice(Device d) {
-		
-		
-	}
-
-	
 
 }
