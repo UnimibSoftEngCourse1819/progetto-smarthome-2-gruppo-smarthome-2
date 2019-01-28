@@ -49,10 +49,15 @@ public class Device{
 		}	
 	}
 	
-	public void initState(Collection<IFunction> fncts) throws MiddlewareException{
-		for(IFunction fn : fncts)
+	public void initState() throws MiddlewareException{
+		for(IFunction fn : this.functions)
 				this.state.updateState(fn);
-		System.out.println(this.state.getCurrentState());
+		//System.out.println(this.state.getCurrentState());
+	}
+
+
+	public State getState() {
+		return state;
 	}
 
 

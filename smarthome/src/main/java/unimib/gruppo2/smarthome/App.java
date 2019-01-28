@@ -77,6 +77,11 @@ public final class App {
     	 Device d = df.addDevice(res.get(9));
     	 for(IFunction f : d.getFunctions())
     		 System.out.println(f);
+    	 d.initState();
+    	 //System.out.println(d.getState());
+    	 System.out.println("************AFTER INIT STATE*****************");
+    	 for(IFunction f : d.getFunctions())
+    		 System.out.println(f);
     	 
     	 
     	 //System.out.println(df.getDeviceDescriptors());
