@@ -12,14 +12,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+
+import domain.DeviceDescriptor;
+
 import java.awt.Dimension;
 import java.awt.Component;
 import javax.swing.JProgressBar;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class HomeGUI extends JPanel{
 
+	
 	public JFrame frame;
 	private GUIFacade guiFacade;
 
@@ -27,6 +33,7 @@ public class HomeGUI extends JPanel{
 	 * Create the application.
 	 */
 	public HomeGUI() {
+		
 		this.guiFacade = new GUIFacade();
 		initialize();
 	}
@@ -35,6 +42,7 @@ public class HomeGUI extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 562, 524);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +53,7 @@ public class HomeGUI extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					guiFacade.show(guiFacade.scan());
+					frame.setVisible(false);
 					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -52,8 +61,23 @@ public class HomeGUI extends JPanel{
 				}
 			}
 		});
-		btnScan.setBounds(193, 442, 162, 25);
+		btnScan.setBounds(85, 442, 162, 25);
 		frame.getContentPane().add(btnScan);
+		
+		JButton btnShowDev = new JButton("SMART-HOME");
+		btnShowDev.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnShowDev.setBounds(300, 442, 162, 25);
+		frame.getContentPane().add(btnShowDev);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("smart-home.png"));
