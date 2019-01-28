@@ -69,31 +69,37 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		return adapters;
 		}
 
+	
 	@Override
 	public Property getProperty(Property prop) throws MiddlewareException {
 		File jsonFile = this.client.post(prop);
-		Converter conv = new Converter();
-		JSONObject resource = conv.parseJSON(jsonFile);
-		JSONObject obj;
+		JSONObject resource = converter.parseJSON(jsonFile);
+		if(converter.isJSONObject(resource))
+			 addObjectParameter(prop, resource);
+		else
+			addArrayParameter(prop, resource);
+		return prop;
+	}
+
+	private void addArrayParameter(Property prop, JSONObject resource) throws MiddlewareException {
 		JSONArray arr;
-		if(conv.isJSONObject(resource)){
-			 obj = conv.convertToJsonObject(resource);
-			 prop.clear();
-			for (Object key : obj.keySet()) 
-				prop.addParameter(key, obj.get(key));
-		}
-		else{
-			arr = conv.convertToJsonArray(resource);
-			prop.clear();
-			for (Object ogg : arr) {
-				if(ogg != null){
-					JSONObject item = ((JSONObject) ogg);
-					for(Object key : item.keySet())
-						prop.addParameter(key, item.get(key));
-				}
+		arr = converter.convertToJsonArray(resource);
+		prop.clear();
+		for (Object ogg : arr) {
+			if(ogg != null){
+				JSONObject item = ((JSONObject) ogg);
+				for(Object key : item.keySet())
+					prop.addParameter(key, item.get(key));
 			}
 		}
-		return prop;
+	}
+
+	private void addObjectParameter(Property prop, JSONObject resource) throws MiddlewareException {
+		JSONObject obj;
+		obj = converter.convertToJsonObject(resource);
+		prop.clear();
+		for (Object key : obj.keySet()) 
+			prop.addParameter(key, obj.get(key));
 	}
 	
 	public void executeOperation(Operation operation) throws MiddlewareException {

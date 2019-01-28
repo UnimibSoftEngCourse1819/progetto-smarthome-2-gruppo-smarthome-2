@@ -13,9 +13,10 @@ import middleware.MiddlewareFacade;
 
 public class State {
 	//[Key = Pair(FunID,property name) , Val = Map (Parameter Name, Value)]
-	private Map<javafx.util.Pair<Object,Object>, Map<Object,Object>> currentState;
+	private Map<Pair<Object,Object>, Map<Object,Object>> currentState;
 	private IMiddlewareFacade receiver;
 	
+	//constructor
 	public State() {
 		this.currentState = new HashMap<>();
 		this.receiver = new MiddlewareFacade();
@@ -31,18 +32,17 @@ public class State {
 				// chiami il middleware..
 				temp = (List<Property>) this.receiver.updateProperties(state);
 				for (Property property : temp) {
-					javafx.util.Pair<Object,Object> chiave = new javafx.util.Pair(property.funId.getValue(), property.getName());
-					this.currentState.put(chiave, new HashMap<>());
-					this.addParameters(chiave,property.getParameters());
+					Pair<Object,Object> key = new Pair(property.funId.getValue(), property.getName());
+					this.currentState.put(key, new HashMap<>());
+					this.addParametersToCurrentState(key,property.getParameters());
 				}
 			}
 			//System.out.println(this.currentState);
 		}
 	
-	
-	private void addParameters(javafx.util.Pair<Object,Object> chiave, Map<Object, Object> parameters){
+	private void addParametersToCurrentState(Pair<Object,Object> propertykey, Map<Object, Object> parameters){
 		for (Object key : parameters.keySet())
-			this.currentState.get(chiave).put(key, parameters.get(key));
+			this.currentState.get(propertykey).put(key, parameters.get(key));
 	}
 	
 	private Collection<Property> getProperties(IFunction function){
@@ -57,13 +57,11 @@ public class State {
 	
 	
 
-	
-
-	public Map<javafx.util.Pair<Object,Object>, Map<Object, Object>> getCurrentState() {
+	public Map<Pair<Object,Object>, Map<Object, Object>> getCurrentState() {
 		return currentState;
 	}
 
-	public void setCurrentState(Map<javafx.util.Pair<Object,Object>, Map<Object, Object>> currentState) {
+	public void setCurrentState(Map<Pair<Object,Object>, Map<Object, Object>> currentState) {
 		this.currentState = currentState;
 	}
 
