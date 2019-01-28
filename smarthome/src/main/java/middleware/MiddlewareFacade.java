@@ -33,9 +33,10 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
 		JSONArray jsoArray = new JSONArray();
-		IConverter converter = new Converter();
+		Converter converter = new Converter();
 		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
-		jsoArray = converter.convertToJsonArray(jsonFile);
+		JSONObject resource = converter.parseJSON(jsonFile);
+		jsoArray = converter.convertToJsonArray(resource);
 		return this.getDescriptors(jsoArray);
 	}
 	
@@ -48,8 +49,9 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		
 	public Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException{
 		File jsonFile = client.get(desc);
-		IConverter converter = new Converter();
-		JSONArray jsonArr = converter.convertToJsonArray(jsonFile);
+		Converter converter = new Converter();
+		JSONObject resource = converter.parseJSON(jsonFile);
+		JSONArray jsonArr = converter.convertToJsonArray(resource);
 		this.getFunctions(jsonArr);
 		return this.getFunctions(jsonArr);
 	}
@@ -68,10 +70,25 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	public Property getProperty(Property prop) throws MiddlewareException {
 		File jsonFile = this.client.post(prop);
 		Converter conv = new Converter();
-		JSONObject obj = conv.convertToJsonObject(jsonFile);
-		prop.clear();
-		for (Object key : obj.keySet()) {
-			prop.addParameter(key, obj.get(key));
+		JSONObject resource = conv.parseJSON(jsonFile);
+		JSONObject obj;
+		JSONArray arr;
+		if(conv.isJSONObject(resource)){
+			 obj = conv.convertToJsonObject(resource);
+			 prop.clear();
+			for (Object key : obj.keySet()) 
+				prop.addParameter(key, obj.get(key));
+		}
+		else{
+			arr = conv.convertToJsonArray(resource);
+			prop.clear();
+			for (Object ogg : arr) {
+				if(ogg != null){
+					JSONObject item = ((JSONObject) ogg);
+					for(Object key : item.keySet())
+						prop.addParameter(key, item.get(key));
+				}
+			}
 		}
 		return prop;
 	}

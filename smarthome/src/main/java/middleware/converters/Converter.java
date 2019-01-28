@@ -18,40 +18,31 @@ import middleware.MiddlewareException;
 
 public class Converter implements IConverter {
 	
-	@Override
-	public JSONArray convertToJsonArray(File f) throws MiddlewareException {
-				JSONObject obj = (new Parser().parseJSONFile(f));
-				JSONArray ja = (JSONArray) obj.get("result");	
+	
+	public JSONArray convertToJsonArray(JSONObject obj) throws MiddlewareException {
+				//JSONObject obj = (new Parser().parseJSONFile(f));
+			JSONArray ja = (JSONArray) obj.get("result");	
 			return ja;
 		 }
 	
-	public JSONObject convertToJsonObject(File f) throws MiddlewareException {
-		JSONObject obj = (new Parser().parseJSONFile(f));
+	public JSONObject convertToJsonObject(JSONObject obj) throws MiddlewareException {
+		//JSONObject obj = (new Parser().parseJSONFile(f));
 		obj = (JSONObject) obj.get("result");
 		return obj;
  }
 	
-	
-	
-	
-/*
-public Collection<ILowObject> convertTo(JSONObject jo,String parameter) throws FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException {
-		
-	  
-    JSONArray ja = (JSONArray) jo.get("result");
-    
-    
-    LowObjectCreator creator = new LowObjectCreator();
-    
-    for (Object element : ja) {
-    	creator.setToAdapt((JSONObject) element); 	
-        lowObjectCollection.add(creator.convertToLowObject(parameter));
-    }
-    return lowObjectCollection;
-    
-}
+	public JSONObject parseJSON(File f) throws MiddlewareException{
+		 JSONObject obj = (new Parser().parseJSONFile(f));
+		 return obj;
+	}
 
-*/
+public boolean isJSONObject(JSONObject ob){
+	Object res = ob.get("result");
+	if(res instanceof JSONObject)
+		return true;
+	else
+		return false;
+}
 	
 
 

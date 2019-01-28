@@ -42,9 +42,10 @@ public class Device{
 	public void callFunction(Object idfunct, Object idcommand) throws MiddlewareException {
 		for (IFunction function : this.functions) {
 			if (function.getId().equals(idfunct)) {
-				System.out.println(function.getId());
+				//System.out.println(function.getId());
 				function.callCommand(idcommand);
 				this.state.updateState(function);
+				System.out.println(this.state.getCurrentState());
 			}
 		}
 		
@@ -52,13 +53,9 @@ public class Device{
 	}
 	
 	public void initState(Collection<IFunction> fncts) throws MiddlewareException{
-		int i = 0;
-		for(IFunction fn : fncts){
-			if(i > 0)
-				this.state.updateState(fn);
-			++i;
-		}
 		
+		for(IFunction fn : fncts)
+				this.state.updateState(fn);
 		System.out.println(this.state.getCurrentState());
 	}
 
