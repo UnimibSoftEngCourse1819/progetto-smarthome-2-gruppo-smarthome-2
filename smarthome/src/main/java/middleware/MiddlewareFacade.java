@@ -26,21 +26,29 @@ import middleware.converters.Converter;
 
 public class MiddlewareFacade implements IMiddlewareFacade {
 	//TODO CONVERTER ATTRIBUTO
-	ICache cache = new FileCache();
-	RestClient client = RestClient.getINSTANCE();
+	private ICache cache;
+	private RestClient client; 
+	private Converter converter;
+	
+	
+	public MiddlewareFacade() {
+		this.cache = new FileCache();
+		this.converter = new Converter();
+		this.client = RestClient.getINSTANCE();
+		
+	}
 	
 	@Override
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
 		JSONArray jsoArray = new JSONArray();
-		Converter converter = new Converter();
 		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
 		JSONObject resource = converter.parseJSON(jsonFile);
 		jsoArray = converter.convertToJsonArray(resource);
-		return this.getDescriptors(jsoArray);
+		return this.getDescriptorsAdapters(jsoArray);
 	}
 	
-	private Collection<IDescriptor> getDescriptors(JSONArray jarr) {
+	private Collection<IDescriptor> getDescriptorsAdapters(JSONArray jarr) {
 		List<IDescriptor> adapters = new ArrayList<IDescriptor>();
 		for(Object job : jarr) // per ciascun dispositivo 
 			adapters.add(new DescriptorAdapter((JSONObject) job));

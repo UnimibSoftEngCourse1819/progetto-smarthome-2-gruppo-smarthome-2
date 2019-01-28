@@ -25,23 +25,20 @@ public class DomainFacade implements IDomainFacade {
 	
 	public DomainFacade(){
 		this.middlewareFacade = new MiddlewareFacade();
-		
 		this.home = SmartHome.getInstance();
 	}
 	
-
 	@Override
-	public Collection<IDescriptor> scanDevices() throws MiddlewareException {	
+	public Collection<DeviceDescriptor> scanDevices() throws MiddlewareException {	
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
 		this.home.createDeviceDescriptors(descs);
-		return descs;
+		return this.home.getDeviceDescriptors();
 	}
 	
+	public List<DeviceDescriptor> getDeviceDescriptors() {
+		return this.home.getDeviceDescriptors(); 
+	}
 	
-	public List<DeviceDescriptor> getDeviceDescriptors() { return this.home.getDeviceDescriptors(); }
-	
-	
-
 	public Device addDevice(IDescriptor devDesc) throws MiddlewareException{
 			System.out.println("Contains!");
 			DeviceFactory fact = new DeviceFactory();

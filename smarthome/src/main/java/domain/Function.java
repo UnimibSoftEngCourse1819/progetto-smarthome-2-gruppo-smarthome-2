@@ -1,15 +1,16 @@
-package domain;
+ package domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javafx.util.Pair;
 import middleware.MiddlewareException;
 
 public class Function implements IFunction {
 	
-	Pair id;
-	Collection<ICommand> commands;
+	private Pair<Tag, Object> id;
+	private Collection<ICommand> commands;
 	
 	public Function(String fId){
 		this.id = new Pair(new TagFunction("UID"),fId);	
