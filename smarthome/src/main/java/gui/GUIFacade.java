@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.json.simple.parser.ParseException;
@@ -14,6 +17,7 @@ import org.json.simple.parser.ParseException;
 import domain.Device;
 import domain.DeviceDescriptor;
 import domain.DomainFacade;
+import domain.ICommand;
 import domain.IDescriptor;
 import domain.IDevice;
 import domain.IFunction;
@@ -64,7 +68,7 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 	
-	public void showDevice (IDevice device) {
+	public void showDevice (Device device) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -81,22 +85,36 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 
+	public void showResult(Device device,Map<Object, Object> state) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					
+					StateGUI statePage = new StateGUI(device, state);
+					JPanel p = new JPanel();
+					p.add(statePage);
+					statePage.frame.setVisible(true);
+					
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+	}
+	
 	public Collection<IDescriptor> scan() throws MiddlewareException {
 			return this.domainFacade.scanDevices();	
 	}
 	
 
-	@Override
+	
 	public Device add(IDescriptor devDesc) throws MiddlewareException {
 		return this.domainFacade.addDevice(devDesc);
 	}
 
-	@Override
-	public void showDevice(Device d) {
-		
-		
+	public void execute(Device device, Object id, Object name) throws MiddlewareException {
+		device.callFunction(id, name);	
 	}
-
-	
-
 }

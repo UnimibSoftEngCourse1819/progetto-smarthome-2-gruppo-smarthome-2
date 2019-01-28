@@ -9,7 +9,7 @@ import middleware.MiddlewareException;
 public class Device{
 	
 	private Collection<IFunction> functions;
-	private DeviceDescriptor desc;
+	private IDescriptor desc;
 	private State state;
 	// attributo stato mappa si altera con l'esecuzione di un operazione 
 	
@@ -21,10 +21,12 @@ public class Device{
 	
 
 	public void setDescriptor(IDescriptor desc) {
-		this.desc = (DeviceDescriptor) desc;
+		this.desc = desc;
 	}
 
-
+	public State getState() {
+		return this.state;
+	}
 	public IDescriptor getDescriptor() {
 		return this.desc;
 	}

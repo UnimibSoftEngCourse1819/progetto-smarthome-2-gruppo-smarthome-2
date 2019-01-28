@@ -16,6 +16,4 @@ public interface IGUIFacade {
 	public void show();
 	public void show(Collection <IDescriptor> descs);
 	public void showDevice(Device d);
-	public Collection<IDescriptor> scan() throws MiddlewareException;
-	public Device add(IDescriptor descDev) throws MiddlewareException;
 }
