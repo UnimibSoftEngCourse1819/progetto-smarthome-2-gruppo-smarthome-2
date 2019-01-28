@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 
 import domain.IDescriptor;
+import domain.Operation;
 import domain.Property;
 
 public class RestClient {
@@ -64,7 +65,7 @@ public class RestClient {
 			return response.readEntity(File.class);
 	}
 
-	public File post(Property prop) {
+	public File post(Property prop) throws MiddlewareException {
 		this.uBuild.clear();
 		this.uBuild.add("/functions/");
 		this.uBuild.add(prop.getFunctionId());
@@ -80,7 +81,7 @@ public class RestClient {
 		return body;
 	}
 
-	public File makeTheCall(String uri, JSONObject body){
+	public File makeTheCall(String uri, JSONObject body) throws MiddlewareException{
 		/*Response response = client.target(uri)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.json(body));*/
@@ -89,12 +90,27 @@ public class RestClient {
 		Invocation.Builder invocationBuilder =  this.myResource.request(MediaType.APPLICATION_JSON);
 		
 		Response response = invocationBuilder.post(Entity.entity(body, MediaType.APPLICATION_JSON));
-		response.getStatus();
-		System.out.println(response.getStatus());
+		
+		if (response.getStatus()>= 300 )
+			throw new MiddlewareException("si è riscontrato un problema di chiamata");
 		
 		return response.readEntity(File.class);
 		
 		
+	}
+
+	public File post(Operation operation) throws MiddlewareException {
+		this.uBuild.clear();
+		this.uBuild.add("/functions/");
+		this.uBuild.add(operation.getFunctionId());
+		JSONObject body = this.constructOperationBody(operation);
+		return this.makeTheCall(this.uBuild.getStringUri(), body);
+	}
+
+	private JSONObject constructOperationBody(Operation operation) {
+		JSONObject body = new JSONObject();
+		body.put("operation", (String) operation.getName());
+		return body;
 	}
 		
 }

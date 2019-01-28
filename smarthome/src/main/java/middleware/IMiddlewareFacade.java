@@ -4,6 +4,7 @@ package middleware;
 import java.util.Collection;
 import domain.IDescriptor;
 import domain.IFunction;
+import domain.Operation;
 import domain.Property;
 
 public interface IMiddlewareFacade {
@@ -14,5 +15,7 @@ public interface IMiddlewareFacade {
 	Collection<IFunction> getADeviceFunctions(IDescriptor desc) throws MiddlewareException;
 	
 	Property getProperty(Property prop) throws MiddlewareException;
+
+	void executeOperation(Operation operation) throws MiddlewareException;
 
 }

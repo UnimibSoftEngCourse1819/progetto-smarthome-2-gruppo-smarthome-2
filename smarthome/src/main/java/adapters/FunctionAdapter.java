@@ -17,6 +17,7 @@ import domain.IFunction;
 import domain.Pair;
 import domain.Tag;
 import domain.TagFunction;
+import middleware.MiddlewareException;
 
 public class FunctionAdapter implements IFunction {
 	
@@ -88,6 +89,12 @@ public class FunctionAdapter implements IFunction {
 			tagsForDescriptor.add(new Tag(key.toString()));
 		
 		return tagsForDescriptor;
+	}
+
+	@Override
+	public void callCommand(Object name) throws MiddlewareException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

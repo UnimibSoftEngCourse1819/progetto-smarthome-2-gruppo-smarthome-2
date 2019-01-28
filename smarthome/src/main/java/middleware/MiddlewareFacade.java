@@ -14,6 +14,7 @@ import adapters.FunctionAdapter;
 
 import domain.IDescriptor;
 import domain.IFunction;
+import domain.Operation;
 import domain.Property;
 import middleware.converters.IConverter;
 import middleware.converters.Parser;
@@ -71,6 +72,10 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 			prop.addParameter(key, obj.get(key));
 		}
 		return prop;
+	}
+	
+	public void executeOperation(Operation operation) throws MiddlewareException {
+		File jsonFile = this.client.post(operation);
 	}
 	
 }
