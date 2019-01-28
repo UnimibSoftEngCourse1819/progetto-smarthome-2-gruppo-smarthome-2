@@ -45,7 +45,7 @@ public final class App {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException, Exception {
 
-    	/*
+    	
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,10 +59,10 @@ public final class App {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
         
 
-    	List<DeviceDescriptor> res = new ArrayList<>();
+    	/*List<DeviceDescriptor> res = new ArrayList<>();
     	DomainFacade df = new DomainFacade();
     	 df.scanDevices();
     	 res = df.getDeviceDescriptors();
@@ -75,7 +75,7 @@ public final class App {
     	 d.callFunction(fns.get(0).getId(), cms.get(0).getName());
     	 d.callFunction(fns.get(0).getId(), cms.get(1).getName());
     	 
-    	 /*
+    	 
     	 System.out.println(d.getDescriptor());
     	 System.out.println(d.getFunctions());
     	 for(ICommand com : fns.get(0).getCommands())

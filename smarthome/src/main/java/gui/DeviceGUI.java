@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,11 +24,13 @@ import javax.swing.JLabel;
 public class DeviceGUI extends JPanel {
 
 	public JFrame frame;
-
+	private GUIFacade guiFacade;
+	
 	/**
 	 * Create the application.
 	 */
 	public DeviceGUI(Device device) {
+		this.guiFacade = new GUIFacade();
 		initialize(device);
 	}
 
@@ -41,6 +46,16 @@ public class DeviceGUI extends JPanel {
 		JLabel lblDeviceName = new JLabel(device.getDescriptor().getName().toString());
 		lblDeviceName.setBounds(38, 20, 56, 16);
 		frame.getContentPane().add(lblDeviceName);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				guiFacade.show();
+			}
+		});
+		btnBack.setBounds(38, 417, 97, 25);
+		frame.getContentPane().add(btnBack);
 		
 		
 		//nome device
@@ -66,8 +81,22 @@ public class DeviceGUI extends JPanel {
 					}
 					posOp+=20;
 					JButton btnOperation = new JButton(cmd.getName().toString());
-					btnOperation.setBounds(38, 50 + posOp, 120, 16);
+					btnOperation.setBounds(38, 50 + posOp, 180, 16);
 					frame.getContentPane().add(btnOperation);
+					btnOperation.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							try {
+								guiFacade.execute(device, fctn.getId(), cmd.getName());
+								frame.setVisible(false);
+								guiFacade.showResult(device, device.getState().getState());
+								
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+
+					});
 				}	
 				else if (cmd.getTag().toString().equals(new TagFunction("property.name").toString())) {
 					if (posPr==0) {
@@ -81,9 +110,29 @@ public class DeviceGUI extends JPanel {
 					JButton btnProperty = new JButton(cmd.getName().toString());
 					btnProperty.setBounds(300, 50 + posPr, 120, 16);				
 					frame.getContentPane().add(btnProperty);
+					btnProperty.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							try {
+								guiFacade.execute(device, fctn.getId(), cmd.getName());
+								frame.setVisible(false);
+								guiFacade.showResult(device,device.getState().getState());
+								
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+
+					});
 				}
 			}
 		}
 	
+	}
+	
+	
+	private void showResult(Map<Object, Object> state) {
+		// TODO Auto-generated method stub
+		
 	}
 }
