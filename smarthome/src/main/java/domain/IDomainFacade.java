@@ -11,7 +11,7 @@ import middleware.MiddlewareException;
 public interface IDomainFacade {
 	//TODO Il tipo di ritorno va definito capendo cosa serve alla GUI
 
-	public Collection<IDescriptor> scanDevices() throws MiddlewareException;
+	public Collection<DeviceDescriptor> scanDevices() throws MiddlewareException;
 	
 	public Device addDevice(IDescriptor id) throws MiddlewareException;
 }

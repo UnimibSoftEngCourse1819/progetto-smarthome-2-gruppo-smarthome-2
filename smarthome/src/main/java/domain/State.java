@@ -5,16 +5,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.util.*;
 
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class State {
-	
-	private Map<Object, Object> currentState;
+	//[Key = Pair(FunID,property name) , Val = Map (Parameter Name, Value)]
+	private Map<Pair<Object,Object>, Map<Object,Object>> currentState;
 	private IMiddlewareFacade receiver;
 	
+	//constructor
 	public State() {
 		this.currentState = new HashMap<>();
 		this.receiver = new MiddlewareFacade();
@@ -30,22 +32,21 @@ public class State {
 			// può darsi che ci sia una funzione senza proprietà..
 			if (temp != null)
 			{
+				//Temp contiene le chiavi della Mappa esterna
 				// chiami il middleware..
 				temp = (List<Property>) this.receiver.updateProperties(state);
 				for (Property property : temp) {
-					this.addParameters(property.getParameters());
+					Pair<Object,Object> key = new Pair(property.funId.getValue(), property.getName());
+					this.currentState.put(key, new HashMap<>());
+					this.addParametersToCurrentState(key,property.getParameters());
 				}
 			}
-			System.out.println(this.currentState);
+			//System.out.println(this.currentState);
 		}
 	
-	
-	private void addParameters(Map<Object, Object> properties){
-		for (Object key : properties.keySet())
-		{
-			this.currentState.put(key, properties.get(key));
-		}
-		
+	private void addParametersToCurrentState(Pair<Object,Object> propertykey, Map<Object, Object> parameters){
+		for (Object key : parameters.keySet())
+			this.currentState.get(propertykey).put(key, parameters.get(key));
 	}
 	
 	private Collection<Property> getProperties(IFunction function){
@@ -57,4 +58,31 @@ public class State {
 		}
 			return result;
 	}
+	
+	
+
+	public Map<Pair<Object,Object>, Map<Object, Object>> getCurrentState() {
+		return currentState;
+	}
+
+	public void setCurrentState(Map<Pair<Object,Object>, Map<Object, Object>> currentState) {
+		this.currentState = currentState;
+	}
+
+	public IMiddlewareFacade getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(IMiddlewareFacade receiver) {
+		this.receiver = receiver;
+	}
+
+	@Override
+	public String toString() {
+		return "State [currentState=" + currentState + "]";
+	}
+	
+	
+	
+	
 }

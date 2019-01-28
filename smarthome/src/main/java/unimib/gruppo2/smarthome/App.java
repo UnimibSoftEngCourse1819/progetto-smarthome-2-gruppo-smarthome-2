@@ -62,18 +62,43 @@ public final class App {
 		});
         
 
+
     	/*List<DeviceDescriptor> res = new ArrayList<>();
+
+    	/************Scan Device************/
+    	List<DeviceDescriptor> res = new ArrayList<>();
+
     	DomainFacade df = new DomainFacade();
     	 df.scanDevices();
     	 res = df.getDeviceDescriptors();
-    	 System.out.println(res.size());
+    	 System.out.println("Array Size " + res.size());
+    	 for(DeviceDescriptor dd : res)
+    		 System.out.println(dd);
     	 
     	 
-    	 Device d = df.addDevice(res.get(0));
+    	 
+    	 /************Add Device************/
+    	 System.out.println("************ADD DEVICE******************");
+    	 Device d = df.addDevice(res.get(9));
+    	 for(IFunction f : d.getFunctions())
+    		 System.out.println(f);
+    	 d.initState();
+    	 //System.out.println(d.getState());
+    	 System.out.println("************AFTER INIT STATE*****************");
+    	 for(IFunction f : d.getFunctions())
+    		 System.out.println(f);
+    	 
+    	 
+    	 //System.out.println(df.getDeviceDescriptors());
+    	 
+    	 /*
+    	 Device d = df.addDevice(res.get(9));
+    	 
+    	 d.initState(d.getFunctions());
     	 ArrayList<IFunction> fns =  (ArrayList<IFunction>) d.getFunctions();
     	 ArrayList<ICommand> cms = (ArrayList<ICommand>) fns.get(0).getCommands();
+    	d.callFunction(fns.get(0).getId(), cms.get(1).getName());
     	 d.callFunction(fns.get(0).getId(), cms.get(0).getName());
-    	 d.callFunction(fns.get(0).getId(), cms.get(1).getName());
     	 
     	 
     	 System.out.println(d.getDescriptor());

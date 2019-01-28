@@ -22,19 +22,23 @@ public class SmartHome {
 	private SmartHome(){
 		this.devDesc = new ArrayList<DeviceDescriptor>();
 		this.devices = new HashMap<String, Device>();
-	};
-
+	}
 
 	public static SmartHome getInstance(){
 		return INSTANCE;
 	}
 
-	public List<DeviceDescriptor> getDeviceDescriptors() { return this.devDesc; }
+	public List<DeviceDescriptor> getDeviceDescriptors() {
+		return this.devDesc;
+		}
 
 	public void createDeviceDescriptors(Collection<IDescriptor> descs) {
 			for (IDescriptor element : descs)
-
 				devDesc.add(DeviceDescriptor.createDeviceDescriptor(element));
+	}
+	
+	public void deleteDeviceDescriptor(IDescriptor devDesc){
+		this.devDesc.remove(devDesc);
 	}
 	
 								

@@ -28,7 +28,6 @@ public class Device{
 		return this.state;
 	}
 	public IDescriptor getDescriptor() {
-		
 		return this.desc;
 	}
 	
@@ -41,16 +40,26 @@ public class Device{
 		return functions;
 	}
 	
-	public void callFunction(Object idfunct, Object idcommand) throws MiddlewareException {
+	public void callFunctionCommand(Object idfunct, Object idcommand) throws MiddlewareException {
 		for (IFunction function : this.functions) {
 			if (function.getId().equals(idfunct)) {
-				System.out.println(function.getId());
+				//System.out.println(function.getId());
 				function.callCommand(idcommand);
 				this.state.updateState(function);
+				System.out.println(this.state.getCurrentState());
 			}
-		}
-		
-			
+		}	
+	}
+	
+	public void initState() throws MiddlewareException{
+		for(IFunction fn : this.functions)
+				this.state.updateState(fn);
+		//System.out.println(this.state.getCurrentState());
+	}
+
+
+	public State getState() {
+		return state;
 	}
 
 
