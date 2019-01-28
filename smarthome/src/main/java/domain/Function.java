@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import middleware.MiddlewareException;
+
 public class Function implements IFunction {
 	
 	Pair id;
@@ -24,9 +26,16 @@ public class Function implements IFunction {
 		return this.id.getValue();
 	}
 
-
 	public void setCommands(Collection<ICommand> commands) {
 		this.commands = commands;
+	}
+	
+	public void callCommand(Object name) throws MiddlewareException {
+		for (ICommand command : this.commands) {
+			if (command.getName().equals(name))
+				command.execute(); // eccezioni
+			// update state e quindi chiamare le proprietà 
+		}
 	}
 
 }

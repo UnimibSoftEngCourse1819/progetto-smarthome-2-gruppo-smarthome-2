@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javassist.bytecode.Descriptor;
+import middleware.MiddlewareException;
 
 public class Device{
 	
 	private Collection<IFunction> functions;
 	private DeviceDescriptor desc;
+	// attributo stato mappa si altera con l'esecuzione di un operazione 
 	
 	public Device(){
 		//this.desc = new DeviceDescriptor();
@@ -36,7 +38,12 @@ public class Device{
 		return functions;
 	}
 	
-	
+	public void callFunction(Object idfunct, Object idcommand) throws MiddlewareException {
+		for (IFunction function : this.functions)
+			if (function.getId().equals(idfunct)) {
+				function.callCommand(idcommand);
+			}
+	}
 
 
 }
