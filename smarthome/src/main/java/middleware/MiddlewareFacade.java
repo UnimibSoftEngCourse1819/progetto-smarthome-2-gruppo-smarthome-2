@@ -17,6 +17,7 @@ import domain.IDescriptor;
 import domain.IFunction;
 import domain.Operation;
 import domain.Property;
+import domain.TagFunction;
 import middleware.converters.IConverter;
 import middleware.converters.Parser;
 import middleware.converters.Converter;
@@ -83,7 +84,8 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	public Collection<Property> updateProperties(IFunction state) throws MiddlewareException {
 		List<Property> properties = new ArrayList<>();
 		for(ICommand command : state.getCommands()) {
-			properties.add(this.getProperty((Property) command));
+			if(command.getTag().equals(new TagFunction("property.name")))
+				properties.add(this.getProperty((Property) command));
 		}
 		return properties;
 	}

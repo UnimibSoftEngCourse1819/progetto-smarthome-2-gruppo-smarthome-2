@@ -33,8 +33,10 @@ public class Function implements IFunction {
 	
 	public void callCommand(Object name) throws MiddlewareException {
 		for (ICommand command : this.commands) {
-			if (command.getName().equals(name))
+			if (command.getName().equals(name)){
+				System.out.println(command.getName() + " " + command.getClass());
 				command.execute(); 
+			}
 		}
 	}
 	

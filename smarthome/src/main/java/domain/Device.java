@@ -16,6 +16,7 @@ public class Device{
 	public Device(){
 		//this.desc = new DeviceDescriptor();
 		this.functions = new ArrayList<>();
+		this.state = new State();
 	}
 	
 
@@ -41,6 +42,7 @@ public class Device{
 	public void callFunction(Object idfunct, Object idcommand) throws MiddlewareException {
 		for (IFunction function : this.functions) {
 			if (function.getId().equals(idfunct)) {
+				System.out.println(function.getId());
 				function.callCommand(idcommand);
 				this.state.updateState(function);
 			}

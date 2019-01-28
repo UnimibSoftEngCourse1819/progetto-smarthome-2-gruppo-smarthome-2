@@ -6,7 +6,7 @@ public class CommandFactory {
 	
 	
 	public ICommand createCommand(Tag t, Object id,Pair fId){
-		if(t.equals(new TagFunction("operation")))
+		if(t.equals(new TagFunction("operation.name")))
 			this.concreteCommand = new Operation(t,id,fId);
 		else
 			this.concreteCommand = new Property(t,id,fId);

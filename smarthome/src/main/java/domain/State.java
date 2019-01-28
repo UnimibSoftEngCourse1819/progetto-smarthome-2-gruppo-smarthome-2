@@ -32,6 +32,7 @@ public class State {
 					this.addParameters(property.getParameters());
 				}
 			}
+			System.out.println(this.currentState);
 		}
 	
 	
