@@ -50,6 +50,17 @@ public class Device{
 		
 			
 	}
+	
+	public void initState(Collection<IFunction> fncts) throws MiddlewareException{
+		int i = 0;
+		for(IFunction fn : fncts){
+			if(i > 0)
+				this.state.updateState(fn);
+			++i;
+		}
+		
+		System.out.println(this.state.getCurrentState());
+	}
 
 
 }

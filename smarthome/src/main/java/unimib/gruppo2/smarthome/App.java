@@ -69,11 +69,13 @@ public final class App {
     	 System.out.println(res.size());
     	 
     	 
-    	 Device d = df.addDevice(res.get(0));
+    	 Device d = df.addDevice(res.get(2));
+    	 
+    	 d.initState(d.getFunctions());
     	 ArrayList<IFunction> fns =  (ArrayList<IFunction>) d.getFunctions();
-    	 ArrayList<ICommand> cms = (ArrayList<ICommand>) fns.get(0).getCommands();
-    	 d.callFunction(fns.get(0).getId(), cms.get(0).getName());
-    	 d.callFunction(fns.get(0).getId(), cms.get(1).getName());
+    	 //ArrayList<ICommand> cms = (ArrayList<ICommand>) fns.get(2).getCommands();
+    	//d.callFunction(fns.get(2).getId(), cms.get(1).getName());
+    	 //d.callFunction(fns.get(2).getId(), cms.get(0).getName());
     	 
     	 /*
     	 System.out.println(d.getDescriptor());
