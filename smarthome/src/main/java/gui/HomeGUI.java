@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 public class HomeGUI extends JPanel{
 
 	
-	public JFrame frame;
+	public JFrame frame; 
 	private GUIFacade guiFacade;
 
 	/**
