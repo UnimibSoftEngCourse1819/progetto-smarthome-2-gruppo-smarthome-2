@@ -38,7 +38,7 @@ public class ScanDeviceGUI extends JPanel {
 	 * Create the application.
 	 */
 	public ScanDeviceGUI(Collection <DeviceDescriptor> descs) {
-		this.guiFacade = new GUIFacade();
+		this.guiFacade = GUIFacade.getInstance();
 		initialize(descs);
 	}
 	

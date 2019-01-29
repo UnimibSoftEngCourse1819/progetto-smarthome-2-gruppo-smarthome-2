@@ -30,7 +30,7 @@ public class DeviceGUI extends JPanel {
 	 * Create the application.
 	 */
 	public DeviceGUI(Device device) {
-		this.guiFacade = new GUIFacade();
+		this.guiFacade = GUIFacade.getInstance();
 		initialize(device);
 	}
 

@@ -33,8 +33,7 @@ public class HomeGUI extends JPanel{
 	 * Create the application.
 	 */
 	public HomeGUI() {
-		
-		this.guiFacade = new GUIFacade();
+		this.guiFacade = GUIFacade.getInstance();
 		initialize();
 	}
 

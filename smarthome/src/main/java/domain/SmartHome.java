@@ -46,4 +46,8 @@ public class SmartHome {
 	
 	Collection<Device> getDevices() { return this.devices.values(); }
 
+	public void addToMyDevices(Device device) {
+		this.devices.put(device.getDescriptor().getId().toString(), device);	
+	}
+
 }

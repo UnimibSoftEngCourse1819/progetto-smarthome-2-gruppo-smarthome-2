@@ -26,13 +26,22 @@ import javafx.util.Pair;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
+
 public class GUIFacade implements IGUIFacade {
-	private DomainFacade domainFacade;
 	
-	public GUIFacade(){
+	private DomainFacade domainFacade;
+	private static GUIFacade instance;
+	
+	public GUIFacade(){	
 		this.domainFacade = new DomainFacade();
+		
 	}
 	
+	public static GUIFacade getInstance() {
+		if (instance==null)
+			instance=new GUIFacade();
+			return instance;
+	}
 	@Override
 	public void show() {
 		

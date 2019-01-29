@@ -54,6 +54,8 @@ public class DomainFacade implements IDomainFacade {
 				this.middlewareFacade.getADeviceFunctions(devDesc);
 		fact.addFunctions(adapters);
 		this.home.deleteDeviceDescriptor(devDesc);
+		this.home.addToMyDevices(fact.getInstance());
+		System.out.println(this.home.getDevices().size());
 		return fact.getInstance();
 	}
 

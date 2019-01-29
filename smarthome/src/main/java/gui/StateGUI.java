@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 
 import domain.Device;
 import domain.ICommand;
+import domain.Operation;
 import javafx.util.Pair;
 
 import javax.swing.BorderFactory;
@@ -59,13 +60,35 @@ public class StateGUI extends JPanel{
 		btnBack.setBounds(40, 386, 97, 25);
 		frame.getContentPane().add(btnBack);
 		
+		
+		if (cmd instanceof Operation) {
+			int pos = 0;
+			for (Pair<Object, Object> s : state.keySet()) {
+				
+				
+				for (Object mapKey : state.get(s).keySet()) {
+					
+					
+					if (((Operation) cmd).getFunctionId().toString().equals(s.getKey().toString())) {
+						JLabel lblKey = new JLabel(mapKey.toString() + " :");
+						lblKey.setBounds(60, 10 + pos, 200, 160);
+						frame.getContentPane().add(lblKey);
+						JLabel lblValue = new JLabel(state.get(s).get(mapKey).toString());
+						lblValue.setBounds(200, 10 + pos, 300, 160);
+						frame.getContentPane().add(lblValue);
+						pos+=20;
+					}			
+				}
+			}	
+		}
+		else {
 		int pos = 0;
 		for (Pair<Object, Object> s : state.keySet()) {
 			
 			
 			for (Object mapKey : state.get(s).keySet()) {
 				
-			
+				
 				if (cmd.getName().toString().equals(s.getValue().toString())) {
 					JLabel lblKey = new JLabel(mapKey.toString() + " :");
 					lblKey.setBounds(60, 10 + pos, 200, 160);
@@ -77,5 +100,6 @@ public class StateGUI extends JPanel{
 				}			
 			}
 		}	
+	}
 	}
 }
