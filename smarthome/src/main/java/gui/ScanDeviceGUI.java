@@ -37,7 +37,7 @@ public class ScanDeviceGUI extends JPanel {
 	/**
 	 * Create the application.
 	 */
-	public ScanDeviceGUI(Collection <IDescriptor> descs) {
+	public ScanDeviceGUI(Collection <DeviceDescriptor> descs) {
 		this.guiFacade = new GUIFacade();
 		initialize(descs);
 	}
@@ -50,7 +50,7 @@ public class ScanDeviceGUI extends JPanel {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Collection <IDescriptor> descs) {
+	private void initialize(Collection <DeviceDescriptor> descs) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 562, 524);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

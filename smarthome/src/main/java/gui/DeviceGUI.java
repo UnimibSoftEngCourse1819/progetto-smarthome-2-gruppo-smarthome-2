@@ -88,7 +88,7 @@ public class DeviceGUI extends JPanel {
 							try {
 								guiFacade.execute(device, fctn.getId(), cmd.getName());
 								frame.setVisible(false);
-								guiFacade.showResult(device, device.getState().getState());
+								guiFacade.showResult(device,cmd, device.getState().getCurrentState());
 								
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
@@ -115,7 +115,7 @@ public class DeviceGUI extends JPanel {
 							try {
 								guiFacade.execute(device, fctn.getId(), cmd.getName());
 								frame.setVisible(false);
-								guiFacade.showResult(device,device.getState().getState());
+								guiFacade.showResult(device,cmd,device.getState().getCurrentState());
 								
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block

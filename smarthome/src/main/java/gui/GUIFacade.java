@@ -22,6 +22,7 @@ import domain.IDescriptor;
 import domain.IDevice;
 import domain.IFunction;
 import domain.SmartHome;
+import javafx.util.Pair;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
@@ -51,7 +52,7 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 	
-	public void show (Collection <IDescriptor> descs) {
+	public void show (Collection <DeviceDescriptor> descs) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -85,12 +86,12 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 
-	public void showResult(Device device,Map<Object, Object> state) {
+	public void showResult(Device device,ICommand cmd, Map<Pair<Object, Object>, Map<Object, Object>> state) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
-					StateGUI statePage = new StateGUI(device, state);
+					StateGUI statePage = new StateGUI(device, cmd, state);
 					JPanel p = new JPanel();
 					p.add(statePage);
 					statePage.frame.setVisible(true);
@@ -104,7 +105,7 @@ public class GUIFacade implements IGUIFacade {
 		
 	}
 	
-	public Collection<IDescriptor> scan() throws MiddlewareException {
+	public Collection<DeviceDescriptor> scan() throws MiddlewareException {
 			return this.domainFacade.scanDevices();	
 	}
 	
@@ -115,6 +116,6 @@ public class GUIFacade implements IGUIFacade {
 	}
 
 	public void execute(Device device, Object id, Object name) throws MiddlewareException {
-		device.callFunction(id, name);	
+		device.callFunctionCommand(id, name);	
 	}
 }

@@ -14,6 +14,6 @@ import middleware.MiddlewareException;
 
 public interface IGUIFacade {
 	public void show();
-	public void show(Collection <IDescriptor> descs);
+	public void show(Collection <DeviceDescriptor> descs);
 	public void showDevice(Device d);
 }
