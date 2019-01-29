@@ -1,27 +1,18 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.security.Timestamp;
-import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.JDialog;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.border.Border;
+import javax.swing.JPanel;
 
 import domain.Device;
 import domain.ICommand;
 import domain.Operation;
 import javafx.util.Pair;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class StateGUI extends JPanel{
 
