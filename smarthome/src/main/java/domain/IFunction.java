@@ -6,7 +6,6 @@ import middleware.MiddlewareException;
 
 public interface IFunction {
 	
-	//TODO void call(ICommand com)
 	public Object getId();
 	
 	public Collection<ICommand> getCommands();

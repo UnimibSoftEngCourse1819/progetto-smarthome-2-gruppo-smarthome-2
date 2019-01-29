@@ -1,27 +1,14 @@
 package gui;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-
-import domain.DeviceDescriptor;
-
-import java.awt.Dimension;
-import java.awt.Component;
-import javax.swing.JProgressBar;
-import java.awt.event.ActionListener;
-import java.util.Collection;
-import java.util.List;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class HomeGUI extends JPanel{
 
@@ -56,7 +43,8 @@ public class HomeGUI extends JPanel{
 					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
+
 				}
 			}
 		});
@@ -71,7 +59,8 @@ public class HomeGUI extends JPanel{
 					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
+
 				}
 			}
 		});

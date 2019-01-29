@@ -2,7 +2,6 @@
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javafx.util.Pair;
 import middleware.MiddlewareException;
@@ -35,7 +34,6 @@ public class Function implements IFunction {
 	public void callCommand(Object name) throws MiddlewareException {
 		for (ICommand command : this.commands) {
 			if (command.getName().equals(name)){
-				System.out.println(command.getName() + " " + command.getClass());
 				command.execute(); 
 			}
 		}
@@ -69,14 +67,10 @@ public class Function implements IFunction {
 		if (id == null) {
 			if (other.id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 	
-	
-	
-	
-	
-
 }

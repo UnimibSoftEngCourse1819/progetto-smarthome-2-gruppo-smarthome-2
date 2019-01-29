@@ -6,11 +6,12 @@ public class Tag {
 	private String parameter;
 	
 	
-	public Tag(){};
+	public Tag(){ //constr
+		}
+	
 	
 	public Tag(String root){
 		this.root = root;
-		//this.parameter = parameter;
 	}
 
 
@@ -59,13 +60,15 @@ public class Tag {
 		if (parameter == null) {
 			if (other.parameter != null)
 				return false;
-		} else if (!parameter.equals(other.parameter))
+		} else if (!parameter.equals(other.parameter)) {
 			return false;
+		}	
 		if (root == null) {
 			if (other.root != null)
 				return false;
-		} else if (!root.equals(other.root))
+		} else if (!root.equals(other.root)) {
 			return false;
+		}	
 		return true;
 	}
 

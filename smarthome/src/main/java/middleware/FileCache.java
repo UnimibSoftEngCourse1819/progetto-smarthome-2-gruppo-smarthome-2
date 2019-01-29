@@ -13,7 +13,6 @@ public class FileCache implements ICache {
 	Collection<File> dynamicCache;
 	
 	public FileCache(){
-		//TODO Potrebbe non essere la scelta migliore
 		this.dynamicCache = new ArrayList<File>();
 	}
 

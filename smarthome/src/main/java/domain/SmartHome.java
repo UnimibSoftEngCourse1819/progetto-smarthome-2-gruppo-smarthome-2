@@ -10,15 +10,15 @@ import java.util.Map;
 
 public class SmartHome {
 
-	/*Per ora ci serve solo la collezione di Device Descriptor*/
+	
 	List<DeviceDescriptor> devDesc;
 	Map<String,Device> devices;
 
 	
-	/*Questo rende la classe istanziabile una volta SOLA per tutto il sistema*/
+	
 	private static final SmartHome INSTANCE = new SmartHome();
 
-	//Il Costruttore è privato per il singleton
+
 	private SmartHome(){
 		this.devDesc = new ArrayList<DeviceDescriptor>();
 		this.devices = new HashMap<String, Device>();
@@ -40,10 +40,7 @@ public class SmartHome {
 	public void deleteDeviceDescriptor(IDescriptor devDesc){
 		this.devDesc.remove(devDesc);
 	}
-	
-								
-	//void addDevice(Device d) { this.devices.put(new DeviceId(d.getDescriptor()), d);}
-	
+		
 	Collection<Device> getDevices() { return this.devices.values(); }
 
 	public void addToMyDevices(Device device) {
