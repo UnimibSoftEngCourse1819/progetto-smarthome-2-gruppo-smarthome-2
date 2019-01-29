@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 
 import gui.GUIFacade;
 import gui.IGUIFacade;
+import middleware.AlreadyInCacheException;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
@@ -29,10 +30,17 @@ public class DomainFacade implements IDomainFacade {
 	}
 	
 	@Override
-	public Collection<DeviceDescriptor> scanDevices() throws MiddlewareException {	
+	public Collection<DeviceDescriptor> scanDevices() throws MiddlewareException {
+		try{
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
-		this.home.createDeviceDescriptors(descs);
-		return this.home.getDeviceDescriptors();
+		this.home.createDeviceDescriptors(descs);}
+		catch(MiddlewareException e){
+			if(e.getLowLevelException() instanceof AlreadyInCacheException)
+				System.out.println(e.getLowLevelExceptionString());
+		}
+		finally{
+			return this.home.getDeviceDescriptors();
+			}
 	}
 	
 	public List<DeviceDescriptor> getDeviceDescriptors() {

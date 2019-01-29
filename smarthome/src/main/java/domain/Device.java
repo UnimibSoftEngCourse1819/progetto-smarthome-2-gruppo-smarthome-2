@@ -24,9 +24,7 @@ public class Device{
 		this.desc = desc;
 	}
 
-	public State getState() {
-		return this.state;
-	}
+
 	public IDescriptor getDescriptor() {
 		return this.desc;
 	}
