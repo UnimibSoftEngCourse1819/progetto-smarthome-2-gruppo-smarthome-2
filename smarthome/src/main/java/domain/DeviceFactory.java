@@ -27,6 +27,4 @@ public class DeviceFactory {
 		return this.dev;
 	}
 	
-	
-
 }
