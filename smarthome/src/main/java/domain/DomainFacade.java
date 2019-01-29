@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 
-import middleware.AlreadyInCacheException;
+import exceptions.AlreadyInCacheException;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
@@ -41,7 +41,7 @@ public class DomainFacade implements IDomainFacade {
 		return this.home.getDeviceDescriptors(); 
 	}
 	
-	public Device addDevice(IDescriptor devDesc) throws MiddlewareException{
+	public IDevice addDevice(IDescriptor devDesc) throws MiddlewareException{
 		DeviceFactory fact = new DeviceFactory();
 		fact.addDeviceDescriptor(devDesc);
 		Collection<IFunction> adapters = 
@@ -49,7 +49,12 @@ public class DomainFacade implements IDomainFacade {
 		fact.addFunctions(adapters);
 		this.home.deleteDeviceDescriptor(devDesc);
 		this.home.addToMyDevices(fact.getInstance());
-		return fact.getInstance();
+		return (IDevice) fact.getInstance();
+	}
+	
+	@Override
+	public void callCommand(Object deviceId, Object idfunct, Object idcommand) throws MiddlewareException{
+		this.home.devices.get(deviceId.toString()).callFunctionCommand(idfunct, idcommand);
 	}
 
 

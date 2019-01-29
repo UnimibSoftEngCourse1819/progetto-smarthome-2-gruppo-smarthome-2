@@ -2,7 +2,9 @@
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import exceptions.NoOperationException;
 import javafx.util.Pair;
 import middleware.MiddlewareException;
 
@@ -72,5 +74,25 @@ public class Function implements IFunction {
 		}
 		return true;
 	}
+
+
+	@Override
+	public Collection<Operation> getOperations() throws NoOperationException {
+		List<Operation> operations = new ArrayList<>();
+		for(ICommand command : this.commands)
+			if(command instanceof Operation)
+				operations.add((Operation) command);
+		return operations;
+	}
+	
+	@Override
+	public Collection<Property> getProperties(){
+		List<Property> properties = new ArrayList<>();
+		for(ICommand command : this.commands)
+			if(command instanceof Property)
+				properties.add((Property) command);
+		return properties;
+	}
+
 	
 }

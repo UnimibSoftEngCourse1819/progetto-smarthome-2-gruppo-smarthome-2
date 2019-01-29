@@ -10,7 +10,10 @@ import org.json.simple.JSONObject;
 import domain.CommandFactory;
 import domain.ICommand;
 import domain.IFunction;
+import domain.Operation;
+import domain.Property;
 import domain.TagFunction;
+import exceptions.NoOperationException;
 import javafx.util.Pair;
 import middleware.MiddlewareException;
 
@@ -74,6 +77,20 @@ public class FunctionAdapter implements IFunction {
 	@Override
 	public void callCommand(Object name) throws MiddlewareException {
 		// unsupported from adapter..
+	}
+
+
+	@Override
+	public Collection<Operation> getOperations() throws NoOperationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Collection<Property> getProperties() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

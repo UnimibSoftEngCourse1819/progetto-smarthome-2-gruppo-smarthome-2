@@ -8,6 +8,8 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
+import exceptions.AlreadyInCacheException;
+
 public class FileCache implements ICache {
 	
 	Collection<File> dynamicCache;

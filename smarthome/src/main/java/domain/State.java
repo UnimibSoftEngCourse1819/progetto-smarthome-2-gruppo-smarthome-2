@@ -22,7 +22,7 @@ public class State {
 	
 	
 	public void updateState(IFunction state) throws MiddlewareException{
-		 List<Property> temp = (List<Property>) this.getProperties(state);
+		 List<Property> temp = (List<Property>) this.getPropertiesFromThisFunction(state);
 			
 			if (temp != null)
 			{
@@ -42,7 +42,7 @@ public class State {
 			this.currentState.get(propertykey).put(key, parameters.get(key));
 	}
 	
-	private Collection<Property> getProperties(IFunction function){
+	private Collection<Property> getPropertiesFromThisFunction(IFunction function){
 		TagFunction tagFunction = new TagFunction("property.name");
 		List<Property> result = new ArrayList<>();
 		for (ICommand command : function.getCommands()) {
@@ -57,9 +57,19 @@ public class State {
 	public Map<Pair<Object,Object>, Map<Object, Object>> getCurrentState() {
 		return currentState;
 	}
-
+	
+	/*
 	public void setCurrentState(Map<Pair<Object,Object>, Map<Object, Object>> currentState) {
 		this.currentState = currentState;
+	}*/
+	
+	public Collection<Map<Object, Object>> getParametersOfThisFunction(Object funId){
+		List<Map<Object,Object>> paramsOfFun = new ArrayList<>();
+		for(Pair<Object,Object> pair : this.currentState.keySet()){
+			if(pair.getKey().equals(funId))
+				paramsOfFun.add(this.currentState.get(pair));
+		}
+		return paramsOfFun;
 	}
 
 	public IMiddlewareFacade getReceiver() {
