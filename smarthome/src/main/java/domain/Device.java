@@ -27,6 +27,7 @@ public class Device{
 	public State getState() {
 		return this.state;
 	}
+	
 	public IDescriptor getDescriptor() {
 		return this.desc;
 	}
@@ -58,9 +59,6 @@ public class Device{
 	}
 
 
-	public State getState() {
-		return state;
-	}
 
 
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.security.Timestamp;
 import java.util.Date;
@@ -10,9 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 
 import domain.Device;
+import domain.ICommand;
+import javafx.util.Pair;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,16 +29,17 @@ public class StateGUI extends JPanel{
 	
 	/**
 	 * Create the application.
+	 * @param cmd 
 	 */
-	public StateGUI(Device device,Map<Object, Object> state) {
-		initialize(state);
+	public StateGUI(Device device,ICommand cmd, Map<Pair<Object, Object>, Map<Object, Object>> state) {
+		initialize(cmd, state);
 		this.deviceGUI = new DeviceGUI(device);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Map<Object, Object> state) {
+	private void initialize(ICommand cmd, Map<Pair<Object, Object>, Map<Object, Object>> state) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 562, 524);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,30 +60,22 @@ public class StateGUI extends JPanel{
 		frame.getContentPane().add(btnBack);
 		
 		int pos = 0;
-		for (Object s : state.keySet()) {
-			System.out.println(state.get(s));
-			JLabel lblKey = new JLabel(s.toString() + " :");
-			lblKey.setBounds(60, 60 + pos, 200, 160);
-			frame.getContentPane().add(lblKey);
+		for (Pair<Object, Object> s : state.keySet()) {
 			
-			if (s.toString().equals("timestamp")) {
-				long l = Long.parseLong(state.get("timestamp").toString());
-				String date1 = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date(l * 1000));
-				System.out.println(date1);
-				JLabel lblValue = new JLabel(date1);
-				lblValue.setBounds(200, 60 + pos, 300, 160);
-				frame.getContentPane().add(lblValue);
-				pos+=20;
-			}
-			else {
-				JLabel lblValue = new JLabel(state.get(s).toString());
-				lblValue.setBounds(200, 60 + pos, 300, 160);
-				frame.getContentPane().add(lblValue);
-				pos+=20;
-			}
 			
-		}
-
-		
+			for (Object mapKey : state.get(s).keySet()) {
+				
+			
+				if (cmd.getName().toString().equals(s.getValue().toString())) {
+					JLabel lblKey = new JLabel(mapKey.toString() + " :");
+					lblKey.setBounds(60, 10 + pos, 200, 160);
+					frame.getContentPane().add(lblKey);
+					JLabel lblValue = new JLabel(state.get(s).get(mapKey).toString());
+					lblValue.setBounds(200, 10 + pos, 300, 160);
+					frame.getContentPane().add(lblValue);
+					pos+=20;
+				}			
+			}
+		}	
 	}
 }
