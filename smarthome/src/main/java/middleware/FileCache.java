@@ -22,7 +22,7 @@ public class FileCache implements ICache {
 		for(java.io.File f : this.dynamicCache)
 			try {
 				if(FileUtils.contentEquals(f, (java.io.File) obj))
-					throw new MiddlewareException("Already in cache");
+					throw new MiddlewareException(new AlreadyInCacheException());
 			} catch (IOException e) {
 				throw new MiddlewareException(e);
 			}

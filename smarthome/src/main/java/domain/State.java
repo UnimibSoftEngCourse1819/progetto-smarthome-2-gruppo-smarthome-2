@@ -23,7 +23,6 @@ public class State {
 	}
 	
 	
-	
 	public void updateState(IFunction state) throws MiddlewareException{
 		List<Property> temp = new ArrayList<>();
 		temp = (List<Property>) this.getProperties(state);
