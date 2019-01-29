@@ -8,18 +8,14 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
-import domain.Function;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IFunction;
 import domain.Operation;
 import domain.Property;
 import domain.TagFunction;
-import middleware.converters.IConverter;
-import middleware.converters.Parser;
 import middleware.converters.Converter;
 
 
@@ -40,8 +36,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	@Override
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();
-		//JSONArray jsoArray = new JSONArray();
-		this.cache.isInCache(jsonFile); // per evitare di creare dei descrittori in più..
+		this.cache.isInCache(jsonFile); 
 		JSONObject resource = converter.parseJSON(jsonFile);
 		JSONArray jsoArray = converter.convertToJsonArray(resource);
 		return this.getDescriptorsAdapters(jsoArray);
@@ -49,7 +44,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	
 	private Collection<IDescriptor> getDescriptorsAdapters(JSONArray jarr) {
 		List<IDescriptor> adapters = new ArrayList<IDescriptor>();
-		for(Object job : jarr) // per ciascun dispositivo 
+		for(Object job : jarr) 
 			adapters.add(new DescriptorAdapter((JSONObject) job));
 		return adapters;
 	}
@@ -80,6 +75,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 			addArrayParameter(prop, resource);
 		return prop;
 	}
+	
 
 	private void addArrayParameter(Property prop, JSONObject resource) throws MiddlewareException {
 		JSONArray arr;

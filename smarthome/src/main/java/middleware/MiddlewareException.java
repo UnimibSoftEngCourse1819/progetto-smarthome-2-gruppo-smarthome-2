@@ -23,4 +23,9 @@ public class MiddlewareException extends Exception{
 	public String getLowLevelExceptionString() {
 		return this.lowLevelException.toString();
 	}
+	
+	@Override
+	public String getMessage() {
+		return this.getLowLevelExceptionString();
+	}
 }

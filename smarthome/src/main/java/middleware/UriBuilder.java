@@ -2,7 +2,7 @@ package middleware;
 
 public class UriBuilder {
 	
-	private static final String baseUri = "http://localhost:8080/api";
+	private static final String BASEURI = "http://localhost:8080/api";
 	
 	private String uri;
 	
@@ -16,7 +16,7 @@ public class UriBuilder {
 	}
 	
 	public String getStringUri(){
-		return this.baseUri + this.uri;
+		return this.BASEURI + this.uri;
 	}
 	
 	public void clear(){
