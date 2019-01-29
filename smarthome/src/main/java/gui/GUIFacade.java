@@ -1,34 +1,23 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.logging.Level;
 
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import org.json.simple.parser.ParseException;
 
 import domain.Device;
 import domain.DeviceDescriptor;
 import domain.DomainFacade;
 import domain.ICommand;
 import domain.IDescriptor;
-import domain.IDevice;
-import domain.IFunction;
-import domain.SmartHome;
 import javafx.util.Pair;
 import middleware.MiddlewareException;
-import middleware.MiddlewareFacade;
 
 
 public class GUIFacade implements IGUIFacade {
-	
+	private static final String GUILOGGER = "guiLogger";
 	private DomainFacade domainFacade;
 	private static GUIFacade instance;
 	
@@ -55,7 +44,8 @@ public class GUIFacade implements IGUIFacade {
 					home.frame.setVisible(true);
 					
 				} catch (Exception e) {
-					e.printStackTrace();
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
 				}
 			}
 		});
@@ -72,7 +62,8 @@ public class GUIFacade implements IGUIFacade {
 					scanPage.frame.setVisible(true);
 					
 				} catch (Exception e) {
-					e.printStackTrace();
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
 				}
 			}
 		});
@@ -89,7 +80,8 @@ public class GUIFacade implements IGUIFacade {
 					devicePage.frame.setVisible(true);
 					
 				} catch (Exception e) {
-					e.printStackTrace();
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
 				}
 			}
 		});
@@ -107,7 +99,8 @@ public class GUIFacade implements IGUIFacade {
 					
 					
 				} catch (Exception e) {
-					e.printStackTrace();
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
 				}
 			}
 		});

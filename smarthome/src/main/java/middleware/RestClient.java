@@ -29,7 +29,6 @@ public class RestClient {
 				return INSTANCE;		
 	}
 	
-	//Il costruttore si comporta come un singleton..
 	private RestClient(){
 			this.client = ClientBuilder.newClient();
 			this.uBuild = new UriBuilder();
@@ -56,7 +55,7 @@ public class RestClient {
 			Invocation.Builder invocationBuilder =  this.myResource.request(MediaType.APPLICATION_JSON);
 			Response response = invocationBuilder.get(); 
 			int stato = response.getStatus();
-			if (stato >= 300 )  // eventuali controlli sullo stato di ritorno...
+			if (stato >= 300 )  
 					{
 						throw new MiddlewareException("si è riscontrato un problema di chiamata");
 					}
@@ -80,10 +79,6 @@ public class RestClient {
 	}
 
 	public File makeTheCall(String uri, JSONObject body) throws MiddlewareException{
-		/*Response response = client.target(uri)
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(body));*/
-		//System.out.println(response.readEntity(File.class));
 		this.myResource = client.target(uri); 
 		Invocation.Builder invocationBuilder =  this.myResource.request(MediaType.APPLICATION_JSON);
 		

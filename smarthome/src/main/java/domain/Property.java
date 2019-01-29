@@ -12,8 +12,6 @@ public class Property implements ICommand {
 	
 	Map<Object,Object> parameters;
 	IMiddlewareFacade receiver;
-	//TODO FORSE PROPERTY E OP POSSONO ESTENDERE UNA CLASSE ASTRATTA
-	//ABSTRACTCOMMAND
 	
 	Pair<Tag, Object> funId;
 	Tag type;
@@ -30,9 +28,7 @@ public class Property implements ICommand {
 
 	@Override
 	public void execute() throws MiddlewareException {
-		Property result = this.receiver.getProperty(this);
-		System.out.println(result.getParameters());
-		//Setta i risultati
+		 this.receiver.getProperty(this);
 	}
 
 	@Override

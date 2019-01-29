@@ -2,19 +2,22 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
-import javassist.bytecode.Descriptor;
+import exceptions.NoOperationException;
+import javafx.util.*;
+
 import middleware.MiddlewareException;
 
-public class Device{
+public class Device implements IDevice{
 	
 	private Collection<IFunction> functions;
 	private IDescriptor desc;
 	private State state;
-	// attributo stato mappa si altera con l'esecuzione di un operazione 
+	
 	
 	public Device(){
-		//this.desc = new DeviceDescriptor();
 		this.functions = new ArrayList<>();
 		this.state = new State();
 	}
@@ -28,6 +31,14 @@ public class Device{
 	public State getState() {
 		return this.state;
 	}
+	
+	public Map<Object,Object> getAttributeOfAProperty(Object funId, Object propertyName){
+		return this.state.getCurrentState().get(new Pair<Object,Object>(funId,propertyName));
+	}
+	/*
+	public Collection<Pair<Object,Object>> getProperties(){
+		return this.state.getCurrentState().keySet();
+	}*/
 	
 
 	public IDescriptor getDescriptor() {
@@ -46,10 +57,8 @@ public class Device{
 	public void callFunctionCommand(Object idfunct, Object idcommand) throws MiddlewareException {
 		for (IFunction function : this.functions) {
 			if (function.getId().equals(idfunct)) {
-				//System.out.println(function.getId());
 				function.callCommand(idcommand);
 				this.state.updateState(function);
-				System.out.println(this.state.getCurrentState());
 			}
 		}	
 	}
@@ -57,7 +66,43 @@ public class Device{
 	public void initState() throws MiddlewareException{
 		for(IFunction fn : this.functions)
 				this.state.updateState(fn);
-		//System.out.println(this.state.getCurrentState());
+	}
+
+
+	@Override
+	public Collection<Object> getFunctionsIds() {
+		List<Object> funIds = new ArrayList<>();
+		for(IFunction fun : this.functions)
+			funIds.add(fun.getId());
+		return funIds;
+	}
+
+
+	@Override
+	public Collection<Map<Object, Object>> getParametersOfThisFunction(Object funId) {
+		return this.state.getParametersOfThisFunction(funId);
+	}
+
+
+	@Override
+	public Collection<Operation> getOperations() throws NoOperationException{
+		List<Operation> operations = new ArrayList<>();
+		for(IFunction fun : this.functions){
+			for(Operation op : fun.getOperations())
+				operations.add(op);
+		}
+		return operations;
+	}
+
+
+	@Override
+	public Collection<Property> getProperties() {
+		List<Property> properties = new ArrayList<>();
+		for(IFunction fun : this.functions){
+			for(Property prop : fun.getProperties())
+				properties.add(prop);
+		}
+		return properties;
 	}
 
 

@@ -3,11 +3,8 @@ package domain;
 
 import java.util.Objects;
 
-import javafx.util.*;
-
 public class DeviceDescriptor implements IDescriptor{
 	
-	//Map<Tag,Object> descriptorElements;
 	private javafx.util.Pair<Tag, Object> deviceId;
 	private javafx.util.Pair<Tag, Object> deviceName;
 	
@@ -17,45 +14,35 @@ public class DeviceDescriptor implements IDescriptor{
 		this.deviceName = new javafx.util.Pair<>(new TagDevice("name"),descrittore.getName());	
 	}
 	
-	/** GETTERS
-	 * @return the id
-	 */
+	
 	public Object getId() {
 		return this.deviceId.getValue();
 	}
 	
-	/**
-	 * @return the description
-	 */
+	
 	public Object getName() {
 		return this.deviceName.getValue();
 	}
 	
 			
 public static DeviceDescriptor createDeviceDescriptor(IDescriptor abstractDesc){
-			DeviceDescriptor deviceDescriptor = new DeviceDescriptor(abstractDesc);
-			return deviceDescriptor;
+	return new DeviceDescriptor(abstractDesc);
+		
 }
 
-/* (non-Javadoc)
- * @see java.lang.Object#toString()
- */
+
 @Override
 public String toString() {
 	return "DeviceDescriptor [deviceId=" + deviceId + ", deviceName=" + deviceName + "]";
 }
 
-/* (non-Javadoc)
- * @see java.lang.Object#hashCode()
- */
+
 @Override
 public int hashCode() {
 	return Objects.hash(deviceId, deviceName);
 }
 
-/* (non-Javadoc)
- * @see java.lang.Object#equals(java.lang.Object)
- */
+
 @Override
 public boolean equals(Object obj) {
 	if (this == obj) {

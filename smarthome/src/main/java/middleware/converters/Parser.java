@@ -24,9 +24,7 @@ public class Parser {
 	public JSONObject parseJSONFile(File jsonFile) throws MiddlewareException {
 		JSONObject jo = new JSONObject();
 		try {
-			// parsing file "JSONExample.json" 
 	        Object obj = parser.parse(new FileReader(jsonFile)); 
-	        // typecasting obj to JSONObject 
 	        jo = (JSONObject) obj; 
 	        
 		}

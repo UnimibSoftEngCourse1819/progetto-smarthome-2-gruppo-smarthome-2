@@ -25,7 +25,9 @@ import domain.Device;
 import domain.DeviceDescriptor;
 import domain.DomainFacade;
 import domain.IDescriptor;
+import domain.IDevice;
 import domain.IFunction;
+import domain.Property;
 
 
 /**
@@ -45,7 +47,7 @@ public final class App {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException, Exception {
     	
-
+    	/*
     	
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -61,14 +63,14 @@ public final class App {
 				}
 			}
 		});
-        
+        */
 
 
     	/*List<DeviceDescriptor> res = new ArrayList<>();
 
     	
     	/************Scan Device************/
-    	/*
+    	
     	List<DeviceDescriptor> res = new ArrayList<>();
 
     	DomainFacade df = new DomainFacade();
@@ -82,19 +84,22 @@ public final class App {
     	 
     	 
     	 /************Add Device************/
-    	/*
+    	
     	 System.out.println("************ADD DEVICE******************");
-    	 Device d = df.addDevice(res.get(9));
+    	 IDevice d = df.addDevice(res.get(9));
     	 df.scanDevices();
     	 System.out.println("Array Size After Added 1 device " + res.size());
     	 
-    	 for(IFunction f : d.getFunctions())
-    		 System.out.println(f);
+    	 for(Object fId : d.getFunctionsIds())
+    		 System.out.println(fId);
     	 d.initState();
     	 //System.out.println(d.getState());
     	 System.out.println("************AFTER INIT STATE*****************");
-    	 for(IFunction f : d.getFunctions())
-    		 System.out.println(f);
+    	// for(Object f : d.getFunctionsIds())
+    		 System.out.println(d.getOperations());
+    		 System.out.println(d.getProperties());
+    	 //for(Property p : d.getProperties())
+    		 //System.out.println(p);
     	 
     	 
     	 //System.out.println(df.getDeviceDescriptors());

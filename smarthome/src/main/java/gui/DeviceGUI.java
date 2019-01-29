@@ -1,25 +1,22 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
+import java.util.logging.Level;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import domain.Device;
 import domain.ICommand;
-import domain.IDevice;
 import domain.IFunction;
 import domain.TagFunction;
-
-import javax.swing.JSpinner;
-import javax.swing.border.Border;
-import javax.swing.JLabel;
 
 public class DeviceGUI extends JPanel {
 
@@ -58,9 +55,7 @@ public class DeviceGUI extends JPanel {
 		frame.getContentPane().add(btnBack);
 		
 		
-		//nome device
-		//device.getDescriptor().getName();		
-		//spaziare tra le funzioni di un device...
+		
 		
 		
 		
@@ -92,7 +87,7 @@ public class DeviceGUI extends JPanel {
 								
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
 							}
 						}
 
@@ -119,7 +114,7 @@ public class DeviceGUI extends JPanel {
 								
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
 							}
 						}
 

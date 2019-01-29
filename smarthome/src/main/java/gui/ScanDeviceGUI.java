@@ -1,32 +1,20 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
+import java.util.logging.Level;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import domain.DeviceDescriptor;
 import domain.IDescriptor;
-import javax.swing.JSeparator;
-import javax.swing.JToggleButton;
-import javax.swing.border.Border;
-
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-//import com.jgoodies.forms.layout.FormLayout;
-//import com.jgoodies.forms.layout.ColumnSpec;
-//import com.jgoodies.forms.layout.RowSpec;
-//import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JMenuBar;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
 
 public class ScanDeviceGUI extends JPanel {
 
@@ -88,7 +76,8 @@ public class ScanDeviceGUI extends JPanel {
 							
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
+
 						}
 					}
 				});

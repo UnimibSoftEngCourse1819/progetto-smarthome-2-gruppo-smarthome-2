@@ -1,16 +1,10 @@
 package domain;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
 
-import org.json.simple.parser.ParseException;
-
-import gui.GUIFacade;
-import gui.IGUIFacade;
-import middleware.AlreadyInCacheException;
+import exceptions.AlreadyInCacheException;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
@@ -19,8 +13,6 @@ public class DomainFacade implements IDomainFacade {
 	
 	private SmartHome home;
 	
-	
-	/*Deve poter chiamare la facade di Middleware*/
 	private IMiddlewareFacade middlewareFacade;
 	
 	
@@ -33,21 +25,23 @@ public class DomainFacade implements IDomainFacade {
 	public Collection<DeviceDescriptor> scanDevices() throws MiddlewareException {
 		try{
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
-		this.home.createDeviceDescriptors(descs);}
+		this.home.createDeviceDescriptors(descs);
+		return this.home.getDeviceDescriptors();
+		}
 		catch(MiddlewareException e){
 			if(e.getLowLevelException() instanceof AlreadyInCacheException)
-				System.out.println(e.getLowLevelExceptionString());
-		}
-		finally{
+				java.util.logging.Logger.getLogger("domainLogger").log(Level.WARNING,e.getMessage(), e);
+
 			return this.home.getDeviceDescriptors();
-			}
+		}
+
 	}
 	
 	public List<DeviceDescriptor> getDeviceDescriptors() {
 		return this.home.getDeviceDescriptors(); 
 	}
 	
-	public Device addDevice(IDescriptor devDesc) throws MiddlewareException{
+	public IDevice addDevice(IDescriptor devDesc) throws MiddlewareException{
 		DeviceFactory fact = new DeviceFactory();
 		fact.addDeviceDescriptor(devDesc);
 		Collection<IFunction> adapters = 
@@ -55,8 +49,12 @@ public class DomainFacade implements IDomainFacade {
 		fact.addFunctions(adapters);
 		this.home.deleteDeviceDescriptor(devDesc);
 		this.home.addToMyDevices(fact.getInstance());
-		System.out.println(this.home.getDevices().size());
-		return fact.getInstance();
+		return (IDevice) fact.getInstance();
+	}
+	
+	@Override
+	public void callCommand(Object deviceId, Object idfunct, Object idcommand) throws MiddlewareException{
+		this.home.devices.get(deviceId.toString()).callFunctionCommand(idfunct, idcommand);
 	}
 
 

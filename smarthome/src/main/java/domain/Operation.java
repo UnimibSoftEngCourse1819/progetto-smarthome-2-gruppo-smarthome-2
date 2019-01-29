@@ -23,7 +23,7 @@ public class Operation implements ICommand {
 
 	@Override
 	public void execute() throws MiddlewareException {
-		this.receiver.executeOperation(this); // andare in eccezione	
+		this.receiver.executeOperation(this); 	
 	}
 
 	@Override
@@ -44,7 +44,5 @@ public class Operation implements ICommand {
 	public String toString() {
 		return "Operation [name=" + name + "]";
 	}
-	
-	
 
 }
