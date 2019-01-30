@@ -84,6 +84,9 @@ public final class App {
 
     	
     	/************Scan Device************/
+	/*
+    	List<DeviceDescriptor> res = new ArrayList<>();
+
 
     	DomainFacade df = new DomainFacade();
     	//List<DeviceDescriptor> res = new ArrayList<>();
@@ -96,7 +99,7 @@ public final class App {
     	//df.addDevice(df.getDeviceDescriptors().get(7));
     	/*
     	 df.scanDevices();
-    	 df.scanDevices();
+    	 //df.scanDevices();
     	 res = df.getDeviceDescriptors();
     	 System.out.println("Array Size " + res.size());
     	 for(DeviceDescriptor dd : res)
@@ -104,13 +107,15 @@ public final class App {
     	 
     	 
     	 
-    	 /************Add Device************
+
+    	 /************Add Device************/
     	
     	 System.out.println("************ADD DEVICE******************");
     	 IDevice d = df.addDevice(res.get(9));
+    	 
     	 df.scanDevices();
     	 System.out.println("Array Size After Added 1 device " + res.size());
-    	 
+    	 System.out.println("map size after added 1 devices" + df.getDevices().size());
     	 for(Object fId : d.getFunctionsIds())
     		 System.out.println(fId);
     	 d.initState();

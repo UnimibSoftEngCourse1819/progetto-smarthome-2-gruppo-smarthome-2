@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import domain.Device;
 import domain.DeviceDescriptor;
 import domain.DomainFacade;
 import domain.ICommand;
@@ -109,6 +110,26 @@ public class GUIFacade implements IGUIFacade {
 		
 	}
 	
+	@Override
+	public void showSmartHome() {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MySmartHomeGUI mySmartHome = new MySmartHomeGUI();
+					
+					JPanel p = new JPanel();
+					p.add(mySmartHome);
+					mySmartHome.getFrame().setVisible(true);
+					
+				} catch (Exception e) {
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
+				}
+			}
+		});
+	}
+	
 	public Collection<DeviceDescriptor> scan() throws MiddlewareException {
 			return this.domainFacade.scanDevices();	
 	}
@@ -121,6 +142,11 @@ public class GUIFacade implements IGUIFacade {
 
 	public void execute(IDevice device, Object id, Object name) throws MiddlewareException {
 		device.callFunctionCommand(id, name);	
+	}
+
+	public Collection<Device> getDev() {
+		return domainFacade.getDevices();
+		
 	}
 
 	
