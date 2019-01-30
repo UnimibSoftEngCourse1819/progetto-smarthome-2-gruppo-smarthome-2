@@ -55,7 +55,7 @@ public class DeviceGUI extends JPanel {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				guiFacade.show();
+				guiFacade.showSmartHome();
 			}
 		});
 		btnBack.setBounds(38, 417, 97, 25);

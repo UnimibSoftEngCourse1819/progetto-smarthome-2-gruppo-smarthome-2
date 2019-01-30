@@ -52,10 +52,13 @@ public class HomeGUI extends JPanel{
 		frame.getContentPane().add(btnScan);
 		
 		JButton btnShowDev = new JButton("SMART-HOME");
+		if(guiFacade.getDev()==null)
+			btnShowDev.setEnabled(false);
 		btnShowDev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+					guiFacade.showSmartHome();
+					frame.setVisible(false);
 					
 				} catch (Exception e1) {
 					java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
