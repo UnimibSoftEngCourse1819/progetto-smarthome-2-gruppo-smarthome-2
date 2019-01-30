@@ -4,8 +4,7 @@ import javafx.util.Pair;
 
 public class CommandFactory {
 	
-	ICommand concreteCommand;
-	
+	private ICommand concreteCommand;
 	
 	public ICommand createCommand(Tag t, Object id,Pair fId){
 		if(t.equals(new TagFunction("operation.name")))
@@ -14,6 +13,4 @@ public class CommandFactory {
 			this.concreteCommand = new Property(t,id,fId);
 		return this.concreteCommand;
 	}
-	
-
 }

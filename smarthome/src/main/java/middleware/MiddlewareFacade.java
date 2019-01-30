@@ -33,6 +33,13 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		
 	}
 	
+	
+	public Collection<IDescriptor> getDevices(File json) throws MiddlewareException {
+		JSONObject resource = converter.parseJSON(json);
+		JSONArray jsoArray = converter.convertToJsonArray(resource);
+		return this.getDescriptorsAdapters(jsoArray);
+	}
+	
 	@Override
 	public Collection<IDescriptor> getDevices() throws MiddlewareException {
 		File jsonFile = client.get();

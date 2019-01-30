@@ -44,5 +44,6 @@ public class Operation implements ICommand {
 	public String toString() {
 		return "Operation [name=" + name + "]";
 	}
-
+	
+	
 }

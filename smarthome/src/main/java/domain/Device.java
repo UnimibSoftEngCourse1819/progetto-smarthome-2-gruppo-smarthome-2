@@ -27,7 +27,6 @@ public class Device implements IDevice{
 		this.desc = desc;
 	}
 
-
 	public State getState() {
 		return this.state;
 	}
