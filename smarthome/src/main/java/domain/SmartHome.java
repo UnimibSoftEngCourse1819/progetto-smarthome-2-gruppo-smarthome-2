@@ -44,7 +44,12 @@ public class SmartHome {
 	Collection<Device> getDevices() { return this.devices.values(); }
 
 	public void addToMyDevices(Device device) {
-		this.devices.put(device.getDescriptor().getId().toString(), device);	
+		this.devices.put(device.getDescriptor().getId().toString(), device);
+	}
+	
+	public void cleanAlreadyAdded(){
+		for(Device device : this.devices.values())
+			this.devDesc.remove((device.getDescriptor()));
 	}
 
 }
