@@ -6,12 +6,15 @@ public class Tag {
 	private String parameter;
 	
 	
-	public Tag(){ //constr
+	public Tag(){
+		this.root = "";
+		this.parameter = "";
 		}
 	
 	
 	public Tag(String root){
 		this.root = root;
+		this.parameter="";
 	}
 
 

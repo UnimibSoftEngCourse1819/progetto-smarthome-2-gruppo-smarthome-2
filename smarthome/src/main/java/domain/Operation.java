@@ -7,11 +7,10 @@ import middleware.MiddlewareFacade;
 
 public class Operation implements ICommand {
 	
-	Pair<Tag, Object> funId;
-	
-	Tag type;
-	Object name;
-	IMiddlewareFacade receiver;
+	private Pair<Tag, Object> funId;
+	public Tag type;
+	public Object name;
+	private IMiddlewareFacade receiver;
 	
 	public Operation(Tag t, Object n,Pair p){
 		this.type = t;

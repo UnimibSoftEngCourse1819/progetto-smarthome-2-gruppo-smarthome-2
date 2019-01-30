@@ -10,12 +10,11 @@ import middleware.MiddlewareFacade;
 
 public class Property implements ICommand {
 	
-	Map<Object,Object> parameters;
-	IMiddlewareFacade receiver;
-	
-	Pair<Tag, Object> funId;
-	Tag type;
-	Object name;
+	private Map<Object,Object> parameters;
+	private IMiddlewareFacade receiver;
+	public Pair<Tag, Object> funId;
+	private Tag type;
+	private Object name;
 	
 	public Property(Tag t, Object n,Pair fId){
 		this.type = t;
@@ -35,7 +34,6 @@ public class Property implements ICommand {
 	public Tag getTag() {
 		return this.type;
 	}
-
 
 	public Object getName() {
 		return this.name;
@@ -58,12 +56,9 @@ public class Property implements ICommand {
 		return this.parameters;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Property [parameters=" + parameters + ", name=" + name + "]";
 	}
 	
-	
-
 }

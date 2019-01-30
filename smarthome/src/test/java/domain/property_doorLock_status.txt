@@ -1,0 +1,1 @@
+{"code":200,"result":{"status":"OPEN","timestamp":1548846147141}}
