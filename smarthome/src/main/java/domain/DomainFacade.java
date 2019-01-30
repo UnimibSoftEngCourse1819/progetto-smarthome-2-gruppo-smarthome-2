@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -8,6 +9,7 @@ import exceptions.AlreadyInCacheException;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
+import persistance.PersistanceController;
 
 public class DomainFacade implements IDomainFacade {
 	
@@ -15,10 +17,19 @@ public class DomainFacade implements IDomainFacade {
 	
 	private IMiddlewareFacade middlewareFacade;
 	
+	PersistanceController db;
+	
 	
 	public DomainFacade(){
 		this.middlewareFacade = new MiddlewareFacade();
 		this.home = SmartHome.getInstance();
+		try {
+			this.db = new PersistanceController();
+			this.initSavedDevices();
+		} catch (IOException | MiddlewareException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -26,6 +37,7 @@ public class DomainFacade implements IDomainFacade {
 		try{
 		Collection<IDescriptor> descs = middlewareFacade.getDevices();
 		this.home.createDeviceDescriptors(descs);
+		this.home.cleanAlreadyAdded();
 		return this.home.getDeviceDescriptors();
 		}
 		catch(MiddlewareException e){
@@ -44,6 +56,12 @@ public class DomainFacade implements IDomainFacade {
 	public IDevice addDevice(IDescriptor devDesc) throws MiddlewareException{
 		DeviceFactory fact = new DeviceFactory();
 		fact.addDeviceDescriptor(devDesc);
+		try {
+			db.saveToFile(devDesc);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Collection<IFunction> adapters = 
 				this.middlewareFacade.getADeviceFunctions(devDesc);
 		fact.addFunctions(adapters);
@@ -58,7 +76,11 @@ public class DomainFacade implements IDomainFacade {
 		this.home.devices.get(deviceId.toString()).callFunctionCommand(idfunct, idcommand);
 	}
 
-
+	public void initSavedDevices() throws IOException, MiddlewareException{
+		for(IDescriptor devdesc : db.convertToIDescriptors())
+			this.addDevice(devdesc);
+	}
+	
 	public Collection<Device> getDevices() {
 		return this.home.getDevices();
 	}

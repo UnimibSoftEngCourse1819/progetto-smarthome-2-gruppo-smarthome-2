@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 import domain.DomainFacade;
 import domain.ICommand;
 import gui.HomeGUI;
+import persistance.PersistanceController;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,6 +48,20 @@ public final class App {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException, Exception {
     	
+    	/*
+    	PersistanceController db = new PersistanceController();
+    	DomainFacade df = new DomainFacade();
+    	df.scanDevices();
+    	System.out.println(df.getDeviceDescriptors().get(0));
+    	
+    	db.saveToFile(df.getDeviceDescriptors().get(0));
+    	db.saveToFile(df.getDeviceDescriptors().get(1));
+    	
+    	for(IDescriptor dd : db.convertToIDescriptors())
+    		df.addDevice(dd);
+    	for(Device d : df.getDevices())
+    		System.out.println(d.getFunctions());
+    	
     	
     	
     	EventQueue.invokeLater(new Runnable() {
@@ -63,29 +78,35 @@ public final class App {
 				}
 			}
 		});
-        
+        */
 
 
-    	/*List<DeviceDescriptor> res = new ArrayList<>();
 
     	
     	/************Scan Device************/
-    	
-    	/*List<DeviceDescriptor> res = new ArrayList<>();
 
     	DomainFacade df = new DomainFacade();
+    	//List<DeviceDescriptor> res = new ArrayList<>();
+    	df.scanDevices();
+    	System.out.println(df.getDeviceDescriptors().size());
+    	
+    	System.out.println(df.getDevices().size());
+    	df.scanDevices();
+    	System.out.println(df.getDeviceDescriptors().size());
+    	//df.addDevice(df.getDeviceDescriptors().get(7));
+    	/*
     	 df.scanDevices();
     	 df.scanDevices();
     	 res = df.getDeviceDescriptors();
     	 System.out.println("Array Size " + res.size());
     	 for(DeviceDescriptor dd : res)
-    		 System.out.println(dd);
+    		 System.out.println(dd);*/
     	 
     	 
     	 
-    	 /************Add Device************/
+    	 /************Add Device************
     	
-    	 /*System.out.println("************ADD DEVICE******************");
+    	 System.out.println("************ADD DEVICE******************");
     	 IDevice d = df.addDevice(res.get(9));
     	 df.scanDevices();
     	 System.out.println("Array Size After Added 1 device " + res.size());
