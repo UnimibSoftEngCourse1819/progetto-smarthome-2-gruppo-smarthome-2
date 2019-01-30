@@ -9,4 +9,5 @@ public interface IGUIFacade {
 	public void show();
 	public void show(Collection <DeviceDescriptor> descs);
 	public void showDevice(IDevice d);
+	public void showSmartHome();
 }

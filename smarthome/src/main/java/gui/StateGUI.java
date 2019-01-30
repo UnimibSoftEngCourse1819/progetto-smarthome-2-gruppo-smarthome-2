@@ -18,7 +18,7 @@ public class StateGUI extends JPanel{
 
 	private JFrame frame;
 	private GUIFacade guiFacade;
-	private DeviceGUI deviceGUI;
+	
 	
 	/**
 	 * Create the application.
@@ -28,7 +28,7 @@ public class StateGUI extends JPanel{
 	public StateGUI(IDevice device, ICommand command) {
 		initialize(device, command);
 		this.guiFacade = new GUIFacade();
-		this.deviceGUI = new DeviceGUI(device);
+		
 	}
 
 	public JFrame getFrame() {
@@ -50,7 +50,7 @@ public class StateGUI extends JPanel{
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				deviceGUI.getFrame().setVisible(true);
+				guiFacade.showDevice(device);
 			}
 		});
 		btnBack.setBounds(40, 386, 97, 25);
@@ -82,10 +82,21 @@ public class StateGUI extends JPanel{
 			lblKey.setBounds(60, 10 + pos, 200, 160);
 			frame.getContentPane().add(lblKey);
 			
-			JLabel lblValue = new JLabel(attribute.get(a).toString());
-			lblValue.setBounds(200, 10 + pos, 300, 160);
-			frame.getContentPane().add(lblValue);
-			pos+=20;
+				if (a.toString().equals("timestamp")) {
+					 long l = Long.parseLong(attribute.get(a).toString());
+					 String date1 = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date(l * 1000));
+					 System.out.println(date1);
+					 JLabel lblValue = new JLabel(date1);
+					 lblValue.setBounds(200, 10 + pos, 300, 160);
+					 frame.getContentPane().add(lblValue);
+					 pos+=20;
+				}
+				else {
+					 JLabel lblValue = new JLabel(attribute.get(a).toString());
+					 lblValue.setBounds(200, 10 + pos, 300, 160);
+					 frame.getContentPane().add(lblValue);
+					 pos+=20;
+				}
 			}
 	} 
 
@@ -103,10 +114,20 @@ public class StateGUI extends JPanel{
 				lblKey.setBounds(60, 10 + pos, 200, 160);
 				frame.getContentPane().add(lblKey);
 				
-				JLabel lblValue = new JLabel(map.get(a).toString());
-				lblValue.setBounds(200, 10 + pos, 300, 160);
-				frame.getContentPane().add(lblValue);
-				pos+=20;
+				if (a.toString().equals("timestamp")) {
+					 long l = Long.parseLong(map.get(a).toString());
+					 String date1 = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date(l * 1000));
+					 JLabel lblValue = new JLabel(date1);
+					 lblValue.setBounds(200, 10 + pos, 300, 160);
+					 frame.getContentPane().add(lblValue);
+					 pos+=20;
+				}
+					else {
+					JLabel lblValue = new JLabel(map.get(a).toString());
+					lblValue.setBounds(200, 10 + pos, 300, 160);
+					frame.getContentPane().add(lblValue);
+					pos+=20;
+					}
 				}
 			}
 	}

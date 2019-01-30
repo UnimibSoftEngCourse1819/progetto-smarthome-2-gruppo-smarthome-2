@@ -49,7 +49,7 @@ public class ScanDeviceGUI extends JPanel {
 		}
 		else {
 			
-			JLabel lblTitle = new JLabel("Here are the devices i found. Add them to your Smart-Home!");
+			JLabel lblTitle = new JLabel("Here are the devices i found.Add them to your Smart-Home!");
 			lblTitle.setBounds(20, 20, 400, 16);
 			frame.getContentPane().add(lblTitle);
 			int pos = 0;
@@ -68,8 +68,8 @@ public class ScanDeviceGUI extends JPanel {
 				btn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							System.out.println(dd);
-							guiFacade.showDevice(guiFacade.add(dd));
+							guiFacade.add(dd);
+							guiFacade.showSmartHome();
 							frame.setVisible(false);
 							
 						} catch (Exception e1) {
