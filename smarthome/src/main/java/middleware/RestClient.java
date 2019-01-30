@@ -95,7 +95,6 @@ public class RestClient {
 		this.uBuild.clear();
 		this.uBuild.add("/functions/");
 		this.uBuild.add(operation.getFunctionId());
-		System.out.println(this.uBuild.getStringUri());
 		JSONObject body = this.constructOperationBody(operation);
 		return this.makeTheCall(this.uBuild.getStringUri(), body);
 	}

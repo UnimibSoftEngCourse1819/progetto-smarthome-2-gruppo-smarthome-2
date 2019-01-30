@@ -35,10 +35,6 @@ public class Device implements IDevice{
 	public Map<Object,Object> getAttributeOfAProperty(Object funId, Object propertyName){
 		return this.state.getCurrentState().get(new Pair<Object,Object>(funId,propertyName));
 	}
-	/*
-	public Collection<Pair<Object,Object>> getProperties(){
-		return this.state.getCurrentState().keySet();
-	}*/
 	
 
 	public IDescriptor getDescriptor() {
@@ -80,7 +76,6 @@ public class Device implements IDevice{
 
 	@Override
 	public Collection<Map<Object, Object>> getParametersOfThisFunction(Object funId) {
-		System.out.println(this.state.getParametersOfThisFunction(funId));
 		return this.state.getParametersOfThisFunction(funId);
 	}
 
