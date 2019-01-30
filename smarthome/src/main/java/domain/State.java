@@ -58,20 +58,12 @@ public class State {
 		return currentState;
 	}
 	
-	/*
-	public void setCurrentState(Map<Pair<Object,Object>, Map<Object, Object>> currentState) {
-		this.currentState = currentState;
-	}*/
 	
 	public Collection<Map<Object, Object>> getParametersOfThisFunction(Object funId){
 		List<Map<Object,Object>> paramsOfFun = new ArrayList<>();
 		System.out.println(this.currentState.keySet() + "1");
 		for(Pair<Object,Object> pair : this.currentState.keySet()){
-			System.out.println(pair.getKey()+ "2");
-			System.out.println(funId+ "3" );
-			if(pair.getKey().toString().equals(funId.toString())) {
-				
-				
+			if(pair.getKey().toString().equals(funId.toString())) {		
 				paramsOfFun.add(this.currentState.get(pair));
 			}
 				

@@ -13,7 +13,6 @@ public interface IDevice {
 	
 	public IDescriptor getDescriptor();
 	
-	//public Collection<Pair<Object,Object>> getProperties();
 	public Collection<Object> getFunctionsIds();
 	
 	public Map<Object,Object> getAttributeOfAProperty(Object funId, Object propertyName);
@@ -26,6 +25,5 @@ public interface IDevice {
 	
 	public void initState() throws MiddlewareException;
 	
-	//public Collection<ICommand> getAllCommands();
 	
 }

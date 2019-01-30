@@ -18,7 +18,7 @@ import middleware.MiddlewareException;
 public class GUIFacade implements IGUIFacade {
 	private static final String GUILOGGER = "guiLogger";
 	private DomainFacade domainFacade;
-	private static GUIFacade instance;
+	private static GUIFacade instance = new GUIFacade();
 	
 	public GUIFacade(){	
 		this.domainFacade = new DomainFacade();
@@ -31,8 +31,6 @@ public class GUIFacade implements IGUIFacade {
 		frame.getContentPane().setLayout(null);
 	}
 	public static GUIFacade getInstance() {
-		if (instance==null)
-			instance=new GUIFacade();
 			return instance;
 	}
 	@Override

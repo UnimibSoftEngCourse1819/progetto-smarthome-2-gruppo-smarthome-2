@@ -82,15 +82,13 @@ public class FunctionAdapter implements IFunction {
 
 	@Override
 	public Collection<Operation> getOperations() throws NoOperationException {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Operation>();
 	}
 
 
 	@Override
 	public Collection<Property> getProperties() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Property>();
 	}
 	
 	

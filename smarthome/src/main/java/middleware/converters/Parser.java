@@ -28,15 +28,10 @@ public class Parser {
 	        jo = (JSONObject) obj; 
 	        
 		}
-		catch (FileNotFoundException e){
+		catch (IOException | ParseException e){
 			throw new MiddlewareException(e); 
 		}
-		catch (IOException e){
-			throw new MiddlewareException(e);
-		}
-		catch (ParseException e){
-			throw new MiddlewareException(e);
-		}
+		
 		return jo;
 	}
 
