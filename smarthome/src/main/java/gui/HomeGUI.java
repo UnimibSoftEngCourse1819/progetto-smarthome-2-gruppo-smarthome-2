@@ -16,17 +16,11 @@ public class HomeGUI extends JPanel{
 	public JFrame frame; 
 	private GUIFacade guiFacade;
 
-	/**
-	 * Create the application.
-	 */
 	public HomeGUI() {
 		this.guiFacade = GUIFacade.getInstance();
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		
 		frame = new JFrame();
@@ -42,7 +36,6 @@ public class HomeGUI extends JPanel{
 					frame.setVisible(false);
 					
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
 
 				}
@@ -58,7 +51,6 @@ public class HomeGUI extends JPanel{
 					
 					
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
 
 				}

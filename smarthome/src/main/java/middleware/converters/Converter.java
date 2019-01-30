@@ -12,11 +12,11 @@ public class Converter implements IConverter {
 	
 	public static final String RESULT = "result";
 	
-	public JSONArray convertToJsonArray(JSONObject obj) throws MiddlewareException {
+	public JSONArray convertToJsonArray(JSONObject obj){
 			return (JSONArray) obj.get(RESULT);	
 		 }
 	
-	public JSONObject convertToJsonObject(JSONObject obj) throws MiddlewareException {
+	public JSONObject convertToJsonObject(JSONObject obj) {
 		return (JSONObject) obj.get(RESULT);
 		
  }

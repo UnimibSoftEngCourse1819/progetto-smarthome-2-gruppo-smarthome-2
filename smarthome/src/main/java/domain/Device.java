@@ -35,10 +35,6 @@ public class Device implements IDevice{
 	public Map<Object,Object> getAttributeOfAProperty(Object funId, Object propertyName){
 		return this.state.getCurrentState().get(new Pair<Object,Object>(funId,propertyName));
 	}
-	/*
-	public Collection<Pair<Object,Object>> getProperties(){
-		return this.state.getCurrentState().keySet();
-	}*/
 	
 
 	public IDescriptor getDescriptor() {

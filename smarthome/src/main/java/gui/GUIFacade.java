@@ -12,6 +12,7 @@ import domain.DeviceDescriptor;
 import domain.DomainFacade;
 import domain.ICommand;
 import domain.IDescriptor;
+import domain.IDevice;
 import javafx.util.Pair;
 import middleware.MiddlewareException;
 
@@ -19,7 +20,7 @@ import middleware.MiddlewareException;
 public class GUIFacade implements IGUIFacade {
 	private static final String GUILOGGER = "guiLogger";
 	private DomainFacade domainFacade;
-	private static GUIFacade instance;
+	private static GUIFacade instance = new GUIFacade();
 	
 	public GUIFacade(){	
 		this.domainFacade = new DomainFacade();
@@ -27,8 +28,6 @@ public class GUIFacade implements IGUIFacade {
 	}
 	
 	public static GUIFacade getInstance() {
-		if (instance==null)
-			instance=new GUIFacade();
 			return instance;
 	}
 	@Override
@@ -69,7 +68,7 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 	
-	public void showDevice (Device device) {
+	public void showDevice (IDevice device) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -87,12 +86,12 @@ public class GUIFacade implements IGUIFacade {
 		});
 	}
 
-	public void showResult(Device device,ICommand cmd, Map<Pair<Object, Object>, Map<Object, Object>> state) {
+	public void showResult(IDevice device, ICommand command) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
-					StateGUI statePage = new StateGUI(device, cmd, state);
+					StateGUI statePage = new StateGUI(device, command);
 					JPanel p = new JPanel();
 					p.add(statePage);
 					statePage.frame.setVisible(true);
@@ -113,11 +112,13 @@ public class GUIFacade implements IGUIFacade {
 	
 
 	
-	public Device add(IDescriptor devDesc) throws MiddlewareException {
+	public IDevice add(IDescriptor devDesc) throws MiddlewareException {
 		return this.domainFacade.addDevice(devDesc);
 	}
 
-	public void execute(Device device, Object id, Object name) throws MiddlewareException {
+	public void execute(IDevice device, Object id, Object name) throws MiddlewareException {
 		device.callFunctionCommand(id, name);	
 	}
+
+	
 }

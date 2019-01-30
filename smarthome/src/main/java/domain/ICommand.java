@@ -10,4 +10,5 @@ public interface ICommand {
 	
 	public Object getName();
 
+	public Object getFunctionId();
 }
