@@ -80,6 +80,7 @@ public class Device implements IDevice{
 
 	@Override
 	public Collection<Map<Object, Object>> getParametersOfThisFunction(Object funId) {
+		System.out.println(this.state.getParametersOfThisFunction(funId));
 		return this.state.getParametersOfThisFunction(funId);
 	}
 

@@ -23,7 +23,7 @@ public class Operation implements ICommand {
 
 	@Override
 	public void execute() throws MiddlewareException {
-		this.receiver.executeOperation(this); 	
+		this.receiver.executeOperation(this); 
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public final class App {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException, Exception {
     	
-    	/*
+    	
     	
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,7 +63,7 @@ public final class App {
 				}
 			}
 		});
-        */
+        
 
 
     	/*List<DeviceDescriptor> res = new ArrayList<>();
@@ -71,7 +71,7 @@ public final class App {
     	
     	/************Scan Device************/
     	
-    	List<DeviceDescriptor> res = new ArrayList<>();
+    	/*List<DeviceDescriptor> res = new ArrayList<>();
 
     	DomainFacade df = new DomainFacade();
     	 df.scanDevices();
@@ -85,7 +85,7 @@ public final class App {
     	 
     	 /************Add Device************/
     	
-    	 System.out.println("************ADD DEVICE******************");
+    	 /*System.out.println("************ADD DEVICE******************");
     	 IDevice d = df.addDevice(res.get(9));
     	 df.scanDevices();
     	 System.out.println("Array Size After Added 1 device " + res.size());

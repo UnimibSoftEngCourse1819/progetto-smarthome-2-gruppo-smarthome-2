@@ -65,9 +65,16 @@ public class State {
 	
 	public Collection<Map<Object, Object>> getParametersOfThisFunction(Object funId){
 		List<Map<Object,Object>> paramsOfFun = new ArrayList<>();
+		System.out.println(this.currentState.keySet() + "1");
 		for(Pair<Object,Object> pair : this.currentState.keySet()){
-			if(pair.getKey().equals(funId))
+			System.out.println(pair.getKey()+ "2");
+			System.out.println(funId+ "3" );
+			if(pair.getKey().toString().equals(funId.toString())) {
+				
+				
 				paramsOfFun.add(this.currentState.get(pair));
+			}
+				
 		}
 		return paramsOfFun;
 	}

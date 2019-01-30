@@ -49,6 +49,7 @@ public class DomainFacade implements IDomainFacade {
 		fact.addFunctions(adapters);
 		this.home.deleteDeviceDescriptor(devDesc);
 		this.home.addToMyDevices(fact.getInstance());
+		fact.getInstance().initState();
 		return (IDevice) fact.getInstance();
 	}
 	
