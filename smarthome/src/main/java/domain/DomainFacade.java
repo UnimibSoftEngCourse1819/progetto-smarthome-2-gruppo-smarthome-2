@@ -27,7 +27,7 @@ public class DomainFacade implements IDomainFacade {
 			this.db = new PersistanceController();
 			this.initSavedDevices();
 		} catch (IOException | MiddlewareException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	}

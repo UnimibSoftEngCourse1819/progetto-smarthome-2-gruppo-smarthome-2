@@ -62,7 +62,7 @@ public final class App {
     	for(Device d : df.getDevices())
     		System.out.println(d.getFunctions());
     	
-    	
+    	*/
     	
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -78,7 +78,7 @@ public final class App {
 				}
 			}
 		});
-        */
+        
 
 
 
@@ -103,12 +103,12 @@ public final class App {
     	 res = df.getDeviceDescriptors();
     	 System.out.println("Array Size " + res.size());
     	 for(DeviceDescriptor dd : res)
-    		 System.out.println(dd);*/
+    		 System.out.println(dd);
     	 
     	 
     	 
 
-    	 /************Add Device************/
+    	 /************Add Device************
     	
     	 System.out.println("************ADD DEVICE******************");
     	 IDevice d = df.addDevice(res.get(9));

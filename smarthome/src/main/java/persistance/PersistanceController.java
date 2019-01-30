@@ -29,16 +29,19 @@ public class PersistanceController {
 	}
 	
 	public void saveToFile(IDescriptor desc) throws IOException, MiddlewareException{
-		System.out.println(this.jsonDB.getAbsolutePath());
-		JSONObject obj = this.conv.parseJSON(this.jsonDB);
+		//System.out.println(this.jsonDB.getAbsolutePath());
+		JSONObject actualDB = new JSONObject();
 		JSONObject toSave = this.mapObject(desc);
+		if(this.jsonDB.length() != 0)
+			actualDB = this.conv.parseJSON(this.jsonDB);
 		for(Object key : toSave.keySet() ){
-			if(!obj.containsKey(key))
-				obj.put(key, toSave.get(key));
-		}
+			if(!actualDB.containsKey(key))
+				actualDB.put(key, toSave.get(key));
+			}
 		FileWriter file = new FileWriter(this.jsonDB.getAbsolutePath());
-		file.write(obj.toJSONString());
+		file.write(actualDB.toJSONString());
 		file.flush();
+		
 	}
 
 	private File createOrGetFile() throws IOException {
@@ -55,11 +58,15 @@ public class PersistanceController {
 	}
 	
 	public Collection<IDescriptor> convertToIDescriptors() throws MiddlewareException{
-		JSONObject obj = conv.parseJSON(jsonDB);
-		System.out.println(obj);
+		JSONObject actualDB = new JSONObject();
+		if(this.jsonDB.length() != 0)
+			actualDB = conv.parseJSON(jsonDB);
+			//throw new MiddlewareException(new EmptyDbException());
+		//JSONObject obj = conv.parseJSON(jsonDB);
+		//System.out.println(obj);
 		Collection<IDescriptor> descs = new ArrayList<IDescriptor>();
-		for(Object key : obj.keySet())
-		descs.add(new DeviceDescriptor(key,obj.get(key)));
+		for(Object key : actualDB.keySet())
+			descs.add(new DeviceDescriptor(key,actualDB.get(key)));
 		return descs;
 	}
 
