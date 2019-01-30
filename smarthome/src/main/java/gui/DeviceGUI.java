@@ -14,18 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import domain.Device;
-import domain.ICommand;
 import domain.IDevice;
-import domain.IFunction;
 import domain.Operation;
 import domain.Property;
-import domain.TagFunction;
 import exceptions.NoOperationException;
 
 public class DeviceGUI extends JPanel {
 
-	public JFrame frame;
+	private JFrame frame;
 	private GUIFacade guiFacade;
 	
 	/**
@@ -36,14 +32,16 @@ public class DeviceGUI extends JPanel {
 		initialize(device);
 	}
 
+	public JFrame getFrame() {
+		return this.frame;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(IDevice device) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 562, 524);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		guiFacade.initializeDimension(this.frame);
+		
 		
 		JLabel lblDeviceName = new JLabel(device.getDescriptor().getName().toString());
 		lblDeviceName.setBounds(38, 20, 200, 16);

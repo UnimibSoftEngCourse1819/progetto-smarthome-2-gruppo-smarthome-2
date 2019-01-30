@@ -18,7 +18,7 @@ import domain.IDescriptor;
 
 public class ScanDeviceGUI extends JPanel {
 
-	public JFrame frame;
+	private JFrame frame;
 	private GUIFacade guiFacade;
 
 	
@@ -30,8 +30,8 @@ public class ScanDeviceGUI extends JPanel {
 		initialize(descs);
 	}
 	
-	public ScanDeviceGUI() {
-		// TODO Auto-generated constructor stub
+	public JFrame getFrame() {
+		return this.frame;
 	}
 
 
@@ -40,9 +40,7 @@ public class ScanDeviceGUI extends JPanel {
 	 */
 	private void initialize(Collection <DeviceDescriptor> descs) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 562, 524);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		guiFacade.initializeDimension(this.frame);
 		
 		if (descs.isEmpty()) {
 			JLabel lbl = new JLabel("No devices found. Ensure they are connected to the net or try later.");

@@ -2,18 +2,16 @@ package gui;
 
 import java.awt.EventQueue;
 import java.util.Collection;
-import java.util.Map;
 import java.util.logging.Level;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import domain.Device;
 import domain.DeviceDescriptor;
 import domain.DomainFacade;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IDevice;
-import javafx.util.Pair;
 import middleware.MiddlewareException;
 
 
@@ -27,6 +25,11 @@ public class GUIFacade implements IGUIFacade {
 		
 	}
 	
+	public static void initializeDimension(JFrame frame) {
+		frame.setBounds(100, 100, 562, 524);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+	}
 	public static GUIFacade getInstance() {
 		if (instance==null)
 			instance=new GUIFacade();
@@ -42,7 +45,7 @@ public class GUIFacade implements IGUIFacade {
 					
 					JPanel p = new JPanel();
 					p.add(home);
-					home.frame.setVisible(true);
+					home.getFrame().setVisible(true);
 					
 				} catch (Exception e) {
 					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
@@ -60,7 +63,7 @@ public class GUIFacade implements IGUIFacade {
 					
 					JPanel p = new JPanel();
 					p.add(scanPage);
-					scanPage.frame.setVisible(true);
+					scanPage.getFrame().setVisible(true);
 					
 				} catch (Exception e) {
 					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
@@ -78,7 +81,7 @@ public class GUIFacade implements IGUIFacade {
 					
 					JPanel p = new JPanel();
 					p.add(devicePage);
-					devicePage.frame.setVisible(true);
+					devicePage.getFrame().setVisible(true);
 					
 				} catch (Exception e) {
 					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
@@ -96,7 +99,7 @@ public class GUIFacade implements IGUIFacade {
 					StateGUI statePage = new StateGUI(device, command);
 					JPanel p = new JPanel();
 					p.add(statePage);
-					statePage.frame.setVisible(true);
+					statePage.getFrame().setVisible(true);
 					
 					
 				} catch (Exception e) {
