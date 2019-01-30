@@ -13,8 +13,17 @@ import javax.swing.JPanel;
 public class HomeGUI extends JPanel{
 
 	
-	public JFrame frame; 
+	private JFrame frame; 
 	private GUIFacade guiFacade;
+
+
+
+	
+	public JFrame getFrame() {
+		return this.frame;
+	}
+	
+
 
 	public HomeGUI() {
 		this.guiFacade = GUIFacade.getInstance();
@@ -24,9 +33,7 @@ public class HomeGUI extends JPanel{
 	private void initialize() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 562, 524);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		guiFacade.initializeDimension(this.frame);
 		
 		JButton btnScan = new JButton("Scan your devices!");
 		btnScan.addActionListener(new ActionListener() {
@@ -56,6 +63,7 @@ public class HomeGUI extends JPanel{
 				}
 			}
 		});
+		
 		btnShowDev.setBounds(300, 442, 162, 25);
 		frame.getContentPane().add(btnShowDev);
 		

@@ -56,7 +56,7 @@ public final class App {
 					
 					JPanel p = new JPanel();
 					p.add(homegui);
-					homegui.frame.setVisible(true);
+					homegui.getFrame().setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
