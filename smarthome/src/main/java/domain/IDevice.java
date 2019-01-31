@@ -3,8 +3,8 @@ package domain;
 import java.util.Collection;
 import java.util.Map;
 
+import exceptions.MiddlewareException;
 import exceptions.NoOperationException;
-import middleware.MiddlewareException;
 
 public interface IDevice {
 	

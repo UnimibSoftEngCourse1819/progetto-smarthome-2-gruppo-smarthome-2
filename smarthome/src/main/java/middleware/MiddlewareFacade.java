@@ -16,6 +16,7 @@ import domain.IFunction;
 import domain.Operation;
 import domain.Property;
 import domain.TagFunction;
+import exceptions.MiddlewareException;
 import middleware.converters.Converter;
 
 

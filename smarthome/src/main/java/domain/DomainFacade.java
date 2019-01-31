@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 import exceptions.AlreadyInCacheException;
+import exceptions.MiddlewareException;
 import middleware.IMiddlewareFacade;
-import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 import persistance.PersistanceController;
 
@@ -19,7 +19,6 @@ public class DomainFacade implements IDomainFacade {
 	
 	PersistanceController db;
 	
-	
 	public DomainFacade(){
 		this.middlewareFacade = new MiddlewareFacade();
 		this.home = SmartHome.getInstance();
@@ -28,7 +27,6 @@ public class DomainFacade implements IDomainFacade {
 			this.initSavedDevices();
 		} catch (IOException | MiddlewareException e) {
 			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
-
 		}
 	}
 	

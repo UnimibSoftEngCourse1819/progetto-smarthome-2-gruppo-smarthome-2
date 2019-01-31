@@ -9,8 +9,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import exceptions.MiddlewareException;
 import javafx.util.Pair;
-import middleware.MiddlewareException;
 
 public class OperationTests {
 

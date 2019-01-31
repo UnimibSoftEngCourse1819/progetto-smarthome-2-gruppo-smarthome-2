@@ -2,8 +2,8 @@ package domain;
 
 import java.util.Collection;
 
+import exceptions.MiddlewareException;
 import exceptions.NoOperationException;
-import middleware.MiddlewareException;
 
 public interface IFunction {
 	

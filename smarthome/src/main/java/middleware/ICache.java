@@ -2,6 +2,8 @@ package middleware;
 
 import java.io.File;
 
+import exceptions.MiddlewareException;
+
 
 public interface ICache {
 	

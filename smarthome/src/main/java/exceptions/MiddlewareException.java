@@ -1,4 +1,4 @@
-package middleware;
+package exceptions;
 
 public class MiddlewareException extends Exception{
 	/**

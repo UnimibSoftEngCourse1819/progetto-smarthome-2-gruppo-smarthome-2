@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import exceptions.MiddlewareException;
 import javafx.util.Pair;
 import middleware.IMiddlewareFacade;
-import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class State {

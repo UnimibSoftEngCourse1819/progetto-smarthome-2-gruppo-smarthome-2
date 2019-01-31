@@ -3,9 +3,9 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import exceptions.MiddlewareException;
 import javafx.util.Pair;
 import middleware.IMiddlewareFacade;
-import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class Property implements ICommand {

@@ -13,7 +13,7 @@ import domain.DomainFacade;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IDevice;
-import middleware.MiddlewareException;
+import exceptions.MiddlewareException;
 
 
 public class GUIFacade implements IGUIFacade {

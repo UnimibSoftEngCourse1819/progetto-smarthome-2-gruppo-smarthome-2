@@ -9,9 +9,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import exceptions.MiddlewareException;
 import javafx.util.Pair;
 import middleware.IMiddlewareFacade;
-import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 import middleware.MiddlewareFacadeTest;
 

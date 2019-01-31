@@ -1,4 +1,4 @@
-package persistance;
+package exceptions;
 
 public class EmptyDbException extends Exception {
 

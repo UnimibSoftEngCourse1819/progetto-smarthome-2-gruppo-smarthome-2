@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import exceptions.MiddlewareException;
 import exceptions.NoOperationException;
 import javafx.util.Pair;
-import middleware.MiddlewareException;
 
 public class Function implements IFunction {
 	

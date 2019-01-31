@@ -5,7 +5,7 @@ import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import middleware.MiddlewareException;
+import exceptions.MiddlewareException;
 
 
 public class Converter implements IConverter {
@@ -23,7 +23,6 @@ public class Converter implements IConverter {
 	
 	public JSONObject parseJSON(File f) throws MiddlewareException{
 		 return (new Parser().parseJSONFile(f));
-		 
 	}
 
 public boolean isJSONObject(JSONObject ob){

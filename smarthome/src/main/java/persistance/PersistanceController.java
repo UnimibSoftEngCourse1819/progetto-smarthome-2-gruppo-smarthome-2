@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 import adapters.DescriptorAdapter;
 import domain.DeviceDescriptor;
 import domain.IDescriptor;
-import middleware.MiddlewareException;
+import exceptions.MiddlewareException;
 import middleware.converters.Converter;
 
 public class PersistanceController {

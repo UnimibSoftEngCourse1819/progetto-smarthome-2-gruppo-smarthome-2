@@ -1,6 +1,6 @@
 package domain;
 
-import middleware.MiddlewareException;
+import exceptions.MiddlewareException;
 
 public interface ICommand {
 	

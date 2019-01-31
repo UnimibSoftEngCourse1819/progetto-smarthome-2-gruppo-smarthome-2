@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import middleware.MiddlewareException;
+import exceptions.MiddlewareException;
 import middleware.MiddlewareFacade;
 import middleware.MiddlewareFacadeTest;
 

@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Collection;
 
-import middleware.MiddlewareException;
+import exceptions.MiddlewareException;
 
 public interface IDomainFacade {
 

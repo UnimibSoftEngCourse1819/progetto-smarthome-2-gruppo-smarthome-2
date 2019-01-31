@@ -13,6 +13,7 @@ import adapters.FunctionAdapter;
 import domain.IDescriptor;
 import domain.IFunction;
 import domain.Property;
+import exceptions.MiddlewareException;
 import middleware.converters.Converter;
 
 public class MiddlewareFacadeTest {

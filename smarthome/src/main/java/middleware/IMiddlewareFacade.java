@@ -7,6 +7,7 @@ import domain.IDescriptor;
 import domain.IFunction;
 import domain.Operation;
 import domain.Property;
+import exceptions.MiddlewareException;
 
 public interface IMiddlewareFacade {
 	

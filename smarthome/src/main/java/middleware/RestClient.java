@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 import domain.IDescriptor;
 import domain.Operation;
 import domain.Property;
+import exceptions.MiddlewareException;
 
 public class RestClient {
 

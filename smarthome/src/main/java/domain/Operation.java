@@ -1,8 +1,8 @@
 package domain;
 
+import exceptions.MiddlewareException;
 import javafx.util.Pair;
 import middleware.IMiddlewareFacade;
-import middleware.MiddlewareException;
 import middleware.MiddlewareFacade;
 
 public class Operation implements ICommand {

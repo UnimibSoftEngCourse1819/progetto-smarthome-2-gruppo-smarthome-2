@@ -13,9 +13,9 @@ import domain.IFunction;
 import domain.Operation;
 import domain.Property;
 import domain.TagFunction;
+import exceptions.MiddlewareException;
 import exceptions.NoOperationException;
 import javafx.util.Pair;
-import middleware.MiddlewareException;
 
 public class FunctionAdapter implements IFunction {
 	
@@ -42,7 +42,6 @@ public class FunctionAdapter implements IFunction {
 		createProperties(res, fact);
 		return res;
 	}
-
 
 	private void createProperties(Collection<ICommand> res, CommandFactory fact) {
 		JSONArray ops = this.findParam("property");
