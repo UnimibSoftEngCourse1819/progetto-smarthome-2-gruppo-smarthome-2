@@ -7,7 +7,7 @@ BUILDING THE PROJECT
 
 RUNNING THE PROJECT
 - Start the Jemma-Server running start.sh(Unix)/start.bat(Windows) in folder  smarthome/dal-web-apis-bin-2.0.0.
-- Start the SmartHome application running start.sh(Unix)/start.bat(Windows), in smarthome/target folder.
+- Start the SmartHome application running start.sh(Unix)/start.bat(Windows), in smarthome folder.
 
  Now you can interact with your Personal Smart Home! 
 
