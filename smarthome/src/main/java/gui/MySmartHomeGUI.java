@@ -1,12 +1,8 @@
 package gui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 
 import javax.swing.JButton;
@@ -51,7 +47,6 @@ public class MySmartHomeGUI extends JPanel{
 		
 		Collection<Device> devices = guiFacade.getDev();
 		int pos = 0;
-		System.out.println(devices.size());
 		for (Device device : devices) {	
 			JLabel lblDevice = new JLabel(device.getDescriptor().getName().toString());
 			lblDevice.setBounds(20, 60 + pos, 400, 16);
@@ -65,7 +60,7 @@ public class MySmartHomeGUI extends JPanel{
 						frame.setVisible(false);
 						
 					} catch (Exception e1) {
-						java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
+						java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
 
 					}
 				}
@@ -84,7 +79,7 @@ public class MySmartHomeGUI extends JPanel{
 					frame.setVisible(false);
 					
 				} catch (Exception e1) {
-					java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
 
 				}
 			}

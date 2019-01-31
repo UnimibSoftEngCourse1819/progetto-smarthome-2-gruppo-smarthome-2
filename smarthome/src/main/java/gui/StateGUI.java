@@ -35,9 +35,7 @@ public class StateGUI extends JPanel{
 		return this.frame;
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize(IDevice device, ICommand command) {
 		frame = new JFrame();
 		guiFacade.initializeDimension(this.frame);
@@ -85,7 +83,6 @@ public class StateGUI extends JPanel{
 				if (a.toString().equals("timestamp")) {
 					 long l = Long.parseLong(attribute.get(a).toString());
 					 String date1 = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date(l * 1000));
-					 System.out.println(date1);
 					 JLabel lblValue = new JLabel(date1);
 					 lblValue.setBounds(200, 10 + pos, 300, 160);
 					 frame.getContentPane().add(lblValue);

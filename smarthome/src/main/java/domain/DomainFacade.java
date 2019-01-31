@@ -14,7 +14,7 @@ import persistance.PersistanceController;
 public class DomainFacade implements IDomainFacade {
 	
 	private SmartHome home;
-	
+	private static final String DOMAINLOGGER = "domainLogger";
 	private IMiddlewareFacade middlewareFacade;
 	
 	PersistanceController db;
@@ -27,8 +27,8 @@ public class DomainFacade implements IDomainFacade {
 			this.db = new PersistanceController();
 			this.initSavedDevices();
 		} catch (IOException | MiddlewareException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
+
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class DomainFacade implements IDomainFacade {
 		}
 		catch(MiddlewareException e){
 			if(e.getLowLevelException() instanceof AlreadyInCacheException)
-				java.util.logging.Logger.getLogger("domainLogger").log(Level.WARNING,e.getMessage(), e);
+				java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
 
 			return this.home.getDeviceDescriptors();
 		}
@@ -59,8 +59,7 @@ public class DomainFacade implements IDomainFacade {
 		try {
 			db.saveToFile(devDesc);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
 		}
 		Collection<IFunction> adapters = 
 				this.middlewareFacade.getADeviceFunctions(devDesc);
@@ -76,7 +75,7 @@ public class DomainFacade implements IDomainFacade {
 		this.home.devices.get(deviceId.toString()).callFunctionCommand(idfunct, idcommand);
 	}
 
-	public void initSavedDevices() throws IOException, MiddlewareException{
+	public void initSavedDevices() throws MiddlewareException{
 		for(IDescriptor devdesc : db.convertToIDescriptors())
 			this.addDevice(devdesc);
 	}

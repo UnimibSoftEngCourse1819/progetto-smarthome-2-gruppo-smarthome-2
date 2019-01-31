@@ -78,7 +78,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	}
 	
 
-	private void addArrayParameter(Property prop, JSONObject resource) throws MiddlewareException {
+	private void addArrayParameter(Property prop, JSONObject resource) {
 		JSONArray arr;
 		arr = converter.convertToJsonArray(resource);
 		prop.clear();
@@ -91,7 +91,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		}
 	}
 
-	private void addObjectParameter(Property prop, JSONObject resource) throws MiddlewareException {
+	private void addObjectParameter(Property prop, JSONObject resource)  {
 		JSONObject obj;
 		obj = converter.convertToJsonObject(resource);
 		prop.clear();

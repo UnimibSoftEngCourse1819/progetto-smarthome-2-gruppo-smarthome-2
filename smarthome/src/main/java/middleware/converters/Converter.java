@@ -19,7 +19,7 @@ public class Converter implements IConverter {
 	public JSONObject convertToJsonObject(JSONObject obj) {
 		return (JSONObject) obj.get(RESULT);
 		
- }
+	}
 	
 	public JSONObject parseJSON(File f) throws MiddlewareException{
 		 return (new Parser().parseJSONFile(f));

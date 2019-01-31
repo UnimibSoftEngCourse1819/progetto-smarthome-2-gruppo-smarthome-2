@@ -54,7 +54,7 @@ public class PersistanceController {
 	private File createOrGetFile() throws IOException {
 		File f = new File(this.path.toString() +"/"+this.DBNAME);
 		if(!f.exists())
-			f.createNewFile();
+				f.createNewFile();
 		return f;
 	}
 	

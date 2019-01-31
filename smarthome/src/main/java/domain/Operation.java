@@ -8,8 +8,8 @@ import middleware.MiddlewareFacade;
 public class Operation implements ICommand {
 	
 	private Pair<Tag, Object> funId;
-	public Tag type;
-	public Object name;
+	private Tag type;
+	private Object name;
 	private IMiddlewareFacade receiver;
 	
 	public Operation(Tag t, Object n,Pair p){

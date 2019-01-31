@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import exceptions.NoOperationException;
-import javafx.util.*;
-
+import javafx.util.Pair;
 import middleware.MiddlewareException;
 
 public class Device implements IDevice{

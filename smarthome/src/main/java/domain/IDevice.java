@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import exceptions.NoOperationException;
-import javafx.util.Pair;
 import middleware.MiddlewareException;
 
 public interface IDevice {
