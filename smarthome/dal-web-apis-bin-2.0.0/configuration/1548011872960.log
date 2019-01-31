@@ -1,0 +1,40 @@
+!SESSION 2019-01-20 20:17:52.269 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Command-line arguments:  -console
+
+!ENTRY org.eclipse.osgi 4 0 2019-01-20 20:17:53.799
+!MESSAGE Error starting bundle: initial@reference:file:plugins/slf4j.jdk14_1.7.7.jar
+!STACK 0
+org.osgi.framework.BundleException: Invalid operation on a fragment.
+	at org.eclipse.osgi.container.Module.checkFragment(Module.java:510)
+	at org.eclipse.osgi.container.Module.start(Module.java:397)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:393)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startBundle(EclipseStarter.java:1049)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startBundles(EclipseStarter.java:1042)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.loadBasicBundles(EclipseStarter.java:586)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:313)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:232)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.main(EclipseStarter.java:209)
+
+!ENTRY org.eclipse.osgi 4 0 2019-01-20 20:17:53.802
+!MESSAGE Error starting bundle: initial@reference:file:plugins/slf4j.log4j12_1.7.7.jar
+!STACK 0
+org.osgi.framework.BundleException: Invalid operation on a fragment.
+	at org.eclipse.osgi.container.Module.checkFragment(Module.java:510)
+	at org.eclipse.osgi.container.Module.start(Module.java:397)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:393)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startBundle(EclipseStarter.java:1049)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startBundles(EclipseStarter.java:1042)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.loadBasicBundles(EclipseStarter.java:586)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:313)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:232)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.main(EclipseStarter.java:209)
+
+!ENTRY org.eclipse.osgi 4 0 2019-01-20 20:17:56.828
+!MESSAGE Bundle slf4j.jdk14_1.7.7 [46] is not active.
+
+!ENTRY org.eclipse.osgi 4 0 2019-01-20 20:17:56.830
+!MESSAGE Bundle slf4j.log4j12_1.7.7 [47] is not active.
