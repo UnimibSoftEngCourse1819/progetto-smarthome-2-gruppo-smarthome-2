@@ -1,1 +1,1 @@
-java -jar smarthome-0.0.1-SNAPSHOT-shaded.jar 
+java -jar original-smarthome-0.0.1-SNAPSHOT.jar 
