@@ -29,7 +29,7 @@ public class State {
 				
 				temp = (List<Property>) this.receiver.updateProperties(state);
 				for (Property property : temp) {
-					Pair<Object,Object> key = new Pair(property.funId.getValue(), property.getName());
+					Pair<Object,Object> key = new Pair(property.getFunctionId(), property.getName());
 					this.currentState.put(key, new HashMap<>());
 					this.addParametersToCurrentState(key,property.getParameters());
 				}

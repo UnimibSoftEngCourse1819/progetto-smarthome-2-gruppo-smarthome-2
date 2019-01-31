@@ -12,7 +12,7 @@ public class Property implements ICommand {
 	
 	private Map<Object,Object> parameters;
 	private IMiddlewareFacade receiver;
-	public Pair<Tag, Object> funId;
+	private Pair<Tag, Object> funId;
 	private Tag type;
 	private Object name;
 	
@@ -29,6 +29,7 @@ public class Property implements ICommand {
 	public void execute() throws MiddlewareException {
 		 this.receiver.getProperty(this);
 	}
+
 
 	@Override
 	public Tag getTag() {

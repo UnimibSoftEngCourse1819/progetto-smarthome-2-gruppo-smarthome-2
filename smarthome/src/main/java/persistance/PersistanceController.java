@@ -21,9 +21,11 @@ public class PersistanceController {
 	private File jsonDB;
 	private Path path;
 	private static final String DBNAME = "JsonDB.json";
+	private boolean creationState;
 	private Converter conv = new Converter();
 	
 	public PersistanceController() throws IOException{
+		this.creationState=false;
 		this.path = Paths.get("").toAbsolutePath();
 		this.jsonDB = this.createOrGetFile();
 	}
@@ -54,7 +56,7 @@ public class PersistanceController {
 	private File createOrGetFile() throws IOException {
 		File f = new File(this.path.toString() +"/"+this.DBNAME);
 		if(!f.exists())
-				f.createNewFile();
+				this.creationState=f.createNewFile();
 		return f;
 	}
 	
