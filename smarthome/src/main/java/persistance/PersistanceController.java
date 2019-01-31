@@ -39,8 +39,15 @@ public class PersistanceController {
 				actualDB.put(key, toSave.get(key));
 			}
 		FileWriter file = new FileWriter(this.jsonDB.getAbsolutePath());
+		try {
 		file.write(actualDB.toJSONString());
 		file.flush();
+		}
+		catch(Exception e) {}
+		finally {
+			file.close();
+		
+		}
 		
 	}
 
