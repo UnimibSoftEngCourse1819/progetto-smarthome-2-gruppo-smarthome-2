@@ -1,6 +1,7 @@
 package middleware;
 
 
+import java.io.IOException;
 import java.util.Collection;
 
 import domain.IDescriptor;
@@ -20,5 +21,10 @@ public interface IMiddlewareFacade {
 	public void executeOperation(Operation operation) throws MiddlewareException;
 
 	public Collection<Property> updateProperties(IFunction state) throws MiddlewareException;
+	
+	public Collection<IDescriptor> getSavedDevices() throws MiddlewareException;
+	
+	public void saveDevice(IDescriptor desc) throws MiddlewareException, IOException;
+
 
 }

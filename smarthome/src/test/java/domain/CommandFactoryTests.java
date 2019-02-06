@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import exceptions.MiddlewareException;
 import javafx.util.Pair;
 
 public class CommandFactoryTests {
@@ -11,7 +12,7 @@ public class CommandFactoryTests {
 	CommandFactory factory = new CommandFactory();
 	
 	@Test
-	public void testCostructor(){
+	public void testCostructor() throws MiddlewareException{
 		Operation op = new Operation(new TagFunction("operation.name"),"open" ,
 				new Pair<Tag, Object>(new TagFunction("UID"),
 			     "ZigBee:ah.app.12345195726903800-1:DoorLock" ));

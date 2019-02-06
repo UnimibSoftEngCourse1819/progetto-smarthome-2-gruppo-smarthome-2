@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 import domain.IDevice;
 import domain.Operation;
 import domain.Property;
+import exceptions.MiddlewareException;
 import exceptions.NoOperationException;
 
 public class DeviceGUI extends JPanel {
@@ -28,7 +29,7 @@ public class DeviceGUI extends JPanel {
 
 	private GUIFacade guiFacade;
 	
-	public DeviceGUI(IDevice device) {
+	public DeviceGUI(IDevice device) throws MiddlewareException {
 		this.guiFacade = GUIFacade.getInstance();
 		initialize(device);
 	}

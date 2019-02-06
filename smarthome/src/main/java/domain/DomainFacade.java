@@ -17,15 +17,14 @@ public class DomainFacade implements IDomainFacade {
 	private static final String DOMAINLOGGER = "domainLogger";
 	private IMiddlewareFacade middlewareFacade;
 	
-	PersistanceController db;
 	
-	public DomainFacade(){
-		this.middlewareFacade = new MiddlewareFacade();
-		this.home = SmartHome.getInstance();
+	
+	public DomainFacade() throws MiddlewareException{
 		try {
-			this.db = new PersistanceController();
-			this.initSavedDevices();
-		} catch (IOException | MiddlewareException e) {
+		this.home = SmartHome.getInstance();
+		this.middlewareFacade = new MiddlewareFacade();
+		this.initSavedDevices();
+		} catch (MiddlewareException e) {
 			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
 		}
 	}
@@ -55,8 +54,8 @@ public class DomainFacade implements IDomainFacade {
 		DeviceFactory fact = new DeviceFactory();
 		fact.addDeviceDescriptor(devDesc);
 		try {
-			db.saveToFile(devDesc);
-		} catch (IOException e) {
+			this.middlewareFacade.saveDevice(devDesc);  // chiamata al middle..dove passi un IDesc
+		} catch (MiddlewareException | IOException e) {
 			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
 		}
 		Collection<IFunction> adapters = 
@@ -74,7 +73,8 @@ public class DomainFacade implements IDomainFacade {
 	}
 
 	public void initSavedDevices() throws MiddlewareException{
-		for(IDescriptor devdesc : db.convertToIDescriptors())
+		for(IDescriptor devdesc : this.middlewareFacade.getSavedDevices()) // una chiamata a middle
+			// getsavedDevices che torna una lista di idescriptor basata su descriptor adapter..
 			this.addDevice(devdesc);
 	}
 	

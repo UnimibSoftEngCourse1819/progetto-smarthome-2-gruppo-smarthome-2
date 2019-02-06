@@ -12,7 +12,7 @@ public class Operation implements ICommand {
 	private Object name;
 	private IMiddlewareFacade receiver;
 	
-	public Operation(Tag t, Object n,Pair p){
+	public Operation(Tag t, Object n,Pair p) throws MiddlewareException{
 		this.type = t;
 		this.name = n;
 		this.funId = p;

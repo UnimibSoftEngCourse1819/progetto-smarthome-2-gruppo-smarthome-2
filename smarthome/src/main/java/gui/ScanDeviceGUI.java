@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 
 import domain.DeviceDescriptor;
 import domain.IDescriptor;
+import exceptions.MiddlewareException;
 
 public class ScanDeviceGUI extends JPanel {
 
@@ -24,8 +25,9 @@ public class ScanDeviceGUI extends JPanel {
 	
 	/**
 	 * Create the application.
+	 * @throws MiddlewareException 
 	 */
-	public ScanDeviceGUI(Collection <DeviceDescriptor> descs) {
+	public ScanDeviceGUI(Collection <DeviceDescriptor> descs) throws MiddlewareException {
 		this.guiFacade = GUIFacade.getInstance();
 		initialize(descs);
 	}

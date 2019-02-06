@@ -20,7 +20,7 @@ public class PropertyTests {
 	private MiddlewareFacadeTest receiver = new MiddlewareFacadeTest();
 	
 @Test
-public void constructor() {
+public void constructor() throws MiddlewareException {
 	Property pro = new Property(new TagFunction("property.name"),"status" ,
 			new Pair<Tag, Object>(new TagFunction("UID"),
 				     "ZigBee:ah.app.12345195726903800-1:DoorLock"));
@@ -31,7 +31,7 @@ public void constructor() {
 }
 
 @Test
-public void addParameter() {
+public void addParameter() throws MiddlewareException {
 	Property pro = new Property(new TagFunction("property.name"),"status" ,
 			new Pair<Tag, Object>(new TagFunction("UID"),
 				     "ZigBee:ah.app.12345195726903800-1:DoorLock"));

@@ -18,7 +18,6 @@ import middleware.MiddlewareFacadeTest;
 public class DeviceFactoryTests {
 	
 	MiddlewareFacadeTest middlewareFacade = new MiddlewareFacadeTest();
-	DomainFacade domainFacade = new DomainFacade();
 	
 	public <T> boolean listEqualsIgnoreOrder(List<T> list1, List<T> list2) {
 	    return (new HashSet<>(list1).equals(new HashSet<>(list2)));

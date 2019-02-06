@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import domain.ICommand;
 import domain.IDevice;
 import domain.Operation;
+import exceptions.MiddlewareException;
 
 public class StateGUI extends JPanel{
 
@@ -24,10 +25,11 @@ public class StateGUI extends JPanel{
 	 * Create the application.
 	 * @param command 
 	 * @param cmd 
+	 * @throws MiddlewareException 
 	 */
-	public StateGUI(IDevice device, ICommand command) {
+	public StateGUI(IDevice device, ICommand command) throws MiddlewareException {
 		initialize(device, command);
-		this.guiFacade = new GUIFacade();
+		this.guiFacade = GUIFacade.getInstance();
 		
 	}
 

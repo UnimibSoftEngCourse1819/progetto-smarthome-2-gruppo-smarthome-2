@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import exceptions.MiddlewareException;
+
 public class HomeGUI extends JPanel{
 
 	
@@ -25,7 +27,7 @@ public class HomeGUI extends JPanel{
 	
 
 
-	public HomeGUI() {
+	public HomeGUI() throws MiddlewareException {
 		this.guiFacade = GUIFacade.getInstance();
 		initialize();
 	}

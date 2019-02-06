@@ -19,10 +19,19 @@ import exceptions.MiddlewareException;
 public class GUIFacade implements IGUIFacade {
 	private static final String GUILOGGER = "guiLogger";
 	private DomainFacade domainFacade;
-	private static GUIFacade instance = new GUIFacade();
 	
-	public GUIFacade(){	
-		this.domainFacade = new DomainFacade();
+		
+	private static GUIFacade instance;
+	
+	
+	private GUIFacade() throws MiddlewareException{	
+		try {
+			this.domainFacade = new DomainFacade();
+		}
+		catch(MiddlewareException e) {
+			java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
+		}
 		
 	}
 	
@@ -31,8 +40,10 @@ public class GUIFacade implements IGUIFacade {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	}
-	public static GUIFacade getInstance() {
-			return instance;
+	public static GUIFacade getInstance() throws MiddlewareException {
+		if (instance == null )
+			return new GUIFacade();
+		return instance;
 	}
 	@Override
 	public void show() {

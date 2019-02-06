@@ -30,12 +30,12 @@ public class FunctionAdapter implements IFunction {
 
 	@Override
 	public Object getId() {
-		Object key = new TagFunction("UID").getTagValue();
+		Object key = new TagFunction("UID").getTagValue();  // dal.function.UID
 		 return  (this.adaptee.get(key));
 	}
 
 	@Override
-	public Collection<ICommand> getCommands() {
+	public Collection<ICommand> getCommands() throws MiddlewareException {
 		Collection<ICommand> res = new ArrayList<>();
 		CommandFactory fact = new CommandFactory();
 		createOperations(res, fact);
@@ -43,7 +43,7 @@ public class FunctionAdapter implements IFunction {
 		return res;
 	}
 
-	private void createProperties(Collection<ICommand> res, CommandFactory fact) {
+	private void createProperties(Collection<ICommand> res, CommandFactory fact) throws MiddlewareException {
 		JSONArray ops = this.findParam("property");
 		 if(ops != null){
 				for(Object op : ops)
@@ -54,7 +54,7 @@ public class FunctionAdapter implements IFunction {
 	}
 
 
-	private void createOperations(Collection<ICommand> res, CommandFactory fact) {
+	private void createOperations(Collection<ICommand> res, CommandFactory fact) throws MiddlewareException {
 		JSONArray ops = this.findParam("operation");
 		if(ops != null){
 			for(Object op : ops){

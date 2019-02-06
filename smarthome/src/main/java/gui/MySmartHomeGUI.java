@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import domain.Device;
+import exceptions.MiddlewareException;
 
 public class MySmartHomeGUI extends JPanel{
 
@@ -24,8 +25,9 @@ public class MySmartHomeGUI extends JPanel{
 
 	/**
 	 * Create the application.
+	 * @throws MiddlewareException 
 	 */
-	public MySmartHomeGUI() {
+	public MySmartHomeGUI() throws MiddlewareException {
 		this.guiFacade = GUIFacade.getInstance();
 		
 		initialize();
