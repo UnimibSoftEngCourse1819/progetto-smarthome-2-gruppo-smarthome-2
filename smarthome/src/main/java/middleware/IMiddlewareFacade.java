@@ -26,7 +26,7 @@ public interface IMiddlewareFacade {
 	
 	public Collection<IDescriptor> getSavedDevices() throws MiddlewareException;
 	
-	public void saveDevice(List<DeviceDescriptor> desc) throws MiddlewareException;
+	public void saveDevice(List<IDescriptor> desc) throws MiddlewareException;
 
 	
 

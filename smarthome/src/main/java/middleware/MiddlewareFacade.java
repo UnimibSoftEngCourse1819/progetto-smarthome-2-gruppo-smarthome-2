@@ -127,7 +127,7 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 
 
 	@Override
-	public void saveDevice(List<DeviceDescriptor> desc) throws MiddlewareException {
+	public void saveDevice(List<IDescriptor> desc) throws MiddlewareException {
 		this.db.saveToFile(desc);	
 	}
 	

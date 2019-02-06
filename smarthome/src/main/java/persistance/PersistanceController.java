@@ -38,7 +38,7 @@ public class PersistanceController {
 			return this.conv.parseJSON(this.jsonDB);
 	}
 	
-	public void saveToFile(List<DeviceDescriptor> desc) throws MiddlewareException {
+	public void saveToFile(List<IDescriptor> desc) throws MiddlewareException {
 		JSONObject actualDB = new JSONObject();
 		actualDB.put("result", new JSONArray());
 		

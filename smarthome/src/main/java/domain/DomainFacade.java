@@ -88,9 +88,9 @@ public class DomainFacade implements IDomainFacade {
 	}
 
 	public void saveMyDevices() throws MiddlewareException, IOException {
-		List <DeviceDescriptor> dd = new ArrayList<>();
+		List <IDescriptor> dd = new ArrayList<>();
 		for (Device dev : this.home.getDevices()) {
-			dd.add((DeviceDescriptor) dev.getDescriptor());
+			dd.add(dev.getDescriptor());
 		}
            this.middlewareFacade.saveDevice(dd);	
 	}
