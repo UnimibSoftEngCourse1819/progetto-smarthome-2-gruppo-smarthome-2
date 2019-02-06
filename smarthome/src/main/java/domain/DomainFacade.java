@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,11 +54,13 @@ public class DomainFacade implements IDomainFacade {
 	public IDevice addDevice(IDescriptor devDesc) throws MiddlewareException{
 		DeviceFactory fact = new DeviceFactory();
 		fact.addDeviceDescriptor(devDesc);
-		try {
+		
+		/* try {
 			this.middlewareFacade.saveDevice(devDesc);  // chiamata al middle..dove passi un IDesc
 		} catch (MiddlewareException | IOException e) {
 			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
-		}
+		} */
+		
 		Collection<IFunction> adapters = 
 				this.middlewareFacade.getADeviceFunctions(devDesc);
 		fact.addFunctions(adapters);
@@ -73,13 +76,23 @@ public class DomainFacade implements IDomainFacade {
 	}
 
 	public void initSavedDevices() throws MiddlewareException{
-		for(IDescriptor devdesc : this.middlewareFacade.getSavedDevices()) // una chiamata a middle
+		for(IDescriptor devdesc : this.middlewareFacade.getSavedDevices()) { // una chiamata a middle
 			// getsavedDevices che torna una lista di idescriptor basata su descriptor adapter..
+			System.out.println(devdesc.getName());
 			this.addDevice(devdesc);
+		}
 	}
 	
 	public Collection<Device> getDevices() {
 		return this.home.getDevices();
+	}
+
+	public void saveMyDevices() throws MiddlewareException, IOException {
+		List <DeviceDescriptor> dd = new ArrayList<>();
+		for (Device dev : this.home.getDevices()) {
+			dd.add((DeviceDescriptor) dev.getDescriptor());
+		}
+           this.middlewareFacade.saveDevice(dd);	
 	}
 
 

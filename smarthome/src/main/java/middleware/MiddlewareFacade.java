@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
+import domain.DeviceDescriptor;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IFunction;
@@ -47,11 +48,10 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		return this.getDescriptorsAdapters(jsoArray);
 	}
 	
-	public void saveDevice(IDescriptor desc) throws MiddlewareException{
-			this.db.saveToFile(desc);	
-	}
+	
 	
 	public Collection<IDescriptor> getSavedDevices() throws MiddlewareException{
+		System.out.println(converter.convertToJsonArray(this.db.getJsonObjectFile()));
 		return getDescriptorsAdapters(converter.convertToJsonArray(this.db.getJsonObjectFile()));
 	}
 	
@@ -123,6 +123,12 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 				properties.add(this.getProperty((Property) command));
 		}
 		return properties;
+	}
+
+
+	@Override
+	public void saveDevice(List<DeviceDescriptor> desc) throws MiddlewareException {
+		this.db.saveToFile(desc);	
 	}
 	
 

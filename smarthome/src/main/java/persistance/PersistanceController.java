@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -33,22 +34,37 @@ public class PersistanceController {
 	}
 	
 	public JSONObject getJsonObjectFile() throws MiddlewareException {
-		return this.conv.parseJSON(this.jsonDB);
+			System.out.println(this.conv.parseJSON(this.jsonDB));
+			return this.conv.parseJSON(this.jsonDB);
 	}
 	
-	public void saveToFile(IDescriptor desc) throws MiddlewareException {
+	public void saveToFile(List<DeviceDescriptor> desc) throws MiddlewareException {
 		JSONObject actualDB = new JSONObject();
 		actualDB.put("result", new JSONArray());
-		JSONObject toSave = this.mapObject(desc); // oggetto che vuoi aggiungere al file
-		if(this.jsonDB.length() != 0)
+		
+		
+		JSONArray devicesToSave = new JSONArray();
+		
+		for (IDescriptor d : desc) {
+			JSONObject toSave = this.mapObject(d); // oggetto che vuoi aggiungere al file
+			devicesToSave.add(toSave);
+		}
+		
+		actualDB.put("result", devicesToSave);
+		
+		
+		
+		
+		/*if(this.jsonDB.length() != 0)
 			actualDB = this.conv.parseJSON(this.jsonDB);
 			JSONArray appoggio = (JSONArray) actualDB.get("result");		
 			// TODO
 			// non sono sicuro  se il jsonarray contiene l'oggetto toSave...va bene contains??
 			if (!appoggio.contains(toSave))
 				appoggio.add(toSave);
-			actualDB.remove("result"); // svuoto array 
-			actualDB.put("result", appoggio); // riempio
+			actualDB.remove("result"); // svuoto array */
+		
+			 // riempio
 		
 		try {
 		FileWriter file = new FileWriter(this.jsonDB.getAbsolutePath());
@@ -76,8 +92,8 @@ public class PersistanceController {
 	
 	private JSONObject mapObject(IDescriptor desc){
 		JSONObject obj = new JSONObject();
-		obj.put(new TagDevice("UID"), desc.getId());
-		obj.put(new TagDevice("name"), desc.getName());
+		obj.put(new TagDevice("UID").getTagValue(), desc.getId());
+		obj.put(new TagDevice("name").getTagValue(), desc.getName());
 		return obj;
 	}
 	

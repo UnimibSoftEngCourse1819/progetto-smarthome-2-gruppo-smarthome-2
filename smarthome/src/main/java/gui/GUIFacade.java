@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 
@@ -35,6 +36,10 @@ public class GUIFacade implements IGUIFacade {
 		
 	}
 	
+	public void save() throws MiddlewareException, IOException {
+		this.domainFacade.saveMyDevices();
+	}
+	
 	public static void initializeDimension(JFrame frame) {
 		frame.setBounds(100, 100, 562, 524);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +47,7 @@ public class GUIFacade implements IGUIFacade {
 	}
 	public static GUIFacade getInstance() throws MiddlewareException {
 		if (instance == null )
-			return new GUIFacade();
+			instance=new GUIFacade();
 		return instance;
 	}
 	@Override

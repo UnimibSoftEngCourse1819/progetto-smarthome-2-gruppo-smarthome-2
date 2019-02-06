@@ -3,7 +3,9 @@ package middleware;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
+import domain.DeviceDescriptor;
 import domain.IDescriptor;
 import domain.IFunction;
 import domain.Operation;
@@ -24,7 +26,9 @@ public interface IMiddlewareFacade {
 	
 	public Collection<IDescriptor> getSavedDevices() throws MiddlewareException;
 	
-	public void saveDevice(IDescriptor desc) throws MiddlewareException, IOException;
+	public void saveDevice(List<DeviceDescriptor> desc) throws MiddlewareException;
+
+	
 
 
 }

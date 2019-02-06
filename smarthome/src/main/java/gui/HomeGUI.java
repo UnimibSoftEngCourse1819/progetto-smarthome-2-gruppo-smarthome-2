@@ -76,11 +76,6 @@ public class HomeGUI extends JPanel{
 		lblNewLabel.setIcon(new ImageIcon("./src/image/smart-home.png"));
 		lblNewLabel.setBounds(24, 13, 503, 416);
 		frame.getContentPane().add(lblNewLabel);
-		
-		
-	    
-	    
-	    
-				
+					
 	}
 }
