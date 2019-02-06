@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 
@@ -89,6 +90,22 @@ public class MySmartHomeGUI extends JPanel{
 		
 		btnScan.setBounds(20, 400, 162, 25);
 		frame.getContentPane().add(btnScan);
+		
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		        try {
+					guiFacade.save();
+				} catch (MiddlewareException | IOException e1) {
+					// TODO Auto-generated catch block
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+				}
+		    }
+		});
+
 	}
 
 }

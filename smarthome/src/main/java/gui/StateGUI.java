@@ -2,8 +2,10 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +21,7 @@ public class StateGUI extends JPanel{
 
 	private JFrame frame;
 	private GUIFacade guiFacade;
-	
+	private static final String GUILOGGER = "guiLogger";
 	
 	/**
 	 * Create the application.
@@ -69,7 +71,21 @@ public class StateGUI extends JPanel{
 		createPropertyState(device, command);
 			
 		}
-			
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		        try {
+					guiFacade.save();
+				} catch (MiddlewareException | IOException e1) {
+					// TODO Auto-generated catch block
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+				}
+		    }
+		});
+
 	}
 
 	private void createPropertyState(IDevice device, ICommand command) {

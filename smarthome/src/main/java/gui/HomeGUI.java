@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.logging.Level;
 
 import javax.swing.ImageIcon;
@@ -17,7 +18,7 @@ public class HomeGUI extends JPanel{
 	
 	private JFrame frame; 
 	private GUIFacade guiFacade;
-
+	private static final String GUILOGGER = "guiLogger";
 
 
 	
@@ -76,6 +77,22 @@ public class HomeGUI extends JPanel{
 		lblNewLabel.setIcon(new ImageIcon("./src/image/smart-home.png"));
 		lblNewLabel.setBounds(24, 13, 503, 416);
 		frame.getContentPane().add(lblNewLabel);
+		
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		        try {
+					guiFacade.save();
+				} catch (MiddlewareException | IOException e1) {
+					// TODO Auto-generated catch block
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+				}
+		    }
+		});
+
 					
 	}
 }

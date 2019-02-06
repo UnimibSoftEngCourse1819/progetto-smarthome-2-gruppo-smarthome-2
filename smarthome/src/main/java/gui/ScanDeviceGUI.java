@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 
@@ -21,7 +22,7 @@ public class ScanDeviceGUI extends JPanel {
 
 	private JFrame frame;
 	private GUIFacade guiFacade;
-
+	private static final String GUILOGGER = "guiLogger";
 	
 	/**
 	 * Create the application.
@@ -82,6 +83,22 @@ public class ScanDeviceGUI extends JPanel {
 					}
 				});
 			}
-		}	
+		}
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		        try {
+					guiFacade.save();
+				} catch (MiddlewareException | IOException e1) {
+					// TODO Auto-generated catch block
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+				}
+		    }
+		});
+
+		
 	}
 }
