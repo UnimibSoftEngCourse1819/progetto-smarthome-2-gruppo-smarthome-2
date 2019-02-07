@@ -71,7 +71,7 @@ public class DomainFacade implements IDomainFacade {
 
 	public void initSavedDevices() throws MiddlewareException{
 		Collection<IDescriptor> descs = this.middlewareFacade.getSavedDevices();
-		for(IDescriptor devdesc : descs) { // una chiamata a middle
+		for(IDescriptor devdesc : descs) { 
 			
 			this.addDevice(DeviceDescriptor.createDeviceDescriptor(devdesc.getId(), devdesc.getName()));
 		}

@@ -51,7 +51,7 @@ public class HomeGUI extends JPanel{
 				}
 			}
 		});
-		btnScan.setBounds(85, 442, 162, 25);
+		btnScan.setBounds(85, 190, 162, 100);
 		frame.getContentPane().add(btnScan);
 		
 		JButton btnShowDev = new JButton("SMART-HOME");
@@ -70,13 +70,10 @@ public class HomeGUI extends JPanel{
 			}
 		});
 		
-		btnShowDev.setBounds(300, 442, 162, 25);
+		btnShowDev.setBounds(300, 190, 162, 100);
 		frame.getContentPane().add(btnShowDev);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("./src/image/smart-home.png"));
-		lblNewLabel.setBounds(24, 13, 503, 416);
-		frame.getContentPane().add(lblNewLabel);
+		
 		
 		
 		Runtime.getRuntime().addShutdownHook(new Thread()
