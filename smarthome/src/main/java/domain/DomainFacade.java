@@ -95,5 +95,9 @@ public class DomainFacade implements IDomainFacade {
            this.middlewareFacade.saveDevice(dd);	
 	}
 
+	public void removeDevice(Device device) {
+		this.home.removeFromMyDevices(device);
+	}
+
 
 }

@@ -165,5 +165,11 @@ public class GUIFacade implements IGUIFacade {
 		
 	}
 
+	public void remove(Device device) {
+		this.domainFacade.removeDevice(device);
+	}
+
+	
+
 	
 }
