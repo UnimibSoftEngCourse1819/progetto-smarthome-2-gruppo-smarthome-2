@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -16,6 +17,7 @@ import javax.swing.border.Border;
 import domain.IDevice;
 import domain.Operation;
 import domain.Property;
+import exceptions.MiddlewareException;
 import exceptions.NoOperationException;
 
 public class DeviceGUI extends JPanel {
@@ -28,7 +30,7 @@ public class DeviceGUI extends JPanel {
 
 	private GUIFacade guiFacade;
 	
-	public DeviceGUI(IDevice device) {
+	public DeviceGUI(IDevice device) throws MiddlewareException {
 		this.guiFacade = GUIFacade.getInstance();
 		initialize(device);
 	}
@@ -125,6 +127,20 @@ public class DeviceGUI extends JPanel {
 			}
 		});
 	}
+	
+	Runtime.getRuntime().addShutdownHook(new Thread()
+	{
+	    @Override
+	    public void run()
+	    {
+	        try {
+				guiFacade.save();
+			} catch (MiddlewareException | IOException e1) {
+				// TODO Auto-generated catch block
+				java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+			}
+	    }
+	});
 }
 	
 }

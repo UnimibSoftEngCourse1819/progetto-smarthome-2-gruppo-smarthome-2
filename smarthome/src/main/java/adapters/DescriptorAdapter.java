@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 
 import domain.IDescriptor;
 import domain.TagDevice;
+import domain.TagFunction;
 
 
 public class DescriptorAdapter implements IDescriptor {
@@ -17,18 +18,16 @@ public class DescriptorAdapter implements IDescriptor {
 	
 	@Override
 	public Object getId() {
-		return this.findParam("UID");
+		Object key = new TagDevice("UID").getTagValue();  // dal.device.UID
+		 return  (this.adaptee.get(key));
 	}
 	
 	@Override
 	public Object getName() {
-		return this.findParam("name");
+		Object key = new TagDevice("name").getTagValue();  // dal.device.name
+		 return  (this.adaptee.get(key));
 	}
 	
 	
-	private Object findParam(String param){
-		TagDevice key = new TagDevice(param);
-		 return this.adaptee.get(key.getTagValue());
-	}
 
 }

@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.logging.Level;
 
 import javax.swing.ImageIcon;
@@ -10,12 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import exceptions.MiddlewareException;
+
 public class HomeGUI extends JPanel{
 
 	
 	private JFrame frame; 
 	private GUIFacade guiFacade;
-
+	private static final String GUILOGGER = "guiLogger";
 
 
 	
@@ -25,7 +28,7 @@ public class HomeGUI extends JPanel{
 	
 
 
-	public HomeGUI() {
+	public HomeGUI() throws MiddlewareException {
 		this.guiFacade = GUIFacade.getInstance();
 		initialize();
 	}
@@ -76,9 +79,20 @@ public class HomeGUI extends JPanel{
 		frame.getContentPane().add(lblNewLabel);
 		
 		
-	    
-	    
-	    
-				
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		        try {
+					guiFacade.save();
+				} catch (MiddlewareException | IOException e1) {
+					// TODO Auto-generated catch block
+					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+				}
+		    }
+		});
+
+					
 	}
 }

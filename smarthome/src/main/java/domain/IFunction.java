@@ -9,7 +9,7 @@ public interface IFunction {
 	
 	public Object getId();
 	
-	public Collection<ICommand> getCommands();
+	public Collection<ICommand> getCommands() throws MiddlewareException;
 	
 	public Collection<Operation> getOperations() throws NoOperationException;
 	

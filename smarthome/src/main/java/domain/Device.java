@@ -16,7 +16,7 @@ public class Device implements IDevice{
 	private State state;
 	
 	
-	public Device(){
+	public Device() throws MiddlewareException{
 		this.functions = new ArrayList<>();
 		this.state = new State();
 	}

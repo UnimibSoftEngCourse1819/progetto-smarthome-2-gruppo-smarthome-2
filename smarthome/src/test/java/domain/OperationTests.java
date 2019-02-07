@@ -16,7 +16,7 @@ public class OperationTests {
 
 	
 	@Test
-	public void constructor() {
+	public void constructor() throws MiddlewareException {
 		Operation op = new Operation(new TagFunction("operation.name"),"open" ,
 				new Pair<Tag, Object>(new TagFunction("UID"),
 			     "ZigBee:ah.app.12345195726903800-1:DoorLock" ));

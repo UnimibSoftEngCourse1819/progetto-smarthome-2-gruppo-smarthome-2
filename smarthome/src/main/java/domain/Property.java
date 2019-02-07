@@ -16,7 +16,7 @@ public class Property implements ICommand {
 	private Tag type;
 	private Object name;
 	
-	public Property(Tag t, Object n,Pair fId){
+	public Property(Tag t, Object n,Pair fId) throws MiddlewareException{
 		this.type = t;
 		this.name = n;
 		this.funId = fId;

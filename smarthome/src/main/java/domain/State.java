@@ -15,7 +15,7 @@ public class State {
 	private Map<Pair<Object,Object>, Map<Object,Object>> currentState;
 	private IMiddlewareFacade receiver;
 	
-	public State() {
+	public State() throws MiddlewareException {
 		this.currentState = new HashMap<>();
 		this.receiver = new MiddlewareFacade();
 	}
@@ -42,7 +42,7 @@ public class State {
 			this.currentState.get(propertykey).put(key, parameters.get(key));
 	}
 	
-	private Collection<Property> getPropertiesFromThisFunction(IFunction function){
+	private Collection<Property> getPropertiesFromThisFunction(IFunction function) throws MiddlewareException{
 		TagFunction tagFunction = new TagFunction("property.name");
 		List<Property> result = new ArrayList<>();
 		for (ICommand command : function.getCommands()) {

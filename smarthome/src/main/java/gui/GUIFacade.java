@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 
@@ -19,11 +20,24 @@ import exceptions.MiddlewareException;
 public class GUIFacade implements IGUIFacade {
 	private static final String GUILOGGER = "guiLogger";
 	private DomainFacade domainFacade;
-	private static GUIFacade instance = new GUIFacade();
 	
-	public GUIFacade(){	
-		this.domainFacade = new DomainFacade();
 		
+	private static GUIFacade instance;
+	
+	
+	private GUIFacade() throws MiddlewareException{	
+		try {
+			this.domainFacade = new DomainFacade();
+		}
+		catch(MiddlewareException e) {
+			java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e.getMessage(), e);
+
+		}
+		
+	}
+	
+	public void save() throws MiddlewareException, IOException {
+		this.domainFacade.saveMyDevices();
 	}
 	
 	public static void initializeDimension(JFrame frame) {
@@ -31,8 +45,10 @@ public class GUIFacade implements IGUIFacade {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	}
-	public static GUIFacade getInstance() {
-			return instance;
+	public static GUIFacade getInstance() throws MiddlewareException {
+		if (instance == null )
+			instance=new GUIFacade();
+		return instance;
 	}
 	@Override
 	public void show() {

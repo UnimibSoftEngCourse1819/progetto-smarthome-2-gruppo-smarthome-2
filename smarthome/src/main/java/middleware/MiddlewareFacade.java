@@ -1,6 +1,7 @@
 package middleware;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
+import domain.DeviceDescriptor;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IFunction;
@@ -18,6 +20,7 @@ import domain.Property;
 import domain.TagFunction;
 import exceptions.MiddlewareException;
 import middleware.converters.Converter;
+import persistance.PersistanceController;
 
 
 
@@ -25,13 +28,14 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	private ICache cache;
 	private RestClient client; 
 	private Converter converter;
+	private PersistanceController db;
 	
 	
-	public MiddlewareFacade() {
+	public MiddlewareFacade() throws MiddlewareException{
 		this.cache = new FileCache();
 		this.converter = new Converter();
 		this.client = RestClient.getINSTANCE();
-		
+		this.db = new PersistanceController();	
 	}
 	
 	
@@ -42,6 +46,13 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 		JSONObject resource = converter.parseJSON(jsonFile);
 		JSONArray jsoArray = converter.convertToJsonArray(resource);
 		return this.getDescriptorsAdapters(jsoArray);
+	}
+	
+	
+	
+	public Collection<IDescriptor> getSavedDevices() throws MiddlewareException{
+		System.out.println(converter.convertToJsonArray(this.db.getJsonObjectFile()));
+		return getDescriptorsAdapters(converter.convertToJsonArray(this.db.getJsonObjectFile()));
 	}
 	
 	private Collection<IDescriptor> getDescriptorsAdapters(JSONArray jarr) {
@@ -112,6 +123,12 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 				properties.add(this.getProperty((Property) command));
 		}
 		return properties;
+	}
+
+
+	@Override
+	public void saveDevice(List<IDescriptor> desc) throws MiddlewareException {
+		this.db.saveToFile(desc);	
 	}
 	
 
