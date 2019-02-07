@@ -14,7 +14,7 @@ public class DeviceDescriptor implements IDescriptor{
 		this.deviceName = new javafx.util.Pair<>(new TagDevice("name"),descrittore.getName());	
 	}
 	
-	public DeviceDescriptor(Object devId, Object devName){
+	private DeviceDescriptor(Object devId, Object devName){
 		this.deviceId  = new javafx.util.Pair<>(new TagDevice("UID"),devId);
 		this.deviceName = new javafx.util.Pair<>(new TagDevice("name"),devName);	
 	}
@@ -34,6 +34,9 @@ public static DeviceDescriptor createDeviceDescriptor(IDescriptor abstractDesc){
 	return new DeviceDescriptor(abstractDesc);	
 }
 
+public static DeviceDescriptor createDeviceDescriptor(Object devId, Object devName){
+	return new DeviceDescriptor(devId, devName);	
+}
 
 @Override
 public String toString() {

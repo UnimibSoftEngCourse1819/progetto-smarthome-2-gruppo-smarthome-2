@@ -53,6 +53,7 @@ public class DomainFacade implements IDomainFacade {
 	
 	public IDevice addDevice(IDescriptor devDesc) throws MiddlewareException{
 		DeviceFactory fact = new DeviceFactory();
+		System.out.println(devDesc.getClass());
 		fact.addDeviceDescriptor(devDesc);
 		
 		/* try {
@@ -76,10 +77,13 @@ public class DomainFacade implements IDomainFacade {
 	}
 
 	public void initSavedDevices() throws MiddlewareException{
-		for(IDescriptor devdesc : this.middlewareFacade.getSavedDevices()) { // una chiamata a middle
+		Collection<IDescriptor> descs = this.middlewareFacade.getSavedDevices();
+			//this.home.createDeviceDescriptors(descs);
+		for(IDescriptor devdesc : descs) { // una chiamata a middle
 			// getsavedDevices che torna una lista di idescriptor basata su descriptor adapter..
 			System.out.println(devdesc.getName());
-			this.addDevice(devdesc);
+			
+			this.addDevice(DeviceDescriptor.createDeviceDescriptor(devdesc.getId(), devdesc.getName()));
 		}
 	}
 	

@@ -78,6 +78,7 @@ public class MySmartHomeGUI extends JPanel{
 			btnRemove.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
+						System.out.println(device.getDescriptor().getClass());
 						guiFacade.remove(device);
 						frame.setVisible(false);
 						guiFacade.showSmartHome();

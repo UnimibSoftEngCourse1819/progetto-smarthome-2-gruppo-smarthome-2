@@ -23,7 +23,9 @@ public class Device implements IDevice{
 	
 
 	public void setDescriptor(IDescriptor desc) {
+		
 		this.desc = desc;
+		System.out.println(this.desc.getClass());
 	}
 
 	public State getState() {
