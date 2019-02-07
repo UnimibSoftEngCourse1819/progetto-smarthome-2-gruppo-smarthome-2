@@ -1,5 +1,5 @@
-CLONE.
-- Clone the project in Eclipse.
+CLONE
+- Clone the project.
 
 BUILDING THE PROJECT
 - Run Maven Clean.
