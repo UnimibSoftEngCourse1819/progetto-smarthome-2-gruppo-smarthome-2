@@ -71,6 +71,27 @@ public class MySmartHomeGUI extends JPanel{
 			
 			btnInfo.setBounds(120, 60 + pos, 70, 25);
 			frame.getContentPane().add(btnInfo);
+			
+			
+			
+			JButton btnRemove = new JButton("Remove");
+			btnRemove.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						System.out.println(device.getDescriptor().getClass());
+						guiFacade.remove(device);
+						frame.setVisible(false);
+						guiFacade.showSmartHome();
+						
+					} catch (Exception e1) {
+						java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
+
+					}
+				}
+			});
+			
+			btnRemove.setBounds(200, 60 + pos, 70, 25);
+			frame.getContentPane().add(btnRemove);
 			pos+=40;
 		}
 		

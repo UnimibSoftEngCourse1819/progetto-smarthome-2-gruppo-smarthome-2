@@ -20,6 +20,7 @@ import domain.Property;
 import domain.TagFunction;
 import exceptions.MiddlewareException;
 import middleware.converters.Converter;
+import middleware.converters.PersistanceConverter;
 import persistance.PersistanceController;
 
 
@@ -28,12 +29,15 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	private ICache cache;
 	private RestClient client; 
 	private Converter converter;
+	private PersistanceConverter PersistanceConverter;
 	private PersistanceController db;
+	
 	
 	
 	public MiddlewareFacade() throws MiddlewareException{
 		this.cache = new FileCache();
 		this.converter = new Converter();
+		this.PersistanceConverter = new PersistanceConverter();
 		this.client = RestClient.getINSTANCE();
 		this.db = new PersistanceController();	
 	}
@@ -51,7 +55,6 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 	
 	
 	public Collection<IDescriptor> getSavedDevices() throws MiddlewareException{
-		System.out.println(converter.convertToJsonArray(this.db.getJsonObjectFile()));
 		return getDescriptorsAdapters(converter.convertToJsonArray(this.db.getJsonObjectFile()));
 	}
 	
@@ -128,8 +131,11 @@ public class MiddlewareFacade implements IMiddlewareFacade {
 
 	@Override
 	public void saveDevice(List<IDescriptor> desc) throws MiddlewareException {
-		this.db.saveToFile(desc);	
+		
+		this.db.saveToFile(this.PersistanceConverter.convertToObjectToSave(desc));	
+		
 	}
 	
 
+	
 }

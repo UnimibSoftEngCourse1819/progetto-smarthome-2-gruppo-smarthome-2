@@ -34,41 +34,15 @@ public class PersistanceController {
 	}
 	
 	public JSONObject getJsonObjectFile() throws MiddlewareException {
-			System.out.println(this.conv.parseJSON(this.jsonDB));
 			return this.conv.parseJSON(this.jsonDB);
 	}
 	
-	public void saveToFile(List<IDescriptor> desc) throws MiddlewareException {
-		JSONObject actualDB = new JSONObject();
-		actualDB.put("result", new JSONArray());
+	public void saveToFile(JSONObject toSave) throws MiddlewareException {
 		
-		
-		JSONArray devicesToSave = new JSONArray();
-		
-		for (IDescriptor d : desc) {
-			JSONObject toSave = this.mapObject(d); // oggetto che vuoi aggiungere al file
-			devicesToSave.add(toSave);
-		}
-		
-		actualDB.put("result", devicesToSave);
-		
-		
-		
-		
-		/*if(this.jsonDB.length() != 0)
-			actualDB = this.conv.parseJSON(this.jsonDB);
-			JSONArray appoggio = (JSONArray) actualDB.get("result");		
-			// TODO
-			// non sono sicuro  se il jsonarray contiene l'oggetto toSave...va bene contains??
-			if (!appoggio.contains(toSave))
-				appoggio.add(toSave);
-			actualDB.remove("result"); // svuoto array */
-		
-			 // riempio
-		
+	
 		try {
 		FileWriter file = new FileWriter(this.jsonDB.getAbsolutePath());
-		file.write(actualDB.toJSONString());
+		file.write(toSave.toJSONString());
 		file.flush();
 		file.close();
 		}
@@ -90,21 +64,5 @@ public class PersistanceController {
 		return f;
 	}
 	
-	private JSONObject mapObject(IDescriptor desc){
-		JSONObject obj = new JSONObject();
-		obj.put(new TagDevice("UID").getTagValue(), desc.getId());
-		obj.put(new TagDevice("name").getTagValue(), desc.getName());
-		return obj;
-	}
 	
-	public Collection<IDescriptor> convertToIDescriptors() throws MiddlewareException{
-		JSONObject actualDB = new JSONObject();
-		if(this.jsonDB.length() != 0)
-			actualDB = conv.parseJSON(jsonDB);
-		Collection<IDescriptor> descs = new ArrayList<IDescriptor>();
-		for(Object key : actualDB.keySet())
-			descs.add(new DeviceDescriptor(key,actualDB.get(key)));
-		return descs;
-	}
-
 }

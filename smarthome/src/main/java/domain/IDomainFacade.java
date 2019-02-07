@@ -11,4 +11,6 @@ public interface IDomainFacade {
 	public IDevice addDevice(IDescriptor id) throws MiddlewareException;
 	
 	public void callCommand(Object deviceId, Object idfunct, Object idcommand) throws MiddlewareException;
+	
+	public void removeDevice(Device device);
 }
