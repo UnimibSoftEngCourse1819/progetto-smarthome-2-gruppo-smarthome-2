@@ -90,7 +90,7 @@ public class MySmartHomeGUI extends JPanel{
 				}
 			});
 			
-			btnRemove.setBounds(200, 60 + pos, 70, 25);
+			btnRemove.setBounds(200, 60 + pos, 100, 25);
 			frame.getContentPane().add(btnRemove);
 			pos+=40;
 		}
