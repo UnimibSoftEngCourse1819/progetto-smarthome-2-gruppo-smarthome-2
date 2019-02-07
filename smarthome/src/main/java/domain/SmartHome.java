@@ -53,7 +53,6 @@ public class SmartHome {
 
 	public void removeFromMyDevices(Device device) {
 		this.devices.remove(device.getDescriptor().getId().toString());
-	System.out.println(device.getDescriptor().getClass());
 		this.devDesc.add((DeviceDescriptor) device.getDescriptor());		
 	}
 

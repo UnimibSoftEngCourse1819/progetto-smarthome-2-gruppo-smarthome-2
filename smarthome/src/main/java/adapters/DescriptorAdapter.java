@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 
 import domain.IDescriptor;
 import domain.TagDevice;
-import domain.TagFunction;
 
 
 public class DescriptorAdapter implements IDescriptor {

@@ -76,7 +76,6 @@ public class ScanDeviceGUI extends JPanel {
 							frame.setVisible(false);
 							
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							java.util.logging.Logger.getLogger("guilogger").log(Level.WARNING,e1.getMessage(), e1);
 
 						}
@@ -93,7 +92,6 @@ public class ScanDeviceGUI extends JPanel {
 		        try {
 					guiFacade.save();
 				} catch (MiddlewareException | IOException e1) {
-					// TODO Auto-generated catch block
 					java.util.logging.Logger.getLogger(GUILOGGER).log(Level.WARNING,e1.getMessage(), e1);
 				}
 		    }

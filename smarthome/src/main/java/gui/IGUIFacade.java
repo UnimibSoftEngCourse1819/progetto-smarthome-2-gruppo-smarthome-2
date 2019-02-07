@@ -2,7 +2,6 @@ package gui;
 
 import java.util.Collection;
 
-import domain.Device;
 import domain.DeviceDescriptor;
 import domain.IDevice;
 

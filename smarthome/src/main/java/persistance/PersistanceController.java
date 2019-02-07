@@ -5,17 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import adapters.DescriptorAdapter;
-import domain.DeviceDescriptor;
-import domain.IDescriptor;
-import domain.TagDevice;
 import exceptions.MiddlewareException;
 import middleware.converters.Converter;
 
@@ -38,17 +30,15 @@ public class PersistanceController {
 	}
 	
 	public void saveToFile(JSONObject toSave) throws MiddlewareException {
-		
-	
-		try {
-		FileWriter file = new FileWriter(this.jsonDB.getAbsolutePath());
+		try (FileWriter file = new FileWriter(this.jsonDB.getAbsolutePath()))
+		{
 		file.write(toSave.toJSONString());
 		file.flush();
-		file.close();
 		}
 		catch(IOException e) {
 			throw new MiddlewareException(e);
 		}
+		
 		
 	}
 

@@ -1,11 +1,9 @@
 package middleware;
 
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import domain.DeviceDescriptor;
 import domain.IDescriptor;
 import domain.IFunction;
 import domain.Operation;

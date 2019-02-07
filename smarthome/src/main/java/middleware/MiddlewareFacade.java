@@ -1,7 +1,6 @@
 package middleware;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +10,6 @@ import org.json.simple.JSONObject;
 
 import adapters.DescriptorAdapter;
 import adapters.FunctionAdapter;
-import domain.DeviceDescriptor;
 import domain.ICommand;
 import domain.IDescriptor;
 import domain.IFunction;

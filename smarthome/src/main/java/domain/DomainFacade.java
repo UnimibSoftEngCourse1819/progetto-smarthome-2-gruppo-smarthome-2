@@ -10,7 +10,6 @@ import exceptions.AlreadyInCacheException;
 import exceptions.MiddlewareException;
 import middleware.IMiddlewareFacade;
 import middleware.MiddlewareFacade;
-import persistance.PersistanceController;
 
 public class DomainFacade implements IDomainFacade {
 	
@@ -53,14 +52,8 @@ public class DomainFacade implements IDomainFacade {
 	
 	public IDevice addDevice(IDescriptor devDesc) throws MiddlewareException{
 		DeviceFactory fact = new DeviceFactory();
-		System.out.println(devDesc.getClass());
 		fact.addDeviceDescriptor(devDesc);
 		
-		/* try {
-			this.middlewareFacade.saveDevice(devDesc);  // chiamata al middle..dove passi un IDesc
-		} catch (MiddlewareException | IOException e) {
-			java.util.logging.Logger.getLogger(DOMAINLOGGER).log(Level.WARNING,e.getMessage(), e);
-		} */
 		
 		Collection<IFunction> adapters = 
 				this.middlewareFacade.getADeviceFunctions(devDesc);
@@ -78,10 +71,7 @@ public class DomainFacade implements IDomainFacade {
 
 	public void initSavedDevices() throws MiddlewareException{
 		Collection<IDescriptor> descs = this.middlewareFacade.getSavedDevices();
-			//this.home.createDeviceDescriptors(descs);
 		for(IDescriptor devdesc : descs) { // una chiamata a middle
-			// getsavedDevices che torna una lista di idescriptor basata su descriptor adapter..
-			System.out.println(devdesc.getName());
 			
 			this.addDevice(DeviceDescriptor.createDeviceDescriptor(devdesc.getId(), devdesc.getName()));
 		}
