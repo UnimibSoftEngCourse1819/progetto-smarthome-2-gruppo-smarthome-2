@@ -13,8 +13,6 @@ public class SmartHome {
 	
 	List<DeviceDescriptor> devDesc;
 	Map<String,Device> devices;
-
-	
 	
 	private static final SmartHome INSTANCE = new SmartHome();
 
@@ -47,22 +45,10 @@ public class SmartHome {
 		this.devices.put(device.getDescriptor().getId().toString(), device);
 	}
 	
+	
 	public void cleanAlreadyAdded(){
-		System.out.println(this.devices.values());
-		ArrayList<DeviceDescriptor> toDelete = new ArrayList<>();
-		for(Device device : this.devices.values()) {
-			for (DeviceDescriptor dd : devDesc) {
-				if (device.getDescriptor().getId().equals(dd.getId())) {
-					toDelete.add(dd);
-				}
-						
-			}
-		}
-		
-		for (DeviceDescriptor dd : toDelete) {
-			this.devDesc.remove(dd);
-			
-		}
+		for(Device device : this.devices.values()) 
+			this.devDesc.remove(device.getDescriptor());
 	}
 
 	public void removeFromMyDevices(Device device) {
